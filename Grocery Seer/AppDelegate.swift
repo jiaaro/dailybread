@@ -8,6 +8,9 @@
 
 import UIKit
 
+var currentGroceryList = GroceryList()
+var grocerySuggestionsList = GroceryList()
+
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
                             
@@ -15,7 +18,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
-        // Override point for customization after application launch.
+        var orange = UIColor.orangeColor()
+        if let w = window {
+            w.tintColor = orange
+        }
+        
+        currentGroceryList.loadFromCalendar(loadCompletedItems: false)
+        grocerySuggestionsList.loadFromCalendar(loadCompletedItems: true)
+        
+        NSNotificationCenter.defaultCenter().addObserverForName("groceryAdded", object: currentGroceryList, queue: nil) {
+                notification in
+                suggestions = nil
+                get_grocery_sugguestion_set("", {s in })
+        }
+        
         return true
     }
 

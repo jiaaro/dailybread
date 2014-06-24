@@ -7,11 +7,14 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		385AF2D91959043B00EE0773 /* calendarAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385AF2D81959043B00EE0773 /* calendarAdapter.swift */; };
+		38A2C9871953622C002409F8 /* groceryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A2C9861953622C002409F8 /* groceryModel.swift */; };
 		38B453541953277F00406FFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B453531953277F00406FFC /* AppDelegate.swift */; };
 		38B453561953277F00406FFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B453551953277F00406FFC /* ViewController.swift */; };
 		38B453591953277F00406FFC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38B453571953277F00406FFC /* Main.storyboard */; };
 		38B4535B1953277F00406FFC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 38B4535A1953277F00406FFC /* Images.xcassets */; };
 		38B453671953277F00406FFC /* Grocery_SeerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B453661953277F00406FFC /* Grocery_SeerTests.swift */; };
+		38CEF5CD195345250044E405 /* AddGroceryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38CEF5CC195345250044E405 /* AddGroceryViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -25,6 +28,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		385AF2D81959043B00EE0773 /* calendarAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = calendarAdapter.swift; path = ../calendarAdapter.swift; sourceTree = "<group>"; };
+		38A2C9861953622C002409F8 /* groceryModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = groceryModel.swift; sourceTree = "<group>"; };
 		38B4534E1953277F00406FFC /* Grocery Seer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Grocery Seer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		38B453521953277F00406FFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		38B453531953277F00406FFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -34,6 +39,7 @@
 		38B453601953277F00406FFC /* Grocery SeerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Grocery SeerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		38B453651953277F00406FFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		38B453661953277F00406FFC /* Grocery_SeerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grocery_SeerTests.swift; sourceTree = "<group>"; };
+		38CEF5CC195345250044E405 /* AddGroceryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddGroceryViewController.swift; path = ../AddGroceryViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -75,8 +81,11 @@
 		38B453501953277F00406FFC /* Grocery Seer */ = {
 			isa = PBXGroup;
 			children = (
+				38CEF5CC195345250044E405 /* AddGroceryViewController.swift */,
+				385AF2D81959043B00EE0773 /* calendarAdapter.swift */,
 				38B453531953277F00406FFC /* AppDelegate.swift */,
 				38B453551953277F00406FFC /* ViewController.swift */,
+				38A2C9861953622C002409F8 /* groceryModel.swift */,
 				38B453571953277F00406FFC /* Main.storyboard */,
 				38B4535A1953277F00406FFC /* Images.xcassets */,
 				38B453511953277F00406FFC /* Supporting Files */,
@@ -158,6 +167,7 @@
 				TargetAttributes = {
 					38B4534D1953277F00406FFC = {
 						CreatedOnToolsVersion = 6.0;
+						DevelopmentTeam = 7U6NXPY6U6;
 					};
 					38B4535F1953277F00406FFC = {
 						CreatedOnToolsVersion = 6.0;
@@ -208,6 +218,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				38CEF5CD195345250044E405 /* AddGroceryViewController.swift in Sources */,
+				385AF2D91959043B00EE0773 /* calendarAdapter.swift in Sources */,
+				38A2C9871953622C002409F8 /* groceryModel.swift in Sources */,
 				38B453561953277F00406FFC /* ViewController.swift in Sources */,
 				38B453541953277F00406FFC /* AppDelegate.swift in Sources */,
 			);
@@ -325,9 +338,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Grocery Seer/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -336,9 +353,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Grocery Seer/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};
@@ -397,6 +418,7 @@
 				38B4536C1953277F00406FFC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		38B4536D1953277F00406FFC /* Build configuration list for PBXNativeTarget "Grocery SeerTests" */ = {
 			isa = XCConfigurationList;
@@ -405,6 +427,7 @@
 				38B4536F1953277F00406FFC /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
