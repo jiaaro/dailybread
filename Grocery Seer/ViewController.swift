@@ -33,8 +33,10 @@ class ViewController: UIViewController, UITableViewDelegate {
     }
     
     func groceryListWasChanged(notification: NSNotification!) {
-        self.tableview.reloadData()
-    }    
+        dispatch_async(dispatch_get_main_queue()) {
+            self.tableview.reloadData()
+        }
+    }
 
     
     func tableView(tableView: UITableView!, willDisplayCell cell: UITableViewCell!, forRowAtIndexPath indexPath: NSIndexPath!) {

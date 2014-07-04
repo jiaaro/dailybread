@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import EventKit
 
 var currentGroceryList = GroceryList()
 var grocerySuggestionsList = GroceryList()
@@ -30,6 +31,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 notification in
                 suggestions = nil
                 get_grocery_sugguestion_set("", {s in })
+        }
+        
+        get_estore {
+            estore in
+            let nc = NSNotificationCenter.defaultCenter()
+            nc.addObserverForName("EKEventStoreChangedNotification", object: estore, queue: nil) {
+                notification in
+                currentGroceryList.updateFromCalendar(false, keepCurrent: true)
+                // grocerySuggestionsList.loadFromCalendar(loadCompletedItems: true)
+            }
+
         }
         
         return true

@@ -88,6 +88,39 @@ extension GroceryList {
             }
         }
     }
+    func updateFromCalendar(loadCompletedItems: Bool, keepCurrent: Bool) {
+        get_estore {
+            estore in
+            
+            get_calendar() {
+                calendar in
+                
+                let current_reminder_ids = NSSet(array: self.list.map { $0.reminder.calendarItemIdentifier })
+                let predicate = estore.predicateForRemindersInCalendars([calendar])
+                
+                estore.fetchRemindersMatchingPredicate(predicate) {
+                    reminders in
+                    
+                    self.list = (reminders as Array<EKReminder>).filter { reminder in
+                        if keepCurrent && current_reminder_ids.containsObject(reminder.calendarItemIdentifier) {
+                            return true
+                        }
+
+                        if loadCompletedItems {
+                            return reminder.completed
+                        }
+                        else {
+                            return !reminder.completed
+                        }
+                    }.map {
+                        Grocery(reminder: $0)
+                    }
+                    
+                    self.sendChangedNotification()
+                }
+            }
+        }
+    }
 }
 
 
