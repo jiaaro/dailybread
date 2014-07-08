@@ -30,6 +30,7 @@
 
 /* Begin PBXFileReference section */
 		3844D969196C392400CBE14A /* StyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKit.swift; sourceTree = "<group>"; };
+		384CC9C1196C42DD00FCD6AC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		385AF2D81959043B00EE0773 /* calendarAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = calendarAdapter.swift; path = ../calendarAdapter.swift; sourceTree = "<group>"; };
 		38A2C9861953622C002409F8 /* groceryModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = groceryModel.swift; sourceTree = "<group>"; };
 		38B4534E1953277F00406FFC /* Grocery Seer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Grocery Seer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -65,6 +66,7 @@
 		38B453451953277F00406FFC = {
 			isa = PBXGroup;
 			children = (
+				384CC9C1196C42DD00FCD6AC /* Foundation.framework */,
 				38B453501953277F00406FFC /* Grocery Seer */,
 				38B453631953277F00406FFC /* Grocery SeerTests */,
 				38B4534F1953277F00406FFC /* Products */,

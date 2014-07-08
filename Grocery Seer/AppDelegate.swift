@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 Jiaaro. All rights reserved.
 //
 
+import Foundation
 import UIKit
 import EventKit
 
