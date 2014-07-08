@@ -36,7 +36,7 @@ func get_calendar(completed:((EKCalendar)->())) {
     get_estore {
         estore in
         
-        var cals = estore.calendarsForEntityType(EKEntityTypeReminder) as EKCalendar[]
+        var cals = estore.calendarsForEntityType(EKEntityTypeReminder) as [EKCalendar]
         cals = cals.filter() {
             switch $0.title.lowercaseString {
             case "grocery", "groceries", "grocery list", "groceries list":

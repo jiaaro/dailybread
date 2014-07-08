@@ -38,12 +38,12 @@ class AddGroceryViewController: UIViewController, UITableViewDataSource, UITable
     }
     
     @IBAction func cancelAddingGrocery(sender: AnyObject) {
-        self.dismissModalViewControllerAnimated(true)
+        self.dismissViewControllerAnimated(true, nil)
     }
     
     @IBAction func saveGrocery(sender: AnyObject) {
         currentGroceryList.add(groceryInput.text)
-        self.dismissModalViewControllerAnimated(true)
+        self.dismissViewControllerAnimated(true, nil)
     }
     
     @IBAction func textChanged(sender: AnyObject) {
