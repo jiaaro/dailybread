@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3844D96A196C392400CBE14A /* StyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3844D969196C392400CBE14A /* StyleKit.swift */; };
 		385AF2D91959043B00EE0773 /* calendarAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385AF2D81959043B00EE0773 /* calendarAdapter.swift */; };
 		38A2C9871953622C002409F8 /* groceryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A2C9861953622C002409F8 /* groceryModel.swift */; };
 		38B453541953277F00406FFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B453531953277F00406FFC /* AppDelegate.swift */; };
@@ -28,6 +29,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		3844D969196C392400CBE14A /* StyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKit.swift; sourceTree = "<group>"; };
 		385AF2D81959043B00EE0773 /* calendarAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = calendarAdapter.swift; path = ../calendarAdapter.swift; sourceTree = "<group>"; };
 		38A2C9861953622C002409F8 /* groceryModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = groceryModel.swift; sourceTree = "<group>"; };
 		38B4534E1953277F00406FFC /* Grocery Seer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Grocery Seer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -81,6 +83,7 @@
 		38B453501953277F00406FFC /* Grocery Seer */ = {
 			isa = PBXGroup;
 			children = (
+				3844D969196C392400CBE14A /* StyleKit.swift */,
 				38CEF5CC195345250044E405 /* AddGroceryViewController.swift */,
 				385AF2D81959043B00EE0773 /* calendarAdapter.swift */,
 				38B453531953277F00406FFC /* AppDelegate.swift */,
@@ -218,6 +221,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3844D96A196C392400CBE14A /* StyleKit.swift in Sources */,
 				38CEF5CD195345250044E405 /* AddGroceryViewController.swift in Sources */,
 				385AF2D91959043B00EE0773 /* calendarAdapter.swift in Sources */,
 				38A2C9871953622C002409F8 /* groceryModel.swift in Sources */,

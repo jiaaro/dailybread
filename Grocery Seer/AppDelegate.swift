@@ -19,9 +19,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
-        var orange = UIColor.orangeColor()
         if let w = window {
-            w.tintColor = orange
+            w.tintColor = StyleKit.mainColor
         }
         
         currentGroceryList.loadFromCalendar(loadCompletedItems: false)

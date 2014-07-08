@@ -74,12 +74,7 @@ extension ViewController: UITableViewDataSource {
         let grocery = currentGroceryList[indexPath.item]
         
         cell.textLabel.text = grocery.name
-        if grocery.bought {
-            cell.imageView.image = UIImage(named: "checked")
-        }
-        else {
-            cell.imageView.image = UIImage(named: "unchecked")
-        }
+        cell.imageView.image = StyleKit.imageOfCheckbox(grocery.bought)
         
         return cell
     }
