@@ -31,7 +31,7 @@
 /* Begin PBXFileReference section */
 		3844D969196C392400CBE14A /* StyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKit.swift; sourceTree = "<group>"; };
 		384CC9C1196C42DD00FCD6AC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		385AF2D81959043B00EE0773 /* calendarAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = calendarAdapter.swift; path = ../calendarAdapter.swift; sourceTree = "<group>"; };
+		385AF2D81959043B00EE0773 /* calendarAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = calendarAdapter.swift; sourceTree = "<group>"; };
 		38A2C9861953622C002409F8 /* groceryModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = groceryModel.swift; sourceTree = "<group>"; };
 		38B4534E1953277F00406FFC /* Grocery Seer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Grocery Seer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		38B453521953277F00406FFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -42,7 +42,7 @@
 		38B453601953277F00406FFC /* Grocery SeerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Grocery SeerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		38B453651953277F00406FFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		38B453661953277F00406FFC /* Grocery_SeerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grocery_SeerTests.swift; sourceTree = "<group>"; };
-		38CEF5CC195345250044E405 /* AddGroceryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddGroceryViewController.swift; path = ../AddGroceryViewController.swift; sourceTree = "<group>"; };
+		38CEF5CC195345250044E405 /* AddGroceryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGroceryViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
