@@ -7,10 +7,13 @@
 //
 
 import UIKit
+import QuartzCore
 
 class ViewController: UIViewController, UITableViewDelegate {
                             
-    @IBOutlet var tableview: UITableView
+    @IBOutlet weak var tableview: UITableView!
+    @IBOutlet weak var clearButton: UIButton!
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,11 +22,18 @@ class ViewController: UIViewController, UITableViewDelegate {
         tableview.delegate = self
         tableview.contentInset = UIEdgeInsets(top: 44.0, left: 0, bottom: 0, right: 0)
         
+        clearButton.titleLabel.font = UIFont(name: "AvenirNext-DemiBold", size: 14.0)
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "groceryListWasChanged:", name: "groceryListChanged", object: currentGroceryList)
     }
     
-    override func viewWillAppear(animated: Bool) {
+    func setup_ui() {
         self.tableview.reloadData()
+        clearButton.hidden = !currentGroceryList.hasAnyCompletedItems()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        self.setup_ui()
         super.viewWillAppear(animated)
     }
 
@@ -34,10 +44,14 @@ class ViewController: UIViewController, UITableViewDelegate {
     
     func groceryListWasChanged(notification: NSNotification!) {
         dispatch_async(dispatch_get_main_queue()) {
-            self.tableview.reloadData()
+            self.setup_ui()
         }
     }
 
+    @IBAction func clearCompleted(sender: AnyObject) {
+        currentGroceryList.loadFromCalendar(loadCompletedItems: false)
+        self.clearButton.hidden = true
+    }
     
     func tableView(tableView: UITableView!, willDisplayCell cell: UITableViewCell!, forRowAtIndexPath indexPath: NSIndexPath!) {
         cell.textLabel.font = UIFont(name: "AvenirNext-Regular", size: 14.0)
@@ -46,7 +60,7 @@ class ViewController: UIViewController, UITableViewDelegate {
     func tableView(tableView: UITableView!, willSelectRowAtIndexPath indexPath: NSIndexPath!) -> NSIndexPath! {
         let grocery = currentGroceryList[indexPath.item]
         grocery.toggle_bought()
-        self.tableview.reloadData()
+        self.setup_ui()
         return nil
     }
     
@@ -74,7 +88,7 @@ extension ViewController: UITableViewDataSource {
         let grocery = currentGroceryList[indexPath.item]
         
         cell.textLabel.text = grocery.name
-        cell.imageView.image = StyleKit.imageOfCheckbox(grocery.bought)
+        cell.imageView.image = StyleKit.imageOfCheckboxWithIsChecked(grocery.bought)
         
         return cell
     }

@@ -76,6 +76,17 @@ class GroceryList {
     }
 }
 
+extension GroceryList {
+    func hasAnyCompletedItems() -> Bool {
+        for item in self.list {
+            if item.bought {
+                return true
+            }
+        }
+        return false
+    }
+}
+
 
 
 

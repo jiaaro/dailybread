@@ -13,8 +13,9 @@ class AddGroceryViewController: UIViewController, UITableViewDataSource, UITable
     
     var grocery_suggestions: Array<GrocerySuggestion> = []
     
-    @IBOutlet var tableview: UITableView
-    @IBOutlet var groceryInput: UITextField
+    @IBOutlet var tableview: UITableView!
+    @IBOutlet var groceryInput: UITextField!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
