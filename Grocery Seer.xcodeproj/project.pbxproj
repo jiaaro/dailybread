@@ -7,9 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3844D96A196C392400CBE14A /* StyleKit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3844D969196C392400CBE14A /* StyleKit.swift */; };
 		385AF2D91959043B00EE0773 /* calendarAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385AF2D81959043B00EE0773 /* calendarAdapter.swift */; };
 		38A2C9871953622C002409F8 /* groceryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A2C9861953622C002409F8 /* groceryModel.swift */; };
+		38A693971981F2DD007EE7C2 /* StyleKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A693961981F2DD007EE7C2 /* StyleKit.m */; };
 		38B453541953277F00406FFC /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B453531953277F00406FFC /* AppDelegate.swift */; };
 		38B453561953277F00406FFC /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38B453551953277F00406FFC /* ViewController.swift */; };
 		38B453591953277F00406FFC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 38B453571953277F00406FFC /* Main.storyboard */; };
@@ -29,10 +29,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		3844D969196C392400CBE14A /* StyleKit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StyleKit.swift; sourceTree = "<group>"; };
 		384CC9C1196C42DD00FCD6AC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		385AF2D81959043B00EE0773 /* calendarAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = calendarAdapter.swift; sourceTree = "<group>"; };
 		38A2C9861953622C002409F8 /* groceryModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = groceryModel.swift; sourceTree = "<group>"; };
+		38A693941981F2DC007EE7C2 /* Grocery Seer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Grocery Seer-Bridging-Header.h"; sourceTree = "<group>"; };
+		38A693951981F2DD007EE7C2 /* StyleKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StyleKit.h; sourceTree = "<group>"; };
+		38A693961981F2DD007EE7C2 /* StyleKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StyleKit.m; sourceTree = "<group>"; };
 		38B4534E1953277F00406FFC /* Grocery Seer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Grocery Seer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		38B453521953277F00406FFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		38B453531953277F00406FFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -85,8 +87,9 @@
 		38B453501953277F00406FFC /* Grocery Seer */ = {
 			isa = PBXGroup;
 			children = (
-				3844D969196C392400CBE14A /* StyleKit.swift */,
 				38CEF5CC195345250044E405 /* AddGroceryViewController.swift */,
+				38A693951981F2DD007EE7C2 /* StyleKit.h */,
+				38A693961981F2DD007EE7C2 /* StyleKit.m */,
 				385AF2D81959043B00EE0773 /* calendarAdapter.swift */,
 				38B453531953277F00406FFC /* AppDelegate.swift */,
 				38B453551953277F00406FFC /* ViewController.swift */,
@@ -94,6 +97,7 @@
 				38B453571953277F00406FFC /* Main.storyboard */,
 				38B4535A1953277F00406FFC /* Images.xcassets */,
 				38B453511953277F00406FFC /* Supporting Files */,
+				38A693941981F2DC007EE7C2 /* Grocery Seer-Bridging-Header.h */,
 			);
 			path = "Grocery Seer";
 			sourceTree = "<group>";
@@ -223,11 +227,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3844D96A196C392400CBE14A /* StyleKit.swift in Sources */,
 				38CEF5CD195345250044E405 /* AddGroceryViewController.swift in Sources */,
 				385AF2D91959043B00EE0773 /* calendarAdapter.swift in Sources */,
 				38A2C9871953622C002409F8 /* groceryModel.swift in Sources */,
 				38B453561953277F00406FFC /* ViewController.swift in Sources */,
+				38A693971981F2DD007EE7C2 /* StyleKit.m in Sources */,
 				38B453541953277F00406FFC /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -344,6 +348,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Grocery Seer/Info.plist";
@@ -351,6 +356,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Grocery Seer/Grocery Seer-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -359,6 +366,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Grocery Seer/Info.plist";
@@ -366,6 +374,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SWIFT_OBJC_BRIDGING_HEADER = "Grocery Seer/Grocery Seer-Bridging-Header.h";
 			};
 			name = Release;
 		};
