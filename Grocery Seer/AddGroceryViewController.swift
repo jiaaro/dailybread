@@ -25,6 +25,7 @@ class AddGroceryViewController: UIViewController, UITableViewDataSource, UITable
         tableview.delegate = self
         
         groceryInput.delegate = self
+        groceryInput.becomeFirstResponder()
     }
     
     func updateSuggestions(text: String) {
