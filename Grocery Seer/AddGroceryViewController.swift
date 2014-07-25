@@ -86,6 +86,8 @@ class AddGroceryViewController: UIViewController, UITableViewDataSource, UITable
     func tableView(tableView: UITableView!, willSelectRowAtIndexPath indexPath: NSIndexPath!) -> NSIndexPath! {
         let suggestion = grocery_suggestions[indexPath.item]
         groceryInput.text = suggestion.name
+        currentGroceryList.add(groceryInput.text)
+        self.dismissViewControllerAnimated(true, nil)
         return nil
     }
     
