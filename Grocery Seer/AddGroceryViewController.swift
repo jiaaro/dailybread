@@ -62,7 +62,8 @@ class AddGroceryViewController: UIViewController, UITableViewDataSource, UITable
     
     func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath:NSIndexPath!) -> UITableViewCell! {
 
-        var cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "suggestionCell")
+        //var cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "suggestionCell")
+        var cell = tableView.dequeueReusableCellWithIdentifier("suggestionCell", forIndexPath: indexPath) as UITableViewCell
         
         let suggestion = self.grocery_suggestions[indexPath.item]
         
