@@ -147,7 +147,7 @@ func save_reminder(reminder: EKReminder, completed: () -> ()) {
         var err: NSError?
         estore.saveReminder(reminder, commit: true, error: &err)
         
-        if err {
+        if let err = err {
             println(err)
         }
         else {
