@@ -3,7 +3,7 @@ import UIKit
 
 var _estore: EKEventStore!
 func get_estore(completed: (EKEventStore) -> ()) {
-    if _estore {
+    if _estore != nil {
         completed(_estore)
         return
     }
@@ -14,7 +14,7 @@ func get_estore(completed: (EKEventStore) -> ()) {
     case .NotDetermined:
         _estore.requestAccessToEntityType(EKEntityTypeReminder) {
             (granted: Bool, err: NSError!) in
-            if granted && !err {
+            if granted && (err == nil) {
                 completed(_estore)
             }
         }
@@ -28,7 +28,7 @@ func get_estore(completed: (EKEventStore) -> ()) {
 
 var calendar: EKCalendar!
 func get_calendar(completed:((EKCalendar)->())) {
-    if calendar {
+    if calendar != nil {
         completed(calendar)
         return
     }
@@ -58,33 +58,36 @@ func get_calendar(completed:((EKCalendar)->())) {
     }
 }
 
+func get_estore_and_calendar(completed: (EKEventStore, EKCalendar) -> ()) {
+    get_estore { estore in
+        get_calendar { calendar in
+            completed(estore, calendar)
+        }
+    }
+}
 
 extension GroceryList {
     func loadFromCalendar(loadCompletedItems:Bool = false) {
-        get_estore {
-            estore in
+        get_estore_and_calendar {
+            (estore, calendar) in
             
-            get_calendar() {
-                calendar in
+            var remindersPredicate: NSPredicate
+            
+            if loadCompletedItems {
+                 remindersPredicate = estore.predicateForCompletedRemindersWithCompletionDateStarting(nil, ending: nil, calendars: [calendar])
+            }
+            else {
+                remindersPredicate = estore.predicateForIncompleteRemindersWithDueDateStarting(nil, ending: nil, calendars: [calendar])
+            }
+            
+            estore.fetchRemindersMatchingPredicate(remindersPredicate) {
+                reminders in
                 
-                var remindersPredicate: NSPredicate
-                
-                if loadCompletedItems {
-                     remindersPredicate = estore.predicateForCompletedRemindersWithCompletionDateStarting(nil, ending: nil, calendars: [calendar])
-                }
-                else {
-                    remindersPredicate = estore.predicateForIncompleteRemindersWithDueDateStarting(nil, ending: nil, calendars: [calendar])
+                self.list = (reminders as Array<EKReminder>).map {
+                    Grocery(reminder: $0)
                 }
                 
-                estore.fetchRemindersMatchingPredicate(remindersPredicate) {
-                    reminders in
-                    
-                    self.list = (reminders as Array<EKReminder>).map {
-                        Grocery(reminder: $0)
-                    }
-                    
-                    self.sendChangedNotification()
-                }
+                self.sendChangedNotification()
             }
         }
     }

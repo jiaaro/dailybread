@@ -101,61 +101,69 @@ func name_set(groceries: Array<Grocery>) -> NSSet {
 
 class GrocerySuggestion {
     var name: String
-    var occurences: Int = 0
+    var occurences = [NSDate]()
     
-    init(name: String, occurences: Int) {
+    init(name: String, occurences: [NSDate]) {
         self.name = name
         self.occurences = occurences
     }
 }
 
 var suggestions: Array<GrocerySuggestion>!
-func get_grocery_sugguestion_set(input:String, completed: (Array<GrocerySuggestion>)->()) {
+func get_grocery_sugguestion_set(completed: (Array<GrocerySuggestion>)->()) {
     if let s = suggestions {
         completed(s)
         return
     }
-    
+
+    let current_grocery_names = name_set(currentGroceryList.list)
     let groceries = grocerySuggestionsList.list
-    var grocery_counts = Dictionary<String, Int>()
+    var grocery_occurences = [String:[NSDate]]()
     
     for grocery in groceries {
         let key = grocery.name.lowercaseString
+        let reminder = grocery.reminder
         
-        if let n = grocery_counts[key] {
-            grocery_counts[key] = n + 1
+        if grocery_occurences[key] == nil {
+            grocery_occurences[key] = []
         }
-        else {
-            grocery_counts[key] = 1
-        }
+
+        grocery_occurences[key]!.append(
+            reminder.creationDate ?? reminder.completionDate ?? reminder.lastModifiedDate!
+        )
     }
-    
+
     var suggestion_candidates = (name_set(groceries).allObjects as Array<String>)
     
     suggestion_candidates.sort({
-        grocery_counts[$0.lowercaseString]! > grocery_counts[$1.lowercaseString]!
+        grocery_occurences[$0.lowercaseString]!.count > grocery_occurences[$1.lowercaseString]!.count
     })
     suggestions = suggestion_candidates.map({
-        let occurences = grocery_counts[$0.lowercaseString]!
+        let occurences = grocery_occurences[$0.lowercaseString]!
         return GrocerySuggestion(name: $0, occurences: occurences)
     })
     
     completed(suggestions)
-    
-
 }
 
 func get_grocery_sugguestions(input:String, completed: (Array<GrocerySuggestion>)->()) {
-    get_grocery_sugguestion_set(input) {
+    get_grocery_sugguestion_set {
         suggestions in
         
-        let current_list_names = name_set(currentGroceryList.list.filter({ !$0.bought }))
+        let current_list_names = name_set(currentGroceryList.list)
         
         completed(suggestions.filter {
-            if current_list_names.containsObject($0.name.lowercaseString) {
+            grocery in
+            
+            // don't show anything in the current list
+            if current_list_names.containsObject(grocery.name.lowercaseString) {
                 return false
             }
-            return $0.name.lowercaseString.hasPrefix(input.lowercaseString)
+            // if the filter string is empty, show everything else
+            if countElements(input) == 0 {
+                return true
+            }
+            return grocery.name.lowercaseString.hasPrefix(input.lowercaseString)
         })
     }
 }

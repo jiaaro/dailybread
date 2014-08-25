@@ -69,7 +69,7 @@ class AddGroceryViewController: UIViewController, UITableViewDataSource, UITable
         let suggestion = self.grocery_suggestions[indexPath.item]
         
         cell.textLabel.text = suggestion.name
-        cell.detailTextLabel.text = "×\(suggestion.occurences)"
+        cell.detailTextLabel.text = "×\(suggestion.occurences.count)"
         
         return cell
     }

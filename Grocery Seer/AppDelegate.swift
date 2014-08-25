@@ -12,6 +12,7 @@ import EventKit
 
 var currentGroceryList = GroceryList()
 var grocerySuggestionsList = GroceryList()
+var suggestionGenerationQueue: NSOperationQueue? = nil //NSOperationQueue()
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -30,16 +31,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         NSNotificationCenter.defaultCenter().addObserverForName("groceryAdded", object: currentGroceryList, queue: nil) {
                 notification in
                 suggestions = nil
-                get_grocery_sugguestion_set("", {s in })
+                get_grocery_sugguestion_set {s in }
         }
+        NSNotificationCenter.defaultCenter().addObserverForName("groceryListChanged", object: grocerySuggestionsList, queue: nil) {
+            notification in
+            suggestions = nil
+            get_grocery_sugguestion_set {s in }
+        }
+        
         
         get_estore {
             estore in
             let nc = NSNotificationCenter.defaultCenter()
-            nc.addObserverForName("EKEventStoreChangedNotification", object: estore, queue: nil) {
+            nc.addObserverForName("EKEventStoreChangedNotification", object: estore, queue: suggestionGenerationQueue) {
                 notification in
                 currentGroceryList.updateFromCalendar(false, keepCurrent: true)
-                // grocerySuggestionsList.loadFromCalendar(loadCompletedItems: true)
+                grocerySuggestionsList.loadFromCalendar(loadCompletedItems: true)
             }
 
         }
