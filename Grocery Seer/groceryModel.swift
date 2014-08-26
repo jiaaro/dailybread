@@ -21,7 +21,7 @@ class Grocery {
         self.reminder = reminder
     }
     convenience init(reminder: EKReminder) {
-        self.init(name: reminder.title, bought: reminder.completed, reminder: reminder)
+        self.init(name: reminder.title, bought: reminder.completed ?? false, reminder: reminder)
     }
     
     func toggle_bought() {
@@ -109,13 +109,9 @@ class GrocerySuggestion {
     }
 }
 
-var suggestions: Array<GrocerySuggestion>!
-func get_grocery_sugguestion_set(completed: (Array<GrocerySuggestion>)->()) {
-    if let s = suggestions {
-        completed(s)
-        return
-    }
 
+func mk_grocery_sugguestion_set(completed: (Array<GrocerySuggestion>)->()) {
+    println("generating suggestions - start")
     let current_grocery_names = name_set(currentGroceryList.list)
     let groceries = grocerySuggestionsList.list
     var grocery_occurences = [String:[NSDate]]()
@@ -138,12 +134,29 @@ func get_grocery_sugguestion_set(completed: (Array<GrocerySuggestion>)->()) {
     suggestion_candidates.sort({
         grocery_occurences[$0.lowercaseString]!.count > grocery_occurences[$1.lowercaseString]!.count
     })
-    suggestions = suggestion_candidates.map({
+    let new_suggestions: [GrocerySuggestion]! = suggestion_candidates.map({
         let occurences = grocery_occurences[$0.lowercaseString]!
         return GrocerySuggestion(name: $0, occurences: occurences)
     })
+    println("generating suggestions - done")
+    completed(new_suggestions)
+}
+
+var suggestions: Array<GrocerySuggestion>!
+func get_grocery_sugguestion_set(completed: (Array<GrocerySuggestion>)->()) {
+    println("get_grocery_sugguestion_set - start")
+    if let s = suggestions {
+        println("get_grocery_sugguestion_set - complete (cached)")
+        completed(s)
+        return
+    }
     
-    completed(suggestions)
+    mk_grocery_sugguestion_set {
+        new_suggestions in
+        suggestions = new_suggestions
+        println("get_grocery_sugguestion_set - complete (uncached)")
+        completed(suggestions)
+    }
 }
 
 func get_grocery_sugguestions(input:String, completed: (Array<GrocerySuggestion>)->()) {
@@ -165,5 +178,19 @@ func get_grocery_sugguestions(input:String, completed: (Array<GrocerySuggestion>
             }
             return grocery.name.lowercaseString.hasPrefix(input.lowercaseString)
         })
+    }
+}
+
+var updating = false
+func update_grocery_suggestions() {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+        if updating { return }
+        updating = true
+
+        mk_grocery_sugguestion_set {
+            new_suggestions in
+            suggestions = new_suggestions
+            updating = false
+        }
     }
 }

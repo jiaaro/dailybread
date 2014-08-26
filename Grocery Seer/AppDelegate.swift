@@ -12,12 +12,13 @@ import EventKit
 
 var currentGroceryList = GroceryList()
 var grocerySuggestionsList = GroceryList()
-var suggestionGenerationQueue: NSOperationQueue? = nil //NSOperationQueue()
+
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
                             
     var window: UIWindow?
+    lazy var suggestionGenerationQueue: NSOperationQueue = NSOperationQueue()
 
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
@@ -28,23 +29,24 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         currentGroceryList.loadFromCalendar(loadCompletedItems: false)
         grocerySuggestionsList.loadFromCalendar(loadCompletedItems: true)
         
-        NSNotificationCenter.defaultCenter().addObserverForName("groceryAdded", object: currentGroceryList, queue: nil) {
-                notification in
-                suggestions = nil
-                get_grocery_sugguestion_set {s in }
-        }
-        NSNotificationCenter.defaultCenter().addObserverForName("groceryListChanged", object: grocerySuggestionsList, queue: nil) {
+        NSNotificationCenter.defaultCenter().addObserverForName("groceryAdded", object: currentGroceryList, queue: suggestionGenerationQueue) {
             notification in
-            suggestions = nil
-            get_grocery_sugguestion_set {s in }
+            update_grocery_suggestions()
         }
-        
+        NSNotificationCenter.defaultCenter().addObserverForName("groceryListChanged", object: grocerySuggestionsList, queue: suggestionGenerationQueue) {
+            notification in
+            update_grocery_suggestions()
+        }
         
         get_estore {
             estore in
             let nc = NSNotificationCenter.defaultCenter()
-            nc.addObserverForName("EKEventStoreChangedNotification", object: estore, queue: suggestionGenerationQueue) {
+            
+            let updateQueue: NSOperationQueue = NSOperationQueue()
+            
+            nc.addObserverForName("EKEventStoreChangedNotification", object: estore, queue: updateQueue) {
                 notification in
+
                 currentGroceryList.updateFromCalendar(false, keepCurrent: true)
                 grocerySuggestionsList.loadFromCalendar(loadCompletedItems: true)
             }

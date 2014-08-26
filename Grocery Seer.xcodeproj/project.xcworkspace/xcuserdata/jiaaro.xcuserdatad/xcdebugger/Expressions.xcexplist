@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "Grocery_Seer.(get_grocery_sugguestion_set (Swift.String, (Swift.Array&lt;Grocery_Seer.GrocerySuggestion&gt;) -&gt; ()) -&gt; ()).(closure #1):groceryModel.swift">
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
