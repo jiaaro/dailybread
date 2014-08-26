@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0587B5B619AC20F7009FAF77 /* ranking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0587B5B519AC20F7009FAF77 /* ranking.swift */; };
 		385AF2D91959043B00EE0773 /* calendarAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385AF2D81959043B00EE0773 /* calendarAdapter.swift */; };
 		38A2C9871953622C002409F8 /* groceryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A2C9861953622C002409F8 /* groceryModel.swift */; };
 		38A693971981F2DD007EE7C2 /* StyleKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A693961981F2DD007EE7C2 /* StyleKit.m */; };
@@ -29,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0587B5B519AC20F7009FAF77 /* ranking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ranking.swift; sourceTree = "<group>"; };
 		384CC9C1196C42DD00FCD6AC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		385AF2D81959043B00EE0773 /* calendarAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = calendarAdapter.swift; sourceTree = "<group>"; };
 		38A2C9861953622C002409F8 /* groceryModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = groceryModel.swift; sourceTree = "<group>"; };
@@ -98,6 +100,7 @@
 				38B4535A1953277F00406FFC /* Images.xcassets */,
 				38B453511953277F00406FFC /* Supporting Files */,
 				38A693941981F2DC007EE7C2 /* Grocery Seer-Bridging-Header.h */,
+				0587B5B519AC20F7009FAF77 /* ranking.swift */,
 			);
 			path = "Grocery Seer";
 			sourceTree = "<group>";
@@ -229,6 +232,7 @@
 			files = (
 				38CEF5CD195345250044E405 /* AddGroceryViewController.swift in Sources */,
 				385AF2D91959043B00EE0773 /* calendarAdapter.swift in Sources */,
+				0587B5B619AC20F7009FAF77 /* ranking.swift in Sources */,
 				38A2C9871953622C002409F8 /* groceryModel.swift in Sources */,
 				38B453561953277F00406FFC /* ViewController.swift in Sources */,
 				38A693971981F2DD007EE7C2 /* StyleKit.m in Sources */,

@@ -132,7 +132,12 @@ func mk_grocery_sugguestion_set(completed: (Array<GrocerySuggestion>)->()) {
     var suggestion_candidates = (name_set(groceries).allObjects as Array<String>)
     
     suggestion_candidates.sort({
-        grocery_occurences[$0.lowercaseString]!.count > grocery_occurences[$1.lowercaseString]!.count
+        a, b in
+
+        let occurrances1 = grocery_occurences[a.lowercaseString]!
+        let occurrances2 = grocery_occurences[b.lowercaseString]!
+
+        return grocery_rank_score(occurrances1) > grocery_rank_score(occurrances2)
     })
     let new_suggestions: [GrocerySuggestion]! = suggestion_candidates.map({
         let occurences = grocery_occurences[$0.lowercaseString]!
