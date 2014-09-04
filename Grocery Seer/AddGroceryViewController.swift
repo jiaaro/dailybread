@@ -9,7 +9,8 @@
 import Foundation
 import UIKit
 
-class AddGroceryViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate {
+
+class AddGroceryViewController: UIViewController, UITextFieldDelegate {
     
     var grocery_suggestions: Array<GrocerySuggestion> = []
     
@@ -57,39 +58,14 @@ class AddGroceryViewController: UIViewController, UITableViewDataSource, UITable
         // Dispose of any resources that can be recreated.
     }
     
-    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
-        return grocery_suggestions.count
-    }
-    
-    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath:NSIndexPath!) -> UITableViewCell! {
-
-        //var cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "suggestionCell")
-        var cell = tableView.dequeueReusableCellWithIdentifier("suggestionCell", forIndexPath: indexPath) as UITableViewCell
-        
-        let suggestion = self.grocery_suggestions[indexPath.item]
-        
-        cell.textLabel.text = suggestion.name
-        cell.detailTextLabel.text = "×\(suggestion.occurences.count)"
-        
-        return cell
-    }
-    
     func tableView(tableView: UITableView!, willDisplayCell cell: UITableViewCell!, forRowAtIndexPath indexPath: NSIndexPath!) {
-        cell.textLabel.font = UIFont(name: "AvenirNext-Medium", size: 14.0)
-        cell.detailTextLabel.font = UIFont(name: "AvenirNext-Regular", size: 9.0)
+        cell.textLabel?.font = UIFont(name: "AvenirNext-Medium", size: 14.0)
+        cell.detailTextLabel?.font = UIFont(name: "AvenirNext-Regular", size: 9.0)
         
-        cell.textLabel.textColor = UIColor.grayColor()
-        cell.detailTextLabel.textColor = UIColor.grayColor()
+        cell.textLabel?.textColor = UIColor.grayColor()
+        cell.detailTextLabel?.textColor = UIColor.grayColor()
         
         cell.backgroundColor = UIColor.clearColor()
-    }
-    
-    func tableView(tableView: UITableView!, willSelectRowAtIndexPath indexPath: NSIndexPath!) -> NSIndexPath! {
-        let suggestion = grocery_suggestions[indexPath.item]
-        groceryInput.text = suggestion.name
-        currentGroceryList.add(groceryInput.text)
-        self.dismissViewControllerAnimated(true, nil)
-        return nil
     }
     
     func textField(textField: UITextField!,
@@ -112,4 +88,42 @@ class AddGroceryViewController: UIViewController, UITableViewDataSource, UITable
         textField.resignFirstResponder()
         return false
     }
+}
+
+extension AddGroceryViewController : UITableViewDelegate {
+    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        let suggestion = grocery_suggestions[indexPath.item]
+        groceryInput.text = suggestion.name
+        currentGroceryList.add(groceryInput.text)
+        self.dismissViewControllerAnimated(true, nil)
+        return nil
+    }
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        cell.textLabel?.font = UIFont(name: "AvenirNext-Medium", size: 14.0)
+        cell.detailTextLabel?.font = UIFont(name: "AvenirNext-Regular", size: 9.0)
+        
+        cell.textLabel?.textColor = UIColor.grayColor()
+        cell.detailTextLabel?.textColor = UIColor.grayColor()
+        
+        cell.backgroundColor = UIColor.clearColor()
+    }
+}
+
+extension AddGroceryViewController : UITableViewDataSource {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return grocery_suggestions.count
+    }
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) -> UITableViewCell {
+        
+        //var cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "suggestionCell")
+        var cell = tableView.dequeueReusableCellWithIdentifier("suggestionCell", forIndexPath: indexPath) as UITableViewCell
+        
+        let suggestion = self.grocery_suggestions[indexPath.item]
+        
+        cell.textLabel?.text = suggestion.name
+        cell.detailTextLabel?.text = "×\(suggestion.occurences.count)"
+        
+        return cell
+    }
+
 }

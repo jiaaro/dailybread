@@ -9,7 +9,7 @@
 import UIKit
 import QuartzCore
 
-class ViewController: UIViewController, UITableViewDelegate {
+class ViewController: UIViewController {
                             
     @IBOutlet weak var tableview: UITableView!
     @IBOutlet weak var clearButton: UIButton!
@@ -22,7 +22,7 @@ class ViewController: UIViewController, UITableViewDelegate {
         tableview.delegate = self
         tableview.contentInset = UIEdgeInsets(top: 44.0, left: 0, bottom: 0, right: 0)
         
-        clearButton.titleLabel.font = UIFont(name: "AvenirNext-DemiBold", size: 14.0)
+        clearButton.titleLabel?.font = UIFont(name: "AvenirNext-DemiBold", size: 14.0)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "groceryListWasChanged:", name: "groceryListChanged", object: currentGroceryList)
     }
@@ -52,43 +52,45 @@ class ViewController: UIViewController, UITableViewDelegate {
         currentGroceryList.loadFromCalendar(loadCompletedItems: false)
         self.clearButton.hidden = true
     }
+}
+
+extension ViewController: UITableViewDelegate {
     
-    func tableView(tableView: UITableView!, willDisplayCell cell: UITableViewCell!, forRowAtIndexPath indexPath: NSIndexPath!) {
-        cell.textLabel.font = UIFont(name: "AvenirNext-Regular", size: 14.0)
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        cell.textLabel?.font = UIFont(name: "AvenirNext-Regular", size: 14.0)
     }
     
-    func tableView(tableView: UITableView!, willSelectRowAtIndexPath indexPath: NSIndexPath!) -> NSIndexPath! {
+    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
         let grocery = currentGroceryList[indexPath.item]
         grocery.toggle_bought()
         self.setup_ui()
         return nil
     }
-    
 }
 
 extension ViewController: UITableViewDataSource {
-    func tableView(tableView: UITableView!, numberOfRowsInSection section: Int) -> Int {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return currentGroceryList.count
     }
-    func tableView(tableView: UITableView!,
-        canEditRowAtIndexPath indexPath: NSIndexPath!) -> Bool {
+    func tableView(tableView: UITableView,
+        canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
             return true
     }
-    func tableView(tableView: UITableView!,
+    func tableView(tableView: UITableView,
         commitEditingStyle editingStyle: UITableViewCellEditingStyle,
-        forRowAtIndexPath indexPath: NSIndexPath!) {
+        forRowAtIndexPath indexPath: NSIndexPath) {
             
             let grocery = currentGroceryList[indexPath.item]
             currentGroceryList.delete(grocery)
             
             tableView.deleteRowsAtIndexPaths([indexPath], withRowAnimation:UITableViewRowAnimation.Automatic)
     }
-    func tableView(tableView: UITableView!, cellForRowAtIndexPath indexPath:NSIndexPath!) -> UITableViewCell! {
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) -> UITableViewCell {
         var cell = UITableViewCell()
         let grocery = currentGroceryList[indexPath.item]
         
-        cell.textLabel.text = grocery.name
-        cell.imageView.image = StyleKit.imageOfCheckboxWithIsChecked(grocery.bought)
+        cell.textLabel?.text = grocery.name
+        cell.imageView?.image = StyleKit.imageOfCheckboxWithIsChecked(grocery.bought)
         
         return cell
     }
