@@ -37,7 +37,7 @@
 		38A693941981F2DC007EE7C2 /* Grocery Seer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Grocery Seer-Bridging-Header.h"; sourceTree = "<group>"; };
 		38A693951981F2DD007EE7C2 /* StyleKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StyleKit.h; sourceTree = "<group>"; };
 		38A693961981F2DD007EE7C2 /* StyleKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StyleKit.m; sourceTree = "<group>"; };
-		38B4534E1953277F00406FFC /* Grocery Seer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Grocery Seer.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		38B4534E1953277F00406FFC /* Daily Bread.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Daily Bread.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		38B453521953277F00406FFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		38B453531953277F00406FFC /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		38B453551953277F00406FFC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -80,7 +80,7 @@
 		38B4534F1953277F00406FFC /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				38B4534E1953277F00406FFC /* Grocery Seer.app */,
+				38B4534E1953277F00406FFC /* Daily Bread.app */,
 				38B453601953277F00406FFC /* Grocery SeerTests.xctest */,
 			);
 			name = Products;
@@ -147,7 +147,7 @@
 			);
 			name = "Grocery Seer";
 			productName = "Grocery Seer";
-			productReference = 38B4534E1953277F00406FFC /* Grocery Seer.app */;
+			productReference = 38B4534E1953277F00406FFC /* Daily Bread.app */;
 			productType = "com.apple.product-type.application";
 		};
 		38B4535F1953277F00406FFC /* Grocery SeerTests */ = {
@@ -358,10 +358,10 @@
 				INFOPLIST_FILE = "Grocery Seer/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Daily Bread";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Grocery Seer/Grocery Seer-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Debug;
 		};
@@ -376,7 +376,7 @@
 				INFOPLIST_FILE = "Grocery Seer/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Daily Bread";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Grocery Seer/Grocery Seer-Bridging-Header.h";
 			};
@@ -397,7 +397,7 @@
 				INFOPLIST_FILE = "Grocery SeerTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Grocery SeerTests";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Debug;
@@ -413,7 +413,7 @@
 				INFOPLIST_FILE = "Grocery SeerTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "Grocery SeerTests";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Release;

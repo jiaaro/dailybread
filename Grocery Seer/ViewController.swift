@@ -13,10 +13,19 @@ class ViewController: UIViewController {
                             
     @IBOutlet weak var tableview: UITableView!
     @IBOutlet weak var clearButton: UIButton!
-
+    @IBOutlet weak var navbarTitle: UINavigationItem!
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        get_calendar { [weak self]
+            calendar in
+            var title = calendar.title
+            self?.navbarTitle.title = title
+        }
+        
+        tableview.separatorColor = UIColor(hue: 0, saturation: 0, brightness: 0, alpha: 0.1)
         
         tableview.dataSource = self
         tableview.delegate = self
@@ -57,7 +66,7 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        cell.textLabel?.font = UIFont(name: "AvenirNext-Regular", size: 14.0)
+        cell.textLabel?.font = UIFont(name: "AvenirNext-Regular", size: 16.0)
     }
     
     func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
