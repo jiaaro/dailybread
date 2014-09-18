@@ -1,6 +1,21 @@
 import EventKit
 import UIKit
 
+func send_user_to_settings() {
+    let alert = UIAlertController(title: "Reminders Access", message: "This app needs to access to your Reminders to work. This lets you add groceries with Siri, sync with iCloud, and share your grocery list.\n\nReminders are in the privacy section of this app’s settings.", preferredStyle: .Alert)
+    
+    let default_action = UIAlertAction(title: "Open Settings", style: .Default) { action in
+        UIApplication.sharedApplication().openURL(NSURL(string:UIApplicationOpenSettingsURLString))
+        return
+    }
+    
+    alert.addAction(default_action)
+    dispatch_async(dispatch_get_main_queue()) {
+        UIApplication.sharedApplication().keyWindow.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+        return
+    }
+}
+
 var _estore: EKEventStore!
 func get_estore(completed: (EKEventStore) -> ()) {
     if _estore != nil {
@@ -13,16 +28,20 @@ func get_estore(completed: (EKEventStore) -> ()) {
     switch EKEventStore.authorizationStatusForEntityType(EKEntityTypeReminder) {
     case .NotDetermined:
         _estore.requestAccessToEntityType(EKEntityTypeReminder) {
-            (granted: Bool, err: NSError!) in
+            (granted: Bool, err: NSError?) in
             if granted && (err == nil) {
                 completed(_estore)
+            }
+            else {
+                _estore = nil
+                send_user_to_settings()
             }
         }
     case .Authorized:
         completed(_estore)
-        
-    case .Denied, .Restricted:
-        break
+    default:
+        _estore = nil
+        send_user_to_settings()
     }
 }
 
@@ -35,6 +54,8 @@ func get_calendar(completed:((EKCalendar)->())) {
     
     get_estore {
         estore in
+        
+        println("getting calendars")
         
         var cals = estore.calendarsForEntityType(EKEntityTypeReminder) as [EKCalendar]
         cals = cals.filter() {
