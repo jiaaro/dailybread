@@ -40,7 +40,7 @@
                                     <fontDescription key="fontDescription" name="AvenirNext-DemiBold" family="Avenir Next" pointSize="16"/>
                                 </textAttributes>
                                 <items>
-                                    <navigationItem title="Grocery Seer" id="ue6-fJ-sVi">
+                                    <navigationItem title="Daily Bread" id="ue6-fJ-sVi">
                                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="add" id="o5g-HX-nxT">
                                             <connections>
                                                 <segue destination="cKo-br-OXv" kind="presentation" id="8Yi-9c-noy"/>

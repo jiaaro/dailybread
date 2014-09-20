@@ -34,7 +34,7 @@
 		384CC9C1196C42DD00FCD6AC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		385AF2D81959043B00EE0773 /* calendarAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = calendarAdapter.swift; sourceTree = "<group>"; };
 		38A2C9861953622C002409F8 /* groceryModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = groceryModel.swift; sourceTree = "<group>"; };
-		38A693941981F2DC007EE7C2 /* Grocery Seer-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Grocery Seer-Bridging-Header.h"; sourceTree = "<group>"; };
+		38A693941981F2DC007EE7C2 /* Daily Bread-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Daily Bread-Bridging-Header.h"; sourceTree = "<group>"; };
 		38A693951981F2DD007EE7C2 /* StyleKit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StyleKit.h; sourceTree = "<group>"; };
 		38A693961981F2DD007EE7C2 /* StyleKit.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StyleKit.m; sourceTree = "<group>"; };
 		38B4534E1953277F00406FFC /* Daily Bread.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Daily Bread.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -43,7 +43,7 @@
 		38B453551953277F00406FFC /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		38B453581953277F00406FFC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		38B4535A1953277F00406FFC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		38B453601953277F00406FFC /* Grocery SeerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Grocery SeerTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		38B453601953277F00406FFC /* Daily BreadTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Daily BreadTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		38B453651953277F00406FFC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		38B453661953277F00406FFC /* Grocery_SeerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Grocery_SeerTests.swift; sourceTree = "<group>"; };
 		38CEF5CC195345250044E405 /* AddGroceryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddGroceryViewController.swift; sourceTree = "<group>"; };
@@ -81,7 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				38B4534E1953277F00406FFC /* Daily Bread.app */,
-				38B453601953277F00406FFC /* Grocery SeerTests.xctest */,
+				38B453601953277F00406FFC /* Daily BreadTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -99,7 +99,7 @@
 				38B453571953277F00406FFC /* Main.storyboard */,
 				38B4535A1953277F00406FFC /* Images.xcassets */,
 				38B453511953277F00406FFC /* Supporting Files */,
-				38A693941981F2DC007EE7C2 /* Grocery Seer-Bridging-Header.h */,
+				38A693941981F2DC007EE7C2 /* Daily Bread-Bridging-Header.h */,
 				0587B5B519AC20F7009FAF77 /* ranking.swift */,
 			);
 			path = "Grocery Seer";
@@ -133,9 +133,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		38B4534D1953277F00406FFC /* Grocery Seer */ = {
+		38B4534D1953277F00406FFC /* Daily Bread */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 38B4536A1953277F00406FFC /* Build configuration list for PBXNativeTarget "Grocery Seer" */;
+			buildConfigurationList = 38B4536A1953277F00406FFC /* Build configuration list for PBXNativeTarget "Daily Bread" */;
 			buildPhases = (
 				38B4534A1953277F00406FFC /* Sources */,
 				38B4534B1953277F00406FFC /* Frameworks */,
@@ -145,14 +145,14 @@
 			);
 			dependencies = (
 			);
-			name = "Grocery Seer";
+			name = "Daily Bread";
 			productName = "Grocery Seer";
 			productReference = 38B4534E1953277F00406FFC /* Daily Bread.app */;
 			productType = "com.apple.product-type.application";
 		};
-		38B4535F1953277F00406FFC /* Grocery SeerTests */ = {
+		38B4535F1953277F00406FFC /* Daily BreadTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 38B4536D1953277F00406FFC /* Build configuration list for PBXNativeTarget "Grocery SeerTests" */;
+			buildConfigurationList = 38B4536D1953277F00406FFC /* Build configuration list for PBXNativeTarget "Daily BreadTests" */;
 			buildPhases = (
 				38B4535C1953277F00406FFC /* Sources */,
 				38B4535D1953277F00406FFC /* Frameworks */,
@@ -163,9 +163,9 @@
 			dependencies = (
 				38B453621953277F00406FFC /* PBXTargetDependency */,
 			);
-			name = "Grocery SeerTests";
+			name = "Daily BreadTests";
 			productName = "Grocery SeerTests";
-			productReference = 38B453601953277F00406FFC /* Grocery SeerTests.xctest */;
+			productReference = 38B453601953277F00406FFC /* Daily BreadTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 /* End PBXNativeTarget section */
@@ -187,7 +187,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 38B453491953277F00406FFC /* Build configuration list for PBXProject "Grocery Seer" */;
+			buildConfigurationList = 38B453491953277F00406FFC /* Build configuration list for PBXProject "Daily Bread" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -200,8 +200,8 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				38B4534D1953277F00406FFC /* Grocery Seer */,
-				38B4535F1953277F00406FFC /* Grocery SeerTests */,
+				38B4534D1953277F00406FFC /* Daily Bread */,
+				38B4535F1953277F00406FFC /* Daily BreadTests */,
 			);
 		};
 /* End PBXProject section */
@@ -253,7 +253,7 @@
 /* Begin PBXTargetDependency section */
 		38B453621953277F00406FFC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 38B4534D1953277F00406FFC /* Grocery Seer */;
+			target = 38B4534D1953277F00406FFC /* Daily Bread */;
 			targetProxy = 38B453611953277F00406FFC /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -355,12 +355,13 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				GCC_OPTIMIZATION_LEVEL = s;
 				INFOPLIST_FILE = "Grocery Seer/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "Daily Bread";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "Grocery Seer/Grocery Seer-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Grocery Seer/Daily Bread-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Debug;
@@ -374,11 +375,12 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = "Grocery Seer/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "Daily Bread";
 				PROVISIONING_PROFILE = "";
-				SWIFT_OBJC_BRIDGING_HEADER = "Grocery Seer/Grocery Seer-Bridging-Header.h";
+				SWIFT_OBJC_BRIDGING_HEADER = "Grocery Seer/Daily Bread-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
 			};
 			name = Release;
 		};
@@ -397,7 +399,7 @@
 				INFOPLIST_FILE = "Grocery SeerTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = YES;
-				PRODUCT_NAME = "Grocery SeerTests";
+				PRODUCT_NAME = "Daily BreadTests";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Debug;
@@ -413,7 +415,7 @@
 				INFOPLIST_FILE = "Grocery SeerTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = "Grocery SeerTests";
+				PRODUCT_NAME = "Daily BreadTests";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
 			name = Release;
@@ -421,7 +423,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		38B453491953277F00406FFC /* Build configuration list for PBXProject "Grocery Seer" */ = {
+		38B453491953277F00406FFC /* Build configuration list for PBXProject "Daily Bread" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				38B453681953277F00406FFC /* Debug */,
@@ -430,7 +432,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		38B4536A1953277F00406FFC /* Build configuration list for PBXNativeTarget "Grocery Seer" */ = {
+		38B4536A1953277F00406FFC /* Build configuration list for PBXNativeTarget "Daily Bread" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				38B4536B1953277F00406FFC /* Debug */,
@@ -439,7 +441,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		38B4536D1953277F00406FFC /* Build configuration list for PBXNativeTarget "Grocery SeerTests" */ = {
+		38B4536D1953277F00406FFC /* Build configuration list for PBXNativeTarget "Daily BreadTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				38B4536E1953277F00406FFC /* Debug */,

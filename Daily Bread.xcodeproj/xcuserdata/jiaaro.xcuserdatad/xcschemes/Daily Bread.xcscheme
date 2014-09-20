@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "38B4534D1953277F00406FFC"
-               BuildableName = "Grocery Seer.app"
-               BlueprintName = "Grocery Seer"
-               ReferencedContainer = "container:Grocery Seer.xcodeproj">
+               BuildableName = "Daily Bread.app"
+               BlueprintName = "Daily Bread"
+               ReferencedContainer = "container:Daily Bread.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
          <BuildActionEntry
@@ -29,9 +29,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "38B4535F1953277F00406FFC"
-               BuildableName = "Grocery SeerTests.xctest"
-               BlueprintName = "Grocery SeerTests"
-               ReferencedContainer = "container:Grocery Seer.xcodeproj">
+               BuildableName = "Daily BreadTests.xctest"
+               BlueprintName = "Daily BreadTests"
+               ReferencedContainer = "container:Daily Bread.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -47,9 +47,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "38B4535F1953277F00406FFC"
-               BuildableName = "Grocery SeerTests.xctest"
-               BlueprintName = "Grocery SeerTests"
-               ReferencedContainer = "container:Grocery Seer.xcodeproj">
+               BuildableName = "Daily BreadTests.xctest"
+               BlueprintName = "Daily BreadTests"
+               ReferencedContainer = "container:Daily Bread.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -57,9 +57,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "38B4534D1953277F00406FFC"
-            BuildableName = "Grocery Seer.app"
-            BlueprintName = "Grocery Seer"
-            ReferencedContainer = "container:Grocery Seer.xcodeproj">
+            BuildableName = "Daily Bread.app"
+            BlueprintName = "Daily Bread"
+            ReferencedContainer = "container:Daily Bread.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </TestAction>
@@ -76,9 +76,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "38B4534D1953277F00406FFC"
-            BuildableName = "Grocery Seer.app"
-            BlueprintName = "Grocery Seer"
-            ReferencedContainer = "container:Grocery Seer.xcodeproj">
+            BuildableName = "Daily Bread.app"
+            BlueprintName = "Daily Bread"
+            ReferencedContainer = "container:Daily Bread.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
       <AdditionalOptions>
@@ -94,9 +94,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "38B4534D1953277F00406FFC"
-            BuildableName = "Grocery Seer.app"
-            BlueprintName = "Grocery Seer"
-            ReferencedContainer = "container:Grocery Seer.xcodeproj">
+            BuildableName = "Daily Bread.app"
+            BlueprintName = "Daily Bread"
+            ReferencedContainer = "container:Daily Bread.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
