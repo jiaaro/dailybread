@@ -20,20 +20,6 @@
                ReferencedContainer = "container:Daily Bread.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
-         <BuildActionEntry
-            buildForTesting = "YES"
-            buildForRunning = "YES"
-            buildForProfiling = "NO"
-            buildForArchiving = "NO"
-            buildForAnalyzing = "YES">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "38B4535F1953277F00406FFC"
-               BuildableName = "Daily BreadTests.xctest"
-               BlueprintName = "Daily BreadTests"
-               ReferencedContainer = "container:Daily Bread.xcodeproj">
-            </BuildableReference>
-         </BuildActionEntry>
       </BuildActionEntries>
    </BuildAction>
    <TestAction
@@ -42,16 +28,6 @@
       shouldUseLaunchSchemeArgsEnv = "YES"
       buildConfiguration = "Debug">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "38B4535F1953277F00406FFC"
-               BuildableName = "Daily BreadTests.xctest"
-               BlueprintName = "Daily BreadTests"
-               ReferencedContainer = "container:Daily Bread.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
