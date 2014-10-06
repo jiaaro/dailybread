@@ -42,9 +42,16 @@
                                 </textAttributes>
                                 <items>
                                     <navigationItem title="Daily Bread" id="ue6-fJ-sVi">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="organize" id="yNa-dA-Jir">
+                                            <connections>
+                                                <segue destination="EVh-hl-D3s" kind="popoverPresentation" identifier="showPopover" popoverAnchorBarButtonItem="yNa-dA-Jir" id="i7D-z0-0kY">
+                                                    <popoverArrowDirection key="popoverArrowDirection" up="YES" down="YES" left="YES" right="YES"/>
+                                                </segue>
+                                            </connections>
+                                        </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" style="done" systemItem="add" id="o5g-HX-nxT">
                                             <connections>
-                                                <segue destination="cKo-br-OXv" kind="presentation" id="8Yi-9c-noy"/>
+                                                <segue destination="cKo-br-OXv" kind="presentation" identifier="addGrocerySegue" id="8Yi-9c-noy"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -229,6 +236,32 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hs9-xJ-KcF" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="837" y="211"/>
+        </scene>
+        <!--Choose Grocery List View Controller-->
+        <scene sceneID="n0l-8h-b35">
+            <objects>
+                <tableViewController id="EVh-hl-D3s" customClass="ChooseGroceryListViewController" customModule="Daily_Bread" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="8O0-0d-QzI">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <prototypes>
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="groceryListInPopover" id="bi4-1s-AJY">
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="bi4-1s-AJY" id="788-yz-OkD">
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="EVh-hl-D3s" id="8ec-Th-R9N"/>
+                            <outlet property="delegate" destination="EVh-hl-D3s" id="Xf5-Lc-5cz"/>
+                        </connections>
+                    </tableView>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="W8Z-IA-Dh1" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="139" y="993"/>
         </scene>
     </scenes>
 </document>

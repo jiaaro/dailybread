@@ -19,12 +19,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        get_calendar { [weak self]
-            calendar in
-            var title = calendar.title
-            self?.navbarTitle.title = title
-        }
-        
         tableview.separatorColor = UIColor(hue: 0, saturation: 0, brightness: 0, alpha: 0.1)
         
         tableview.dataSource = self
@@ -37,6 +31,11 @@ class ViewController: UIViewController {
     }
     
     func setup_ui() {
+        get_calendar { [weak self]
+            calendar in
+            var title = calendar.title
+            self?.navbarTitle.title = title
+        }
         self.tableview.reloadData()
         clearButton.hidden = !currentGroceryList.hasAnyCompletedItems()
     }
@@ -102,5 +101,19 @@ extension ViewController: UITableViewDataSource {
         cell.imageView?.image = StyleKit.imageOfCheckboxWithIsChecked(grocery.bought)
         
         return cell
+    }
+}
+
+// popover related code
+extension ViewController: UIPopoverPresentationControllerDelegate {
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        let segueid = segue.identifier
+        if (segueid == "showPopover") {
+            let destinationVC = segue.destinationViewController as UIViewController
+            destinationVC.popoverPresentationController?.delegate = self
+        }
+    }
+    func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {
+        return UIModalPresentationStyle.None
     }
 }

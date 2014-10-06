@@ -45,20 +45,21 @@ func get_estore(completed: (EKEventStore) -> ()) {
     }
 }
 
-var calendar: EKCalendar!
-func get_calendar(completed:((EKCalendar)->())) {
-    if calendar != nil {
-        completed(calendar)
-        return
-    }
-    
+func get_calendars(completed: (([EKCalendar])->())) {
     get_estore {
         estore in
         
         println("getting calendars")
         
         var cals = estore.calendarsForEntityType(EKEntityTypeReminder) as [EKCalendar]
-        cals = cals.filter() {
+        completed(cals)
+    }
+}
+func get_default_calendar(completed: (EKCalendar) -> () ) {
+    get_calendars {
+        calendars in
+        
+        let cals = calendars.filter() {
             switch $0.title.lowercaseString {
             case "grocery", "groceries", "grocery list", "groceries list":
                 return true
@@ -67,16 +68,54 @@ func get_calendar(completed:((EKCalendar)->())) {
             }
         }
         if cals.count > 0 {
-            calendar = cals[0]
+            completed(cals[0])
         }
         else {
-            calendar = EKCalendar(forEntityType:EKEntityTypeReminder, eventStore: estore)
-            calendar.title = "Grocery List"
-            estore.saveCalendar(calendar, commit: true, error: nil)
+            get_estore {
+                estore in
+                
+                let cal = EKCalendar(forEntityType:EKEntityTypeReminder, eventStore: estore)
+                cal.title = "Grocery List"
+                estore.saveCalendar(cal, commit: true, error: nil)
+                
+                completed(cal)
+            }
+        }
+    }
+}
+
+var calendar: EKCalendar!
+func get_calendar(completed: (EKCalendar)->()) {
+    if calendar != nil {
+        completed(calendar)
+        return
+    }
+    
+    let user_defaults = NSUserDefaults.standardUserDefaults()
+    
+    get_estore {
+        estore in
+        
+        if let calendar_id = user_defaults.stringForKey("calendar_id") {
+            if let cal = estore.calendarWithIdentifier(calendar_id) {
+                calendar = cal
+                completed(cal)
+                return
+            }
         }
         
-        completed(calendar)
+        get_default_calendar {
+            cal in
+            set_calendar(cal)
+            completed(cal)
+        }
     }
+}
+func set_calendar(cal: EKCalendar) {
+    let user_defaults = NSUserDefaults.standardUserDefaults()
+    user_defaults.setObject(cal.calendarIdentifier, forKey: "calendar_id")
+    
+    calendar = cal
 }
 
 func get_estore_and_calendar(completed: (EKEventStore, EKCalendar) -> ()) {
