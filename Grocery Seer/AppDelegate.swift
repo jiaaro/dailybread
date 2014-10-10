@@ -26,8 +26,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             w.tintColor = StyleKit.mainColor()!
         }
         
-        currentGroceryList.loadFromCalendar(loadCompletedItems: false)
-        grocerySuggestionsList.loadFromCalendar(loadCompletedItems: true)
+        if app_has_estore_permission() {
+            let user_defaults = NSUserDefaults.standardUserDefaults()
+            if let cal_id = user_defaults.stringForKey("calendar_id") {
+                self.showMainViewController()
+            }
+        }
         
         NSNotificationCenter.defaultCenter().addObserverForName("groceryAdded", object: currentGroceryList, queue: suggestionGenerationQueue) {
             notification in
@@ -38,6 +42,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             update_grocery_suggestions()
         }
         
+        return true
+    }
+    func showMainViewController() {
+        currentGroceryList.loadFromCalendar(loadCompletedItems: false)
+        grocerySuggestionsList.loadFromCalendar(loadCompletedItems: true)
         get_estore {
             estore in
             let nc = NSNotificationCenter.defaultCenter()
@@ -46,14 +55,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             nc.addObserverForName("EKEventStoreChangedNotification", object: estore, queue: updateQueue) {
                 notification in
-
+                
                 currentGroceryList.updateFromCalendar(false, keepCurrent: true)
                 grocerySuggestionsList.loadFromCalendar(loadCompletedItems: true)
             }
-
+            
         }
         
-        return true
+        if let window = self.window {
+            if let storyboard = window.rootViewController?.storyboard {
+                if let rootViewController = storyboard.instantiateViewControllerWithIdentifier("appMain") as? UIViewController {
+                    window.rootViewController = rootViewController
+                    window.makeKeyAndVisible()
+                }
+            }
+        }
     }
 
     func applicationWillResignActive(application: UIApplication) {

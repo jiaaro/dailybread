@@ -1,7 +1,20 @@
 import EventKit
 import UIKit
 
-func send_user_to_settings() {
+func send_user_to_settings(var current_view_controller: UIViewController! = nil) {
+    if current_view_controller == nil {
+        if let vc = UIApplication.sharedApplication().keyWindow.rootViewController {
+            if vc.isViewLoaded() && vc.view.window != nil {
+                current_view_controller = vc
+            }
+        }
+    }
+    
+    // if nothing was passed in and we couldn't find a VC to use, give up
+    if current_view_controller == nil {
+        return
+    }
+    
     let alert = UIAlertController(title: "Reminders Access", message: "This app needs to access to your Reminders to work. This lets you add groceries with Siri, sync with iCloud, and share your grocery list.\n\nReminders are in the privacy section of this app’s settings.", preferredStyle: .Alert)
     
     let default_action = UIAlertAction(title: "Open Settings", style: .Default) { action in
@@ -11,7 +24,7 @@ func send_user_to_settings() {
     
     alert.addAction(default_action)
     dispatch_async(dispatch_get_main_queue()) {
-        UIApplication.sharedApplication().keyWindow.rootViewController?.presentViewController(alert, animated: true, completion: nil)
+        current_view_controller.presentViewController(alert, animated: true, completion: nil)
         return
     }
 }
@@ -45,6 +58,11 @@ func get_estore(completed: (EKEventStore) -> ()) {
     }
 }
 
+func app_has_estore_permission() -> Bool {
+    let status = EKEventStore.authorizationStatusForEntityType(EKEntityTypeReminder)
+    return status == EKAuthorizationStatus.Authorized;
+}
+
 func get_calendars(completed: (([EKCalendar])->())) {
     get_estore {
         estore in
@@ -71,16 +89,29 @@ func get_default_calendar(completed: (EKCalendar) -> () ) {
             completed(cals[0])
         }
         else {
-            get_estore {
-                estore in
-                
-                let cal = EKCalendar(forEntityType:EKEntityTypeReminder, eventStore: estore)
-                cal.title = "Grocery List"
-                estore.saveCalendar(cal, commit: true, error: nil)
-                
+            create_calendar("Grocery") {
+                cal in
                 completed(cal)
             }
         }
+    }
+}
+func create_calendar(name: String, completed: (EKCalendar)->Void) {
+    get_estore {
+        estore in
+        
+        let cal = EKCalendar(forEntityType:EKEntityTypeReminder, eventStore: estore)
+        cal.title = name
+        cal.source = estore.defaultCalendarForNewReminders().source
+        
+        var err: NSError?
+        estore.saveCalendar(cal, commit: true, error: &err)
+        
+        if let err = err {
+            println(err)
+        }
+        
+        completed(cal)
     }
 }
 
