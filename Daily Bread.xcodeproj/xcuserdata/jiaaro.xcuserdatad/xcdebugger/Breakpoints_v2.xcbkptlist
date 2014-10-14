@@ -9,22 +9,6 @@
             shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Grocery Seer/calendarAdapter.swift"
-            timestampString = "434605249.12018"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
-            landmarkName = "get_estore(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
             filePath = "Grocery Seer/groceryModel.swift"
             timestampString = "430711810.728126"
             startingColumnNumber = "9223372036854775807"
@@ -286,11 +270,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Grocery Seer/calendarAdapter.swift"
-            timestampString = "434605537.285522"
+            timestampString = "434944907.66173"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "94"
-            endingLineNumber = "94"
+            startingLineNumber = "105"
+            endingLineNumber = "105"
             landmarkName = "get_default_calendar(_:)"
             landmarkType = "7">
          </BreakpointContent>

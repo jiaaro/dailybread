@@ -181,7 +181,22 @@ func get_grocery_sugguestions(input:String, completed: (Array<GrocerySuggestion>
             if countElements(input) == 0 {
                 return true
             }
-            return grocery.name.lowercaseString.hasPrefix(input.lowercaseString)
+            
+            let simplified_name = grocery.name.lowercaseString
+            let simplified_input = input.lowercaseString
+            
+            var chars = " \t\n\"'"
+            if countElements(input) > 1 {
+                chars = "/+_[]- \t\n:"
+            }
+            
+            let words: [String] = simplified_name.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: chars))
+            for word in words {
+                if word.hasPrefix(simplified_input) {
+                    return true
+                }
+            }
+            return simplified_name.hasPrefix(simplified_input)
         })
     }
 }

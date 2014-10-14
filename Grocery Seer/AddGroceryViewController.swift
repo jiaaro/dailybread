@@ -44,9 +44,13 @@ class AddGroceryViewController: UIViewController, UITextFieldDelegate {
         self.dismissViewControllerAnimated(true, nil)
     }
     
-    @IBAction func saveGrocery(sender: AnyObject) {
-        currentGroceryList.add(groceryInput.text)
+    func createGroceryAndClose(grocery_name: String) {
+        currentGroceryList.add(grocery_name)
         self.dismissViewControllerAnimated(true, nil)
+    }
+    
+    @IBAction func saveGrocery(sender: AnyObject) {
+        self.createGroceryAndClose(groceryInput.text)
     }
     
     @IBAction func textChanged(sender: AnyObject) {
@@ -85,7 +89,9 @@ class AddGroceryViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(textField: UITextField!) -> Bool {
-        textField.resignFirstResponder()
+        if countElements(textField.text) > 0 {
+            self.createGroceryAndClose(groceryInput.text)
+        }
         return false
     }
 }

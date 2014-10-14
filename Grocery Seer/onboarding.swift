@@ -39,13 +39,22 @@ class OnboardingStep2: OnboardingViewController {
         self.tableView?.dataSource = self
         self.tableView?.delegate = self
         
-        get_calendars { [weak self]
-            calendars in
-            if let strongself = self {
-                strongself.cals = calendars
-                dispatch_async(dispatch_get_main_queue()) {
-                    strongself.tableView.reloadData()
+        get_estore_permission {
+            estore_permission in
+            
+            if estore_permission {
+                get_calendars { [weak self]
+                    calendars in
+                    if let strongself = self {
+                        strongself.cals = calendars
+                        dispatch_async(dispatch_get_main_queue()) {
+                            strongself.tableView.reloadData()
+                        }
+                    }
                 }
+            }
+            else {
+                send_user_to_settings(current_view_controller: self)
             }
         }
     }

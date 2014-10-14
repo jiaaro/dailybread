@@ -29,6 +29,25 @@ func send_user_to_settings(var current_view_controller: UIViewController! = nil)
     }
 }
 
+func get_estore_permission(completed: (Bool) -> Void) {
+    switch EKEventStore.authorizationStatusForEntityType(EKEntityTypeReminder) {
+    case .NotDetermined:
+        _estore.requestAccessToEntityType(EKEntityTypeReminder) {
+            (granted: Bool, err: NSError?) in
+            if granted && (err == nil) {
+                completed(true)
+            }
+            else {
+                completed(false)
+            }
+        }
+    case .Authorized:
+        completed(true)
+    default:
+        completed(false)
+    }
+}
+
 var _estore: EKEventStore!
 func get_estore(completed: (EKEventStore) -> ()) {
     if _estore != nil {
@@ -38,23 +57,15 @@ func get_estore(completed: (EKEventStore) -> ()) {
     
     _estore = EKEventStore()
     
-    switch EKEventStore.authorizationStatusForEntityType(EKEntityTypeReminder) {
-    case .NotDetermined:
-        _estore.requestAccessToEntityType(EKEntityTypeReminder) {
-            (granted: Bool, err: NSError?) in
-            if granted && (err == nil) {
-                completed(_estore)
-            }
-            else {
-                _estore = nil
-                send_user_to_settings()
-            }
+    get_estore_permission {
+        permission in
+        if permission {
+            completed(_estore)
         }
-    case .Authorized:
-        completed(_estore)
-    default:
-        _estore = nil
-        send_user_to_settings()
+        else {
+            _estore = nil
+            send_user_to_settings()
+        }
     }
 }
 
