@@ -61,17 +61,21 @@ footer {
 }
 
 @media screen and (max-width: 720px) {
-	section {
+	section, footer {
 		width: auto;
 		max-width: 440px;
 		margin-left: auto;
 		margin-right: auto;
-		padding: 0 20px;
+		padding-left: 20px;
+		padding-right: 20px;
 	}
 	.sidebar {
 		display: block;
 		width: 200px;
 		position: static;
 		margin: 30px auto;
+	}
+	.appstore {
+		width: 100%;
 	}
 }
