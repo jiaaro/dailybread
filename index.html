@@ -85,10 +85,7 @@
 
 				<p>
 					And you can just tap to add a grocery to the list. 
-					No Typing<aside>
-						unless you’re adding one of those “once in a while” 
-						things to the list
-					</aside>!
+					No Typing!<a id="astx1" class="astx"></a>
 					I don’t care how good the new iOS 8 keyboards are. No keyboard is better
 					than no keyboard at all.
 				</p>
@@ -101,23 +98,49 @@
 				</p>
 
 				<p>
-					Oh, and you can use Siri: “Add eggs to my grocery list<aside>
-						Assuming the list is called “grocery” otherwise you’ll have to use the name 
-						you used for the list. For example if you call your list “daily bread”
-						it would be “add eggs to my daily bread list”
-					</aside>”
+					Oh, and you can use Siri: “Add eggs to my grocery list<a id="astx2" class="astx"></a>”
 				</p>
 
 				<p>Making a grocery list should be quick and easy, and now it is.</p>
 
-				<div class="footnotes"></div>
       </section>
       
       <footer>
         <a href="#"><img src="img/appstore.png" class="appstore"></a>
+        
+        <div class="footnotes">
+					<aside id="fn1">
+						Unless you’re adding one of those “once in a while” 
+						things to the list
+					</aside>
+					<aside id="fn2">
+						Assuming the list is called “grocery” otherwise you’ll have to use the name 
+						you used for the list. For example if you call your list “daily bread”
+						it would be “add eggs to my daily bread list”
+					</aside>
+				</div>
       </footer>
     </div>
     
     <script src="javascripts/scale.fix.js"></script>
+    <script src="javascripts/jquery-2.1.1.min.js"></script>
+    <script>
+    	$(function() {
+    		$(".astx").each(function() {
+    			var $this = $(this),
+    					id = this.id.slice(4),
+
+    					$fn = $("#fn" + id),
+    					$goback = $("<a>↩</a>");
+    					
+    			$goback.attr("href", "#astx" + id);
+    			$this.attr("href", "#fn" + id);
+    			$this.text(id);
+    			
+    			$fn.append($goback);
+    			$fn.prepend("<strong>[" + id + "]: </strong>");
+    		})
+    	});
+    </script>
   </body>
 </html>
