@@ -3,6 +3,8 @@ What is this?
 
 I made a simple app which manages your grocery list (in reminders, so it syncs with reminders and uses reminders as the storage location for the grocery list).
 
+Here’s a (now pretty old) comparison screenshot:
+
 ![](http://esploded.s3.amazonaws.com/anon_data/2014/rkEo-photo%203.PNG)
 
 I wrote it in swift, to learn swift, which has [gone quite well](http://stackoverflow.com/search?q=user:2908+[swift]) so far.
