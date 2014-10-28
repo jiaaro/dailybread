@@ -112,9 +112,13 @@ class GrocerySuggestion {
 let stock_suggestions = [
     "Bread",
     "Milk",
-    "Coffee",
     "Eggs",
+    "Coffee",
     "Chocolate",
+    "Water",
+    "Peanut butter",
+    "Yogurt",
+    "Orange Juice",
 ]
 func mk_grocery_sugguestion_set(completed: (Array<GrocerySuggestion>)->()) {
     println("generating suggestions - start")
@@ -151,14 +155,13 @@ func mk_grocery_sugguestion_set(completed: (Array<GrocerySuggestion>)->()) {
         return GrocerySuggestion(name: $0, occurences: occurences)
     })
 
-    for stock_suggestion in stock_suggestions {
-        if countElements(suggestion_candidates) >= countElements(stock_suggestions) {
-            break
+    if countElements(suggestion_candidates) < 25 {
+        for stock_suggestion in stock_suggestions {
+            if suggestion_candidates_set.containsObject(stock_suggestion.lowercaseString) {
+                continue
+            }
+            new_suggestions.append(GrocerySuggestion(name: stock_suggestion, occurences: []))
         }
-        if suggestion_candidates_set.containsObject(stock_suggestion.lowercaseString) {
-            continue
-        }
-        new_suggestions.append(GrocerySuggestion(name: stock_suggestion, occurences: []))
     }
     
     println("generating suggestions - done")
