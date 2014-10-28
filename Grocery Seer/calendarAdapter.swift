@@ -3,7 +3,7 @@ import UIKit
 
 func send_user_to_settings(var current_view_controller: UIViewController! = nil) {
     if current_view_controller == nil {
-        if let vc = UIApplication.sharedApplication().keyWindow.rootViewController {
+        if let vc = UIApplication.sharedApplication().keyWindow?.rootViewController {
             if vc.isViewLoaded() && vc.view.window != nil {
                 current_view_controller = vc
             }
@@ -18,8 +18,9 @@ func send_user_to_settings(var current_view_controller: UIViewController! = nil)
     let alert = UIAlertController(title: "Reminders Access", message: "This app needs to access to your Reminders to work. This lets you add groceries with Siri, sync with iCloud, and share your grocery list.\n\nReminders are in the privacy section of this app’s settings.", preferredStyle: .Alert)
     
     let default_action = UIAlertAction(title: "Open Settings", style: .Default) { action in
-        UIApplication.sharedApplication().openURL(NSURL(string:UIApplicationOpenSettingsURLString))
-        return
+        if let url = NSURL(string:UIApplicationOpenSettingsURLString) {
+            UIApplication.sharedApplication().openURL(url)
+        }
     }
     
     alert.addAction(default_action)
@@ -32,7 +33,7 @@ func send_user_to_settings(var current_view_controller: UIViewController! = nil)
 func get_estore_permission(completed: (Bool) -> Void) {
     switch EKEventStore.authorizationStatusForEntityType(EKEntityTypeReminder) {
     case .NotDetermined:
-        _estore.requestAccessToEntityType(EKEntityTypeReminder) {
+        EKEventStore().requestAccessToEntityType(EKEntityTypeReminder) {
             (granted: Bool, err: NSError?) in
             if granted && (err == nil) {
                 completed(true)

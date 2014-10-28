@@ -60,15 +60,22 @@ class ViewController: UIViewController {
         currentGroceryList.loadFromCalendar(loadCompletedItems: false)
         self.clearButton.hidden = true
     }
+    
 }
 
 extension ViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        cell.textLabel?.font = UIFont(name: "AvenirNext-Regular", size: 16.0)
+        cell.textLabel.font = UIFont(name: "AvenirNext-Regular", size: 16.0)
     }
     
     func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+        // special case for empty, "add grocery" cell
+        if indexPath.item == currentGroceryList.count {
+            self.performSegueWithIdentifier("addGrocerySegue", sender: nil)
+            return nil
+        }
+        
         let grocery = currentGroceryList[indexPath.item]
         grocery.toggle_bought()
         self.setup_ui()
@@ -78,11 +85,14 @@ extension ViewController: UITableViewDelegate {
 
 extension ViewController: UITableViewDataSource {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return currentGroceryList.count
+        return currentGroceryList.count + 1
     }
-    func tableView(tableView: UITableView,
-        canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
-            return true
+    func tableView(tableView: UITableView, canEditRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+        // special case for empty, "add grocery" cell
+        if indexPath.item == currentGroceryList.count {
+            return false
+        }
+        return true
     }
     func tableView(tableView: UITableView,
         commitEditingStyle editingStyle: UITableViewCellEditingStyle,
@@ -95,10 +105,34 @@ extension ViewController: UITableViewDataSource {
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) -> UITableViewCell {
         var cell = UITableViewCell()
+        
+        if indexPath.item != currentGroceryList.count {
+            let selected_bg_view = UIView()
+            selected_bg_view.backgroundColor = StyleKit.orangeWhite()
+            cell.selectedBackgroundView = selected_bg_view
+        }
+        else {
+            cell.selectionStyle = .None
+        }
+        
+        
+        
+        // special case for empty, "add grocery" cell
+        if indexPath.item == currentGroceryList.count {
+            return cell
+        }
+        
+        
         let grocery = currentGroceryList[indexPath.item]
         
-        cell.textLabel?.text = grocery.name
-        cell.imageView?.image = StyleKit.imageOfCheckboxWithIsChecked(grocery.bought)
+        cell.textLabel.text = grocery.name
+        cell.imageView.image = StyleKit.imageOfCheckboxWithIsChecked(grocery.bought)
+        if grocery.bought {
+            cell.accessibilityHint = "checks off \(grocery.name)"
+        }
+        else {
+            cell.accessibilityHint = "unchecks \(grocery.name)"
+        }
         
         return cell
     }
