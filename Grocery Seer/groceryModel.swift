@@ -109,7 +109,13 @@ class GrocerySuggestion {
     }
 }
 
-
+let stock_suggestions = [
+    "Bread",
+    "Milk",
+    "Coffee",
+    "Eggs",
+    "Chocolate",
+]
 func mk_grocery_sugguestion_set(completed: (Array<GrocerySuggestion>)->()) {
     println("generating suggestions - start")
     let current_grocery_names = name_set(currentGroceryList.list)
@@ -129,7 +135,8 @@ func mk_grocery_sugguestion_set(completed: (Array<GrocerySuggestion>)->()) {
         )
     }
 
-    var suggestion_candidates = (name_set(groceries).allObjects as Array<String>)
+    let suggestion_candidates_set = name_set(groceries)
+    var suggestion_candidates = (suggestion_candidates_set.allObjects as Array<String>)
     
     suggestion_candidates.sort({
         a, b in
@@ -139,10 +146,21 @@ func mk_grocery_sugguestion_set(completed: (Array<GrocerySuggestion>)->()) {
 
         return grocery_rank_score(occurrances1) > grocery_rank_score(occurrances2)
     })
-    let new_suggestions: [GrocerySuggestion]! = suggestion_candidates.map({
+    var new_suggestions: [GrocerySuggestion] = suggestion_candidates.map({
         let occurences = grocery_occurences[$0.lowercaseString]!
         return GrocerySuggestion(name: $0, occurences: occurences)
     })
+
+    for stock_suggestion in stock_suggestions {
+        if countElements(suggestion_candidates) >= countElements(stock_suggestions) {
+            break
+        }
+        if suggestion_candidates_set.containsObject(stock_suggestion.lowercaseString) {
+            continue
+        }
+        new_suggestions.append(GrocerySuggestion(name: stock_suggestion, occurences: []))
+    }
+    
     println("generating suggestions - done")
     completed(new_suggestions)
 }
