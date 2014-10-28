@@ -9,12 +9,10 @@ Here’s a (now pretty old) comparison screenshot:
 
 I wrote it in swift, to learn swift, which has [gone quite well](http://stackoverflow.com/search?q=user:2908+[swift]) so far.
 
-There’s more about it on [the website](http://dailybread.jiaaro.com), which is also where you can **request beta access** if you just want to try it out.
+There’s more about it on [the website](http://dailybread.jiaaro.com), where you can also **request beta access** if you just want to try it out.
 
 If you really don’t care and just want to know when it’s in the App Store:  
-[send me an email](requestingdailybreadlaunchnews@jiaaro.com). 
-
-I'll add you to the list =D
+[send me an email](requestingdailybreadlaunchnews@jiaaro.com). I'll add you to the list =D
 
 Technology
 ----------
