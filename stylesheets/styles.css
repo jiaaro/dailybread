@@ -7,10 +7,10 @@
 }
 
 ::selection {
-  background: #fc2; /* WebKit/Blink Browsers */
+  background: #ffd990; /* WebKit/Blink Browsers */
 }
 ::-moz-selection {
-  background: #fc2; /* Gecko Browsers */
+  background: #ffd990; /* Gecko Browsers */
 }
 body {
   padding: 10px 0;
