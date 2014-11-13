@@ -41,7 +41,7 @@ header {
 }
 .header-title {
   position: absolute;
-  width: 100px;
+  width: 110px;
   left: 50%;
   margin-left: 40px;
   top: 168px;
@@ -53,10 +53,10 @@ header {
 }
 .header-copy {
   position: absolute;
-  width: 100px;
+  width: 110px;
   right: 50%;
   margin-right: 40px;
-  top: 280px;
+  top: 282px;
   text-align: right;
   color: #f90;
   font-size: 14px;
