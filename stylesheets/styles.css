@@ -52,10 +52,11 @@ header {
   position: absolute;
   width: 100px;
   right: 50%;
-  margin-right: -40px;
-  top: 205px;
+  margin-right: 40px;
+  top: 280px;
   text-align: right;
   color: #f90;
+  font-size: 14px;
 }
 .header-title {
   font-weight: bold;
