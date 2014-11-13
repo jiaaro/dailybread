@@ -6,7 +6,12 @@
 	margin: 0 20px;
 }
 
-
+::selection {
+  background: #fc2; /* WebKit/Blink Browsers */
+}
+::-moz-selection {
+  background: #fc2; /* Gecko Browsers */
+}
 body {
   padding: 10px 0;
   margin: 0;
