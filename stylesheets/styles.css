@@ -39,15 +39,23 @@ header {
 	margin: 140px 0px;
   width: 200px;
 }
-.header-copy {
-  width: 160px;
+.header-title {
   position: absolute;
+  width: 100px;
   left: 50%;
   margin-left: 40px;
   top: 168px;
   text-align: left;
   color: #f90;
-  
+}
+.header-copy {
+  position: absolute;
+  width: 100px;
+  right: 50%;
+  margin-right: -40px;
+  top: 205px;
+  text-align: right;
+  color: #f90;
 }
 .header-title {
   font-weight: bold;
