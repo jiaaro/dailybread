@@ -196,11 +196,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Grocery Seer/ViewController.swift"
-            timestampString = "436150193.284881"
+            timestampString = "438405388.182523"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "145"
-            endingLineNumber = "145"
+            startingLineNumber = "148"
+            endingLineNumber = "148"
             landmarkName = "prepareForSegue(_:sender:)"
             landmarkType = "5">
             <Locations>

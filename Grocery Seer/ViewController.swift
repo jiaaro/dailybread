@@ -10,10 +10,11 @@ import UIKit
 import QuartzCore
 
 class ViewController: UIViewController {
-                            
+    
     @IBOutlet weak var tableview: UITableView!
     @IBOutlet weak var clearButton: UIButton!
     @IBOutlet weak var navbarTitle: UINavigationItem!
+    @IBOutlet weak var emptyListOverlay: UIView!
     
     
     override func viewDidLoad() {
@@ -37,7 +38,9 @@ class ViewController: UIViewController {
             self?.navbarTitle.title = title
         }
         self.tableview.reloadData()
-        clearButton.hidden = !currentGroceryList.hasAnyCompletedItems()
+        self.clearButton.hidden = !currentGroceryList.hasAnyCompletedItems()
+        
+        self.emptyListOverlay.hidden = currentGroceryList.count > 0
     }
     
     override func viewWillAppear(animated: Bool) {

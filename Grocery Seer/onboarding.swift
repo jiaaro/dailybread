@@ -11,6 +11,7 @@ import UIKit
 import EventKit
 
 @IBDesignable class OnboardingViewController: UIViewController {
+
     override func viewDidLoad() {
         self.setSharedStyles()
     }
@@ -21,7 +22,12 @@ import EventKit
 
 
 class OnboardingStep1: OnboardingViewController {
+    @IBOutlet weak var heading: UILabel!
     
+    override func setSharedStyles() {
+        super.setSharedStyles()
+        self.heading.textColor = StyleKit.mainColor()
+    }
 }
 
 
@@ -30,6 +36,7 @@ class OnboardingStep1: OnboardingViewController {
 class OnboardingStep2: OnboardingViewController {
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var continueButton: UIButton!
+    @IBOutlet weak var heading: UILabel!
     
     var selected_index = 0
     var cals: [EKCalendar] = []
@@ -57,6 +64,11 @@ class OnboardingStep2: OnboardingViewController {
                 send_user_to_settings(current_view_controller: self)
             }
         }
+    }
+    
+    override func setSharedStyles() {
+        super.setSharedStyles()
+        self.heading.textColor = StyleKit.mainColor()
     }
     
     @IBAction func continueToMain(sender: AnyObject) {
