@@ -36,12 +36,12 @@ class ChooseGroceryListViewController: UITableViewController {
         let calendar = self.calendars[indexPath.item]
         
         if calendar.calendarIdentifier == self.current_cal?.calendarIdentifier {
-            cell.textLabel.font = UIFont(name: "AvenirNext-Bold", size: 16.0)
-            cell.textLabel.text = "‣ \(calendar.title)"
+            cell.textLabel?.font = UIFont(name: "AvenirNext-Bold", size: 16.0)
+            cell.textLabel?.text = "‣ \(calendar.title)"
         }
         else {
-            cell.textLabel.font = UIFont(name: "AvenirNext-Regular", size: 16.0)
-            cell.textLabel.text = calendar.title
+            cell.textLabel?.font = UIFont(name: "AvenirNext-Regular", size: 16.0)
+            cell.textLabel?.text = calendar.title
         }
         
         return cell

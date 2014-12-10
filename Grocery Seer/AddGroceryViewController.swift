@@ -65,10 +65,10 @@ class AddGroceryViewController: UIViewController, UITextFieldDelegate {
     }
     
     func tableView(tableView: UITableView!, willDisplayCell cell: UITableViewCell!, forRowAtIndexPath indexPath: NSIndexPath!) {
-        cell.textLabel.font = UIFont(name: "AvenirNext-Medium", size: 14.0)
+        cell.textLabel?.font = UIFont(name: "AvenirNext-Medium", size: 14.0)
         cell.detailTextLabel?.font = UIFont(name: "AvenirNext-Regular", size: 9.0)
         
-        cell.textLabel.textColor = UIColor.grayColor()
+        cell.textLabel?.textColor = UIColor.grayColor()
         cell.detailTextLabel?.textColor = UIColor.grayColor()
         
         cell.backgroundColor = UIColor.clearColor()
@@ -105,10 +105,10 @@ extension AddGroceryViewController : UITableViewDelegate {
         return nil
     }
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        cell.textLabel.font = UIFont(name: "AvenirNext-Medium", size: 14.0)
+        cell.textLabel?.font = UIFont(name: "AvenirNext-Medium", size: 14.0)
         cell.detailTextLabel?.font = UIFont(name: "AvenirNext-Regular", size: 9.0)
         
-        cell.textLabel.textColor = UIColor.grayColor()
+        cell.textLabel?.textColor = UIColor.grayColor()
         cell.detailTextLabel?.textColor = UIColor.grayColor()
         
         cell.backgroundColor = UIColor.clearColor()
@@ -126,7 +126,7 @@ extension AddGroceryViewController : UITableViewDataSource {
         
         let suggestion = self.grocery_suggestions[indexPath.item]
         
-        cell.textLabel.text = suggestion.name
+        cell.textLabel?.text = suggestion.name
         cell.detailTextLabel?.text = "×\(suggestion.occurences.count)"
         cell.detailTextLabel?.accessibilityLabel = "\(suggestion.occurences.count) times"
         cell.accessibilityHint = "adds \(suggestion) to your grocery list"

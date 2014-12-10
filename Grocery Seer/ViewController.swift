@@ -69,7 +69,7 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDelegate {
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        cell.textLabel.font = UIFont(name: "AvenirNext-Regular", size: 16.0)
+        cell.textLabel?.font = UIFont(name: "AvenirNext-Regular", size: 16.0)
     }
     
     func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
@@ -128,8 +128,8 @@ extension ViewController: UITableViewDataSource {
         
         let grocery = currentGroceryList[indexPath.item]
         
-        cell.textLabel.text = grocery.name
-        cell.imageView.image = StyleKit.imageOfCheckboxWithIsChecked(grocery.bought)
+        cell.textLabel?.text = grocery.name
+        cell.imageView?.image = StyleKit.imageOfCheckboxWithIsChecked(grocery.bought)
         if grocery.bought {
             cell.accessibilityHint = "checks off \(grocery.name)"
         }

@@ -93,7 +93,7 @@ class OnboardingStep2: OnboardingViewController {
 extension OnboardingStep2: UITableViewDelegate {
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        cell.textLabel.font = UIFont(name: "AvenirNext-Regular", size: 16.0)
+        cell.textLabel?.font = UIFont(name: "AvenirNext-Regular", size: 16.0)
     }
     
     func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
@@ -126,7 +126,7 @@ extension OnboardingStep2: UITableViewDataSource {
         }
         
         
-        cell.textLabel.text = label
+        cell.textLabel?.text = label
         
         return cell
     }
