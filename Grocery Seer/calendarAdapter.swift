@@ -170,7 +170,7 @@ func get_estore_and_calendar(completed: (EKEventStore, EKCalendar) -> ()) {
 }
 
 extension GroceryList {
-    func loadFromCalendar(loadCompletedItems:Bool = false) {
+    func loadFromCalendar(loadCompletedItems:Bool = false, complete: (()->Void)? = nil) {
         get_estore_and_calendar {
             (estore, calendar) in
             
@@ -191,6 +191,10 @@ extension GroceryList {
                 }
                 
                 self.sendChangedNotification()
+
+                if let cb = complete {
+                    cb()
+                }
             }
         }
     }

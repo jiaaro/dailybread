@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scheme
+   LastUpgradeVersion = "0620"
+   version = "1.3">
+   <BuildAction
+      parallelizeBuildables = "YES"
+      buildImplicitDependencies = "YES">
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "056342A11A65671E009EE218"
+               BuildableName = "Daily Bread WatchKit App.app"
+               BlueprintName = "Daily Bread WatchKit App"
+               ReferencedContainer = "container:Daily Bread.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "056342941A65671D009EE218"
+               BuildableName = "Daily Bread WatchKit Extension.appex"
+               BlueprintName = "Daily Bread WatchKit Extension"
+               ReferencedContainer = "container:Daily Bread.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "YES"
+            buildForArchiving = "YES"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "38B4534D1953277F00406FFC"
+               BuildableName = "Daily Bread.app"
+               BlueprintName = "Daily Bread"
+               ReferencedContainer = "container:Daily Bread.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
+   </BuildAction>
+   <TestAction
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      buildConfiguration = "Debug">
+      <Testables>
+      </Testables>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "056342A11A65671E009EE218"
+            BuildableName = "Daily Bread WatchKit App.app"
+            BlueprintName = "Daily Bread WatchKit App"
+            ReferencedContainer = "container:Daily Bread.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
+   </TestAction>
+   <LaunchAction
+      selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
+      selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      launchStyle = "0"
+      useCustomWorkingDirectory = "NO"
+      buildConfiguration = "Debug"
+      ignoresPersistentStateOnLaunch = "NO"
+      debugDocumentVersioning = "YES"
+      allowLocationSimulation = "YES"
+      notificationPayloadFile = "Daily Bread WatchKit Extension/PushNotificationPayload.apns">
+      <RemoteRunnable
+         runnableDebuggingMode = "2"
+         BundleIdentifier = "com.apple.springboard"
+         RemotePath = "/Daily Bread">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "056342A11A65671E009EE218"
+            BuildableName = "Daily Bread WatchKit App.app"
+            BlueprintName = "Daily Bread WatchKit App"
+            ReferencedContainer = "container:Daily Bread.xcodeproj">
+         </BuildableReference>
+      </RemoteRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "056342A11A65671E009EE218"
+            BuildableName = "Daily Bread WatchKit App.app"
+            BlueprintName = "Daily Bread WatchKit App"
+            ReferencedContainer = "container:Daily Bread.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
+      <AdditionalOptions>
+      </AdditionalOptions>
+   </LaunchAction>
+   <ProfileAction
+      shouldUseLaunchSchemeArgsEnv = "YES"
+      savedToolIdentifier = ""
+      useCustomWorkingDirectory = "NO"
+      buildConfiguration = "Release"
+      debugDocumentVersioning = "YES">
+      <RemoteRunnable
+         runnableDebuggingMode = "2"
+         BundleIdentifier = "com.apple.springboard"
+         RemotePath = "/Daily Bread">
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "056342A11A65671E009EE218"
+            BuildableName = "Daily Bread WatchKit App.app"
+            BlueprintName = "Daily Bread WatchKit App"
+            ReferencedContainer = "container:Daily Bread.xcodeproj">
+         </BuildableReference>
+      </RemoteRunnable>
+      <MacroExpansion>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "056342A11A65671E009EE218"
+            BuildableName = "Daily Bread WatchKit App.app"
+            BlueprintName = "Daily Bread WatchKit App"
+            ReferencedContainer = "container:Daily Bread.xcodeproj">
+         </BuildableReference>
+      </MacroExpansion>
+   </ProfileAction>
+   <AnalyzeAction
+      buildConfiguration = "Debug">
+   </AnalyzeAction>
+   <ArchiveAction
+      buildConfiguration = "Release"
+      revealArchiveInOrganizer = "YES">
+   </ArchiveAction>
+</Scheme>

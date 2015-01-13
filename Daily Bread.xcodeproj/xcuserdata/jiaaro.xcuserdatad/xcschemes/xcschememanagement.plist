@@ -4,6 +4,16 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>Daily Bread WatchKit App.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>Daily Bread WatchKit Glance.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
 		<key>Daily Bread.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -12,6 +22,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>056342A11A65671E009EE218</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>38B4534D1953277F00406FFC</key>
 		<dict>
 			<key>primary</key>

@@ -71,6 +71,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
+    
+    func application(application: UIApplication!, handleWatchKitExtensionRequest userInfo: [NSObject : AnyObject]!, reply: (([NSObject : AnyObject]!) -> Void)!) {
+        
+        currentGroceryList.loadFromCalendar(loadCompletedItems: false) {
+            reply([
+                "groceries": map(currentGroceryList.list, {
+                    [
+                        "id": $0.reminder.calendarItemIdentifier,
+                        "name": $0.name,
+                        "bought": $0.bought ? "yes" : "no",
+                    ]
+                })
+            ])
+        }
+    }
 
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
