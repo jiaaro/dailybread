@@ -15,7 +15,7 @@
                                 <tableRow identifier="groceryRow" id="3Yh-Eq-X0e" customClass="groceryRowController" customModule="Daily_Bread_WatchKit_Extension">
                                     <group key="rootItem" width="1" alignment="left" id="6Gz-sS-BKa">
                                         <items>
-                                            <imageView width="16" height="16" alignment="left" verticalAlignment="center" id="cxR-0a-Ixd"/>
+                                            <imageView width="16" height="16" alignment="left" verticalAlignment="center" image="unchecked_box" id="cxR-0a-Ixd"/>
                                             <label alignment="left" verticalAlignment="center" text="Label" id="Ako-FE-s7W"/>
                                         </items>
                                     </group>
@@ -27,6 +27,15 @@
                             </items>
                         </table>
                     </items>
+                    <menu key="menu" id="41h-0R-nhH">
+                        <items>
+                            <menuItem title="Refresh" icon="resume" id="dqV-oV-YVm">
+                                <connections>
+                                    <action selector="menuItemRefresh" destination="AgC-eL-Hgc" id="wTb-bl-JOH"/>
+                                </connections>
+                            </menuItem>
+                        </items>
+                    </menu>
                     <connections>
                         <outlet property="groceryTable" destination="QbS-MN-LAZ" id="Ghi-Pe-Wc0"/>
                     </connections>
