@@ -119,6 +119,106 @@ let stock_suggestions = [
     "Peanut butter",
     "Yogurt",
     "Orange Juice",
+    "Soda",
+    "Laundry Detergent",
+    "Tea",
+    "Breakfast bars",
+    "Cheese",
+    "Oatmeal",
+    "Mac ‘n Cheese",
+    "Wine",
+    "Guacamole",
+    "Chocolate Chip Cookies",
+    "Soylent",
+    "Beer",
+    "Pita Bread",
+    "Greek Yogurt",
+    "Apple Juice",
+    "Carrots",
+    "Celery",
+    "Potatoes",
+    "String Beans",
+    "Crackers",
+    "Chicken",
+    "Burgers",
+    "Veggie Burgers",
+    "Steak",
+    "Ground Beef",
+    "Ground Chicken",
+    "Ground Turkey",
+    "Cold Cuts",
+    "Ginger Snaps",
+    "Turkey",
+    "Ham",
+    "Tomatoes",
+    "Brussels Sprouts",
+    "Bananas",
+    "Strawberries",
+    "Blueberries",
+    "String Beans",
+    "Mushrooms",
+    "Pork",
+    "Canned Beans",
+    "Apples",
+    "Strawberry Jam",
+    "Grape Jam",
+    "Peaches",
+    "Oranges",
+    "Clementines",
+    "Salmon",
+    "Tilapia",
+    "Lamb",
+    "Bagels",
+    "Croutons",
+    "Break Crumbs",
+    "Shrimp",
+    "Cheddar Cheese",
+    "Swiss Cheese",
+    "Mozzarella",
+    "Parmesan Cheese",
+    "Pasta",
+    "Corn",
+    "Peas",
+    "Rice",
+    "Spaghetti",
+    "Linguini",
+    "Onions",
+    "Red Onions",
+    "White Onions",
+    "Green Onions",
+    "Bacon",
+    "Turkey Bacon",
+    "Salt",
+    "Pepper",
+    "Garlic",
+    "Mashed Potatoes",
+    "Sweet Potatoes",
+    "Ketchup",
+    "Mustard",
+    "Steak Sauce",
+    "Butter",
+    "Broccoli",
+    "Paper towels",
+    "Napkins",
+    "Chips",
+    "Salsa",
+    "Olive Oil",
+    "Tomato Sauce",
+    "Barbecue Sauce",
+    "Brown rice",
+    "Tuna",
+    "Halibut",
+    "Trout",
+    "Mackerel",
+    "Peas",
+    "Peas and Carrots",
+    "Greek Yogurt",
+    "Tofu",
+    "Extra Firm Tofu",
+    "String Cheese",
+    "Almonds",
+    "Peanuts",
+    "Hummus",
 ]
 func mk_grocery_sugguestion_set(completed: (Array<GrocerySuggestion>)->()) {
     println("generating suggestions - start")
@@ -155,14 +255,14 @@ func mk_grocery_sugguestion_set(completed: (Array<GrocerySuggestion>)->()) {
         return GrocerySuggestion(name: $0, occurences: occurences)
     })
 
-    if countElements(suggestion_candidates) < 25 {
-        for stock_suggestion in stock_suggestions {
-            if suggestion_candidates_set.containsObject(stock_suggestion.lowercaseString) {
-                continue
-            }
-            new_suggestions.append(GrocerySuggestion(name: stock_suggestion, occurences: []))
+    
+    for stock_suggestion in stock_suggestions {
+        if suggestion_candidates_set.containsObject(stock_suggestion.lowercaseString) {
+            continue
         }
+        new_suggestions.append(GrocerySuggestion(name: stock_suggestion, occurences: []))
     }
+    
     
     println("generating suggestions - done")
     completed(new_suggestions)
