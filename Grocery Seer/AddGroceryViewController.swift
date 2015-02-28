@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 
-class AddGroceryViewController: UIViewController, UITextFieldDelegate {
+class AddGroceryViewController: UIViewController {
     
     var grocery_suggestions: Array<GrocerySuggestion> = []
     
@@ -27,6 +27,9 @@ class AddGroceryViewController: UIViewController, UITextFieldDelegate {
         tableview.delegate = self
         
         groceryInput.delegate = self
+    }
+    
+    override func viewDidAppear(animated: Bool) {
         groceryInput.becomeFirstResponder()
     }
     
@@ -40,15 +43,19 @@ class AddGroceryViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    @IBAction func cancelAddingGrocery(sender: AnyObject) {
+    func close() {
         self.dismissViewControllerAnimated(true, nil)
+    }
+    
+    @IBAction func cancelAddingGrocery(sender: AnyObject) {
+        self.close()
     }
     
     func createGroceryAndClose(grocery_name: String) {
         if countElements(grocery_name) > 0 {
             currentGroceryList.add(grocery_name)
         }
-        self.dismissViewControllerAnimated(true, nil)
+        self.close()
     }
     
     @IBAction func saveGrocery(sender: AnyObject) {
@@ -63,17 +70,9 @@ class AddGroceryViewController: UIViewController, UITextFieldDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func tableView(tableView: UITableView!, willDisplayCell cell: UITableViewCell!, forRowAtIndexPath indexPath: NSIndexPath!) {
-        cell.textLabel?.font = UIFont(name: "AvenirNext-Medium", size: 14.0)
-        cell.detailTextLabel?.font = UIFont(name: "AvenirNext-Regular", size: 9.0)
-        
-        cell.textLabel?.textColor = UIColor.grayColor()
-        cell.detailTextLabel?.textColor = UIColor.grayColor()
-        
-        cell.backgroundColor = UIColor.clearColor()
-    }
-    
+}
+
+extension AddGroceryViewController : UITextFieldDelegate {
     func textField(textField: UITextField!,
         shouldChangeCharactersInRange range: NSRange,
         replacementString string: String!) -> Bool {
@@ -101,10 +100,20 @@ extension AddGroceryViewController : UITableViewDelegate {
         let suggestion = grocery_suggestions[indexPath.item]
         groceryInput.text = suggestion.name
         currentGroceryList.add(groceryInput.text)
-        self.dismissViewControllerAnimated(true, nil)
+        self.close()
         return nil
     }
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        cell.textLabel?.font = UIFont(name: "AvenirNext-Medium", size: 14.0)
+        cell.detailTextLabel?.font = UIFont(name: "AvenirNext-Regular", size: 9.0)
+        
+        cell.textLabel?.textColor = UIColor.grayColor()
+        cell.detailTextLabel?.textColor = UIColor.grayColor()
+        
+        cell.backgroundColor = UIColor.clearColor()
+    }
+    
+    func tableView(tableView: UITableView!, willDisplayCell cell: UITableViewCell!, forRowAtIndexPath indexPath: NSIndexPath!) {
         cell.textLabel?.font = UIFont(name: "AvenirNext-Medium", size: 14.0)
         cell.detailTextLabel?.font = UIFont(name: "AvenirNext-Regular", size: 9.0)
         
