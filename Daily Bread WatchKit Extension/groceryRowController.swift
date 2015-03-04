@@ -9,7 +9,43 @@ import WatchKit
 import Foundation
 
 class groceryRowController : NSObject {
+    @IBOutlet weak var checked: WKInterfaceGroup!
     @IBOutlet weak var label: WKInterfaceLabel!
-    @IBOutlet weak var img: WKInterfaceImage!
     
+    func reset_fields_hack() {
+        self.label.setText("")
+        self.label.setAlpha(0.0)
+        self.checked.setBackgroundColor(UIColor.grayColor())
+        self.checked.setWidth(0)
+        self.checked.setHeight(0)
+        self.checked.setCornerRadius(0)
+    }
+    
+    func set_values(text: String, checked: Bool) {
+        if checked {
+            self.label.setAlpha(0.3)
+            
+            let single_style: NSNumber = NSUnderlineStyle.StyleSingle.rawValue
+            let attrs: NSDictionary = [NSStrikethroughStyleAttributeName: single_style]
+            let attributed_string = NSMutableAttributedString(string: text, attributes: attrs)
+            
+            self.label.setAttributedText(attributed_string)
+            
+            self.checked.setBackgroundColor(UIColor.grayColor())
+            
+            self.checked.setHeight(20)
+            self.checked.setWidth(6)
+            self.checked.setCornerRadius(3)
+        }
+        else {
+            self.label.setAlpha(1.0)
+            self.label.setText(text)
+            
+            self.checked.setBackgroundColor(UIColor.orangeColor())
+            
+            self.checked.setHeight(25)
+            self.checked.setWidth(8)
+            self.checked.setCornerRadius(4)
+        }
+    }
 }

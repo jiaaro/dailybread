@@ -39,8 +39,16 @@ class InterfaceController: WKInterfaceController {
     override init() {
         super.init()
         println("init")
-        
         self.refresh_data()
+    }
+    
+    @IBAction func showOneAtATime() {
+        let names = Array<String>(count: self.groceries.count, repeatedValue: "OneAtATimeInterface")
+        
+        let cxs = (0..<groceries.count).map {
+            ["i": $0, "groceries": self.groceries]
+        }
+        self.presentControllerWithNames(names, contexts: cxs)
     }
 
     override func awakeWithContext(context: AnyObject?) {
@@ -82,29 +90,14 @@ class InterfaceController: WKInterfaceController {
         let grocery_count = countElements(self.groceries)
         let row_difference = grocery_count - groceryTable.numberOfRows
         
-        if row_difference > 0 {
-            let indexes = NSIndexSet(indexesInRange: NSRange(0..<row_difference))
-            groceryTable.insertRowsAtIndexes(indexes, withRowType: "groceryRow")
-        }
-        if row_difference < 0 {
-            let indexes = NSIndexSet(indexesInRange: NSRange(0..<(-row_difference)))
-            groceryTable.removeRowsAtIndexes(indexes)
-        }
-        //groceryTable.setNumberOfRows(grocery_count, withRowType: "groceryRow")
+        groceryTable.setNumberOfRows(grocery_count, withRowType: "groceryRow")
         
         for i in 0..<grocery_count {
             let row = groceryTable.rowControllerAtIndex(i) as groceryRowController
             let grocery = self.groceries[i]
             
-            println("setting text: \(grocery.name)")
-            row.label.setText(grocery.name)
-            
-            if grocery.bought {
-                row.img.setImageNamed("checked_box")
-            }
-            else {
-                row.img.setImageNamed("unchecked_box")
-            }
+            row.reset_fields_hack()
+            row.set_values(grocery.name, checked: grocery.bought)
         }
     }
     
@@ -113,12 +106,7 @@ class InterfaceController: WKInterfaceController {
         grocery.bought = !grocery.bought
         
         let row = table.rowControllerAtIndex(rowIndex) as groceryRowController
-        if grocery.bought {
-            row.img.setImageNamed("checked_box")
-        }
-        else {
-            row.img.setImageNamed("unchecked_box")
-        }
+        row.set_values(grocery.name, checked: grocery.bought)
     }
 
     override func willActivate() {
@@ -134,3 +122,75 @@ class InterfaceController: WKInterfaceController {
 
 }
 
+var tracker: [Int: OneAtATimeController] = [:]
+class OneAtATimeController: WKInterfaceController {
+    
+    @IBOutlet weak var grocery_label: WKInterfaceLabel!
+    @IBOutlet weak var got_grocery_button: WKInterfaceButton!
+    
+    var groceries = [empty_list_message]
+    var my_i = 0
+    var grocery: Grocery {
+        return self.groceries[my_i]
+    }
+    var get_this_text: String {
+        switch self.my_i {
+        case 0:
+            return "get this:"
+        case 1:
+            return "now get this:"
+        case 5:
+            return "keep going!"
+        case 10:
+            return "don’t lose hope"
+        default:
+            return "and this:"
+        }
+    }
+    
+    override init() {
+        super.init()
+    }
+    
+    override func awakeWithContext(context: AnyObject?) {
+        super.awakeWithContext(context)
+        let cx = context as Dictionary<String, AnyObject>
+        self.groceries = cx["groceries"] as [Grocery]
+        self.my_i = cx["i"] as Int
+        
+        tracker[self.my_i] = self
+        
+        self.update_UI()
+    }
+    
+    func update_UI() {
+        if self.grocery.bought {
+            self.grocery_label.setText("you got:")
+            
+            let checkbox_attrs: NSDictionary = [
+                NSForegroundColorAttributeName: UIColor.greenColor(),
+            ]
+            let name_attrs: NSDictionary = [
+                NSStrikethroughStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue,
+                NSForegroundColorAttributeName: UIColor.grayColor(),
+            ]
+
+            let btn_str = NSMutableAttributedString(string: "✓", attributes: checkbox_attrs)
+            btn_str.appendAttributedString(NSAttributedString(string: " \(self.grocery.name)", attributes: name_attrs))
+
+            self.got_grocery_button.setAttributedTitle(btn_str)
+        }
+        else {
+            let name_attrs: NSDictionary = [
+                NSForegroundColorAttributeName: UIColor.orangeColor(),
+            ]
+            self.grocery_label.setText(self.get_this_text)
+            self.got_grocery_button.setAttributedTitle(NSAttributedString(string: self.grocery.name, attributes: name_attrs))
+        }
+    }
+    @IBAction func tapped() {
+        self.grocery.bought = !self.grocery.bought
+        self.update_UI()
+        tracker[self.my_i+1]?.becomeCurrentPage()
+    }
+}
