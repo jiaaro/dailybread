@@ -24,7 +24,6 @@ class ViewController: UIViewController {
         
         tableview.dataSource = self
         tableview.delegate = self
-        tableview.contentInset = UIEdgeInsets(top: 44.0, left: 0, bottom: 0, right: 0)
         
         clearButton.titleLabel?.font = UIFont(name: "AvenirNext-DemiBold", size: 14.0)
         
@@ -38,9 +37,22 @@ class ViewController: UIViewController {
             self?.navbarTitle.title = title
         }
         self.tableview.reloadData()
-        self.clearButton.hidden = !currentGroceryList.hasAnyCompletedItems()
+        
+        if currentGroceryList.hasAnyCompletedItems() {
+            self.clearButton.hidden = false
+            self.tableview.contentInset = UIEdgeInsets(top: 44.0, left: 0, bottom: self.clearButton.frame.height, right: 0)
+        }
+        else {
+            self.clearButton.hidden = true
+            self.tableview.contentInset = UIEdgeInsets(top: 44.0, left: 0, bottom: 0, right: 0)
+        }
+        
         
         self.emptyListOverlay.hidden = currentGroceryList.count > 0
+    }
+    
+    func addGrocery() {
+        self.performSegueWithIdentifier("addGrocerySegue", sender: nil)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -75,7 +87,6 @@ extension ViewController: UITableViewDelegate {
     func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
         // special case for empty, "add grocery" cell
         if indexPath.item == currentGroceryList.count {
-            self.performSegueWithIdentifier("addGrocerySegue", sender: nil)
             return nil
         }
         
@@ -115,6 +126,10 @@ extension ViewController: UITableViewDataSource {
             cell.selectedBackgroundView = selected_bg_view
         }
         else {
+            let button = UIButton(frame: cell.frame)
+            button.backgroundColor = UIColor.clearColor()
+            button.addTarget(self, action: "addGrocery", forControlEvents: .TouchUpInside)
+            cell.addSubview(button)
             cell.selectionStyle = .None
         }
         
@@ -142,12 +157,18 @@ extension ViewController: UITableViewDataSource {
 }
 
 // popover related code
+var addGroceryTransitionDelegate = ZippyModalTransitioningDelegate()
 extension ViewController: UIPopoverPresentationControllerDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let segueid = segue.identifier
         if (segueid == "showPopover") {
             let destinationVC = segue.destinationViewController as UIViewController
             destinationVC.popoverPresentationController?.delegate = self
+        }
+        else if segueid == "addGrocerySegue" {
+            let destinationVC = segue.destinationViewController as UIViewController
+            destinationVC.modalPresentationStyle = .Custom
+            destinationVC.transitioningDelegate = addGroceryTransitionDelegate
         }
     }
     func adaptivePresentationStyleForPresentationController(controller: UIPresentationController) -> UIModalPresentationStyle {

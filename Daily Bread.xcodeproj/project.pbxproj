@@ -16,6 +16,7 @@
 		056342AD1A656722009EE218 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 056342AC1A656722009EE218 /* Images.xcassets */; };
 		056342B01A656722009EE218 /* Daily Bread WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 056342951A65671D009EE218 /* Daily Bread WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0587B5B619AC20F7009FAF77 /* ranking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0587B5B519AC20F7009FAF77 /* ranking.swift */; };
+		0588F2F61AA2839300D4DD27 /* ZippyAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0588F2F51AA2839300D4DD27 /* ZippyAnimator.swift */; };
 		05AB511919E75E690084A738 /* onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AB511819E75E690084A738 /* onboarding.swift */; };
 		05D693C319E06FD6007F19E2 /* ChooseGroceryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D693C219E06FD6007F19E2 /* ChooseGroceryListViewController.swift */; };
 		385AF2D91959043B00EE0773 /* calendarAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385AF2D81959043B00EE0773 /* calendarAdapter.swift */; };
@@ -80,6 +81,7 @@
 		056342AA1A656722009EE218 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Interface.storyboard; sourceTree = "<group>"; };
 		056342AC1A656722009EE218 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		0587B5B519AC20F7009FAF77 /* ranking.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ranking.swift; sourceTree = "<group>"; };
+		0588F2F51AA2839300D4DD27 /* ZippyAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZippyAnimator.swift; sourceTree = "<group>"; };
 		05AB511819E75E690084A738 /* onboarding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = onboarding.swift; sourceTree = "<group>"; };
 		05D693C219E06FD6007F19E2 /* ChooseGroceryListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseGroceryListViewController.swift; sourceTree = "<group>"; };
 		384CC9C1196C42DD00FCD6AC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -191,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				38CEF5CC195345250044E405 /* AddGroceryViewController.swift */,
+				0588F2F51AA2839300D4DD27 /* ZippyAnimator.swift */,
 				38A693951981F2DD007EE7C2 /* StyleKit.h */,
 				05AB511819E75E690084A738 /* onboarding.swift */,
 				38A693961981F2DD007EE7C2 /* StyleKit.m */,
@@ -408,6 +411,7 @@
 				38CEF5CD195345250044E405 /* AddGroceryViewController.swift in Sources */,
 				385AF2D91959043B00EE0773 /* calendarAdapter.swift in Sources */,
 				0587B5B619AC20F7009FAF77 /* ranking.swift in Sources */,
+				0588F2F61AA2839300D4DD27 /* ZippyAnimator.swift in Sources */,
 				38A2C9871953622C002409F8 /* groceryModel.swift in Sources */,
 				05AB511919E75E690084A738 /* onboarding.swift in Sources */,
 				38B453561953277F00406FFC /* ViewController.swift in Sources */,
