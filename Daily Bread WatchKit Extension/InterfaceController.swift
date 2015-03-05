@@ -8,65 +8,79 @@
 
 import WatchKit
 import Foundation
+import EventKit
 
 class Grocery {
     let id: String
     let name: String
-    var bought: Bool
+    var _bought: Bool
+    var bought: Bool {
+        get {
+           return _bought
+        }
+        set {
+            if self.id == "0" {
+                return
+            }
+            _bought = newValue
+            WKInterfaceController.openParentApplication([
+                    "action": "setCompletion",
+                    "id": self.id,
+                    "completed": _bought,
+                ], nil)
+        }
+    }
     
     init(_ grocery_data: [String:String]) {
         self.id = grocery_data["id"]!
         self.name = grocery_data["name"]!
-        self.bought = (grocery_data["bought"] == "yes")
+        self._bought = (grocery_data["bought"] == "yes")
     }
 }
 
-let empty_list_message = Grocery(["id": "0", "name": "No Data", "bought": "no"])
+let empty_list_message = Grocery(["id": "0", "name": "Empty List", "bought": "no"])
 
 class InterfaceController: WKInterfaceController {
     
     @IBOutlet weak var groceryTable: WKInterfaceTable!
     
     var needs_ui_refresh = true
-//    
-//    let cb_unchecked: UIImage = StyleKit.imageOfCheckbox(isChecked: false)
-//    let cb_checked: UIImage = StyleKit.imageOfCheckbox(isChecked: true)
-    
+    var list_name = "Groceries"
     var groceries: [Grocery] = [
         empty_list_message,
     ]
     
     override init() {
         super.init()
-        println("init")
         self.refresh_data()
     }
     
     @IBAction func showOneAtATime() {
-        let names = Array<String>(count: self.groceries.count, repeatedValue: "OneAtATimeInterface")
-        
-        let cxs = (0..<groceries.count).map {
-            ["i": $0, "groceries": self.groceries]
+        let to_buy = groceries.filter { !$0.bought }
+        var names = Array<String>(count: to_buy.count, repeatedValue: "OneAtATimeInterface")
+        var cxs = (0...to_buy.count).map {
+            ["i": $0, "groceries": to_buy]
         }
+        names.append("OneAtATimeDoneInterface")
+
         self.presentControllerWithNames(names, contexts: cxs)
     }
 
     override func awakeWithContext(context: AnyObject?) {
+        println("main controller: awakeWithContext")
         super.awakeWithContext(context)
-        self.refresh_ui()
+        self.refresh_ui(force: true)
     }
     @IBAction func menuItemRefresh() {
         self.refresh_data()
     }
     func refresh_data() {
-        WKInterfaceController.openParentApplication([:]) {
+        WKInterfaceController.openParentApplication(["action": "getList"]) {
             [weak self] (replyInfo, error) in
             
-            println("got reply:")
-            println(replyInfo)
-            
             let grocery_info_list = replyInfo["groceries"]! as [[String:String]]
-            
+
+            self?.list_name = replyInfo["listName"]! as String
             self?.groceries = map(grocery_info_list) {
                 Grocery($0)
             }
@@ -80,12 +94,15 @@ class InterfaceController: WKInterfaceController {
             return
         }
     }
-    func refresh_ui() {
-        println("refresh_data")
-        if !self.needs_ui_refresh {
+    func refresh_ui(force: Bool = false) {
+        if !self.needs_ui_refresh & !force {
             return
         }
         self.needs_ui_refresh = false
+        
+        println("refreshing_ui")
+        
+        self.setTitle(self.list_name)
         
         let grocery_count = countElements(self.groceries)
         let row_difference = grocery_count - groceryTable.numberOfRows
@@ -112,7 +129,7 @@ class InterfaceController: WKInterfaceController {
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
         super.willActivate()
-        self.refresh_ui()
+        self.refresh_ui(force: true)
     }
 
     override func didDeactivate() {
@@ -120,77 +137,4 @@ class InterfaceController: WKInterfaceController {
         super.didDeactivate()
     }
 
-}
-
-var tracker: [Int: OneAtATimeController] = [:]
-class OneAtATimeController: WKInterfaceController {
-    
-    @IBOutlet weak var grocery_label: WKInterfaceLabel!
-    @IBOutlet weak var got_grocery_button: WKInterfaceButton!
-    
-    var groceries = [empty_list_message]
-    var my_i = 0
-    var grocery: Grocery {
-        return self.groceries[my_i]
-    }
-    var get_this_text: String {
-        switch self.my_i {
-        case 0:
-            return "get this:"
-        case 1:
-            return "now get this:"
-        case 5:
-            return "keep going!"
-        case 10:
-            return "don’t lose hope"
-        default:
-            return "and this:"
-        }
-    }
-    
-    override init() {
-        super.init()
-    }
-    
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
-        let cx = context as Dictionary<String, AnyObject>
-        self.groceries = cx["groceries"] as [Grocery]
-        self.my_i = cx["i"] as Int
-        
-        tracker[self.my_i] = self
-        
-        self.update_UI()
-    }
-    
-    func update_UI() {
-        if self.grocery.bought {
-            self.grocery_label.setText("you got:")
-            
-            let checkbox_attrs: NSDictionary = [
-                NSForegroundColorAttributeName: UIColor.greenColor(),
-            ]
-            let name_attrs: NSDictionary = [
-                NSStrikethroughStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue,
-                NSForegroundColorAttributeName: UIColor.grayColor(),
-            ]
-
-            let btn_str = NSMutableAttributedString(string: "✓", attributes: checkbox_attrs)
-            btn_str.appendAttributedString(NSAttributedString(string: " \(self.grocery.name)", attributes: name_attrs))
-
-            self.got_grocery_button.setAttributedTitle(btn_str)
-        }
-        else {
-            let name_attrs: NSDictionary = [
-                NSForegroundColorAttributeName: UIColor.orangeColor(),
-            ]
-            self.grocery_label.setText(self.get_this_text)
-            self.got_grocery_button.setAttributedTitle(NSAttributedString(string: self.grocery.name, attributes: name_attrs))
-        }
-    }
-    @IBAction func tapped() {
-        self.grocery.bought = !self.grocery.bought
-        self.update_UI()
-        tracker[self.my_i+1]?.becomeCurrentPage()
-    }
 }

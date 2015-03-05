@@ -169,8 +169,18 @@ func get_estore_and_calendar(completed: (EKEventStore, EKCalendar) -> ()) {
     }
 }
 
+func get_reminder_with_identifier(identifier: String, completed: (EKReminder) -> Void) {
+    get_estore {
+        (estore: EKEventStore) in
+        let event = estore.calendarItemWithIdentifier(identifier) as EKReminder
+        completed(event)
+    }
+}
+
 extension GroceryList {
     func loadFromCalendar(loadCompletedItems:Bool = false, complete: (()->Void)? = nil) {
+        // loadCompletedItems:
+        
         get_estore_and_calendar {
             (estore, calendar) in
             

@@ -74,15 +74,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication!, handleWatchKitExtensionRequest userInfo: [NSObject : AnyObject]!, reply: (([NSObject : AnyObject]!) -> Void)!) {
         
-        currentGroceryList.loadFromCalendar(loadCompletedItems: false) {
+        switch userInfo?["action"] as String {
+        case "getList":
+            // requires: (no args)
+            currentGroceryList.loadFromCalendar(loadCompletedItems: false) {
+                get_calendar {
+                    calendar in
+                    
+                    reply([
+                        "status": "success",
+                        "listName": calendar.title,
+                        "groceries": map(currentGroceryList.list, {
+                            [
+                                "id": $0.reminder.calendarItemIdentifier,
+                                "name": $0.name,
+                                "bought": $0.bought ? "yes" : "no",
+                            ]
+                        })
+                    ])
+                }
+            }
+        case "setCompletion":
+            // requires: id, completed
+            let reminder_id = userInfo?["id"] as String
+            let is_complete = userInfo?["completed"] as Bool
+            get_reminder_with_identifier(reminder_id) {
+                (reminder: EKReminder) in
+                reminder.completed = is_complete
+                save_reminder(reminder) {
+                    reply(["status": "success"])
+                }
+            }
+            
+        default:
             reply([
-                "groceries": map(currentGroceryList.list, {
-                    [
-                        "id": $0.reminder.calendarItemIdentifier,
-                        "name": $0.name,
-                        "bought": $0.bought ? "yes" : "no",
-                    ]
-                })
+                "status": "error",
+                "err": "unrecognized_request"
             ])
         }
     }

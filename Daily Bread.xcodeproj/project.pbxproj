@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		05207AB81AA7F13900111032 /* OneAtATimeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05207AB71AA7F13900111032 /* OneAtATimeController.swift */; };
 		055B33101A656AA1002CDB32 /* groceryRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055B330F1A656AA1002CDB32 /* groceryRowController.swift */; };
 		0563429B1A65671E009EE218 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0563429A1A65671E009EE218 /* InterfaceController.swift */; };
 		0563429D1A65671E009EE218 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0563429C1A65671E009EE218 /* NotificationController.swift */; };
@@ -69,6 +70,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		05207AB71AA7F13900111032 /* OneAtATimeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OneAtATimeController.swift; sourceTree = "<group>"; };
 		055B330F1A656AA1002CDB32 /* groceryRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = groceryRowController.swift; sourceTree = "<group>"; };
 		056342951A65671D009EE218 /* Daily Bread WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Daily Bread WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		056342981A65671E009EE218 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -131,6 +133,7 @@
 			isa = PBXGroup;
 			children = (
 				0563429A1A65671E009EE218 /* InterfaceController.swift */,
+				05207AB71AA7F13900111032 /* OneAtATimeController.swift */,
 				0563429C1A65671E009EE218 /* NotificationController.swift */,
 				0563429E1A65671E009EE218 /* Images.xcassets */,
 				056342971A65671E009EE218 /* Supporting Files */,
@@ -398,6 +401,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05207AB81AA7F13900111032 /* OneAtATimeController.swift in Sources */,
 				055B33101A656AA1002CDB32 /* groceryRowController.swift in Sources */,
 				0563429D1A65671E009EE218 /* NotificationController.swift in Sources */,
 				0563429B1A65671E009EE218 /* InterfaceController.swift in Sources */,

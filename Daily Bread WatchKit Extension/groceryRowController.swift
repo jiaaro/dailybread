@@ -33,9 +33,9 @@ class groceryRowController : NSObject {
             
             self.checked.setBackgroundColor(UIColor.grayColor())
             
-            self.checked.setHeight(20)
-            self.checked.setWidth(6)
-            self.checked.setCornerRadius(3)
+            self.checked.setHeight(16)
+            self.checked.setWidth(4)
+            self.checked.setCornerRadius(2)
         }
         else {
             self.label.setAlpha(1.0)
@@ -43,9 +43,9 @@ class groceryRowController : NSObject {
             
             self.checked.setBackgroundColor(UIColor.orangeColor())
             
-            self.checked.setHeight(25)
-            self.checked.setWidth(8)
-            self.checked.setCornerRadius(4)
+            self.checked.setHeight(24)
+            self.checked.setWidth(6)
+            self.checked.setCornerRadius(3)
         }
     }
 }
