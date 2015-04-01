@@ -1,42 +1,6 @@
 {
   "images" : [
     {
-      "size" : "29x29",
-      "idiom" : "iphone",
-      "filename" : "AppIcon58.png",
-      "scale" : "2x"
-    },
-    {
-      "size" : "29x29",
-      "idiom" : "iphone",
-      "filename" : "AppIcon87.png",
-      "scale" : "3x"
-    },
-    {
-      "size" : "40x40",
-      "idiom" : "iphone",
-      "filename" : "AppIcon80.png",
-      "scale" : "2x"
-    },
-    {
-      "size" : "40x40",
-      "idiom" : "iphone",
-      "filename" : "AppIcon120.png",
-      "scale" : "3x"
-    },
-    {
-      "size" : "60x60",
-      "idiom" : "iphone",
-      "filename" : "AppIcon120-1.png",
-      "scale" : "2x"
-    },
-    {
-      "size" : "60x60",
-      "idiom" : "iphone",
-      "filename" : "AppIcon180.png",
-      "scale" : "3x"
-    },
-    {
       "size" : "24x24",
       "idiom" : "watch",
       "scale" : "2x",
@@ -62,7 +26,7 @@
     {
       "size" : "29x29",
       "idiom" : "watch",
-      "filename" : "watchIcon87.png",
+      "filename" : "watchIcon87-1.png",
       "role" : "companionSettings",
       "scale" : "3x"
     },
@@ -78,7 +42,7 @@
       "size" : "44x44",
       "idiom" : "watch",
       "scale" : "2x",
-      "filename" : "watchIcon88.png",
+      "filename" : "watchIcon88-1.png",
       "role" : "longLook",
       "subtype" : "42mm"
     },

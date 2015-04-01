@@ -8,7 +8,6 @@
 
 import WatchKit
 import Foundation
-import EventKit
 
 class Grocery {
     let id: String
@@ -67,7 +66,6 @@ class InterfaceController: WKInterfaceController {
     }
 
     override func awakeWithContext(context: AnyObject?) {
-        println("main controller: awakeWithContext")
         super.awakeWithContext(context)
         self.refresh_ui(force: true)
     }
