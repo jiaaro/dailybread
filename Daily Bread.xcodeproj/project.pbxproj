@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		05207AB81AA7F13900111032 /* OneAtATimeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05207AB71AA7F13900111032 /* OneAtATimeController.swift */; };
 		055B33101A656AA1002CDB32 /* groceryRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055B330F1A656AA1002CDB32 /* groceryRowController.swift */; };
-		055B93371ACC97C50043D0F7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 055B93361ACC97C50043D0F7 /* Images.xcassets */; };
 		0563429B1A65671E009EE218 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0563429A1A65671E009EE218 /* InterfaceController.swift */; };
 		0563429D1A65671E009EE218 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0563429C1A65671E009EE218 /* NotificationController.swift */; };
 		056342A31A656722009EE218 /* Daily Bread WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = 056342A21A65671E009EE218 /* Daily Bread WatchKit App.app */; };
@@ -72,7 +71,6 @@
 /* Begin PBXFileReference section */
 		05207AB71AA7F13900111032 /* OneAtATimeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OneAtATimeController.swift; sourceTree = "<group>"; };
 		055B330F1A656AA1002CDB32 /* groceryRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = groceryRowController.swift; sourceTree = "<group>"; };
-		055B93361ACC97C50043D0F7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		056342951A65671D009EE218 /* Daily Bread WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Daily Bread WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
 		056342981A65671E009EE218 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		056342991A65671E009EE218 /* PushNotificationPayload.apns */ = {isa = PBXFileReference; lastKnownFileType = text; path = PushNotificationPayload.apns; sourceTree = "<group>"; };
@@ -133,7 +131,6 @@
 			isa = PBXGroup;
 			children = (
 				0563429A1A65671E009EE218 /* InterfaceController.swift */,
-				055B93361ACC97C50043D0F7 /* Images.xcassets */,
 				05207AB71AA7F13900111032 /* OneAtATimeController.swift */,
 				0563429C1A65671E009EE218 /* NotificationController.swift */,
 				056342971A65671E009EE218 /* Supporting Files */,
@@ -366,7 +363,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				056342A31A656722009EE218 /* Daily Bread WatchKit App.app in Resources */,
-				055B93371ACC97C50043D0F7 /* Images.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -580,7 +576,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				METAL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -616,7 +612,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				METAL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -634,7 +630,7 @@
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "Grocery Seer/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "Daily Bread";
 				PROVISIONING_PROFILE = "";
@@ -654,7 +650,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "Grocery Seer/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "Daily Bread";
 				PROVISIONING_PROFILE = "";
