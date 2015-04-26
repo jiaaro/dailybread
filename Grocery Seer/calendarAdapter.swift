@@ -79,9 +79,8 @@ func get_calendars(completed: (([EKCalendar])->())) {
     get_estore {
         estore in
         
-        println("getting calendars")
-        
         var cals = estore.calendarsForEntityType(EKEntityTypeReminder) as! [EKCalendar]
+        
         completed(cals)
     }
 }
@@ -179,7 +178,6 @@ func get_reminder_with_identifier(identifier: String, completed: (EKReminder) ->
 
 extension GroceryList {
     func loadFromCalendar(loadCompletedItems:Bool = false, complete: (()->Void)? = nil) {
-        // loadCompletedItems:
         
         get_estore_and_calendar {
             (estore, calendar) in

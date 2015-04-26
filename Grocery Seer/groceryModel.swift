@@ -221,7 +221,6 @@ let stock_suggestions = [
     "Hummus",
 ]
 func mk_grocery_sugguestion_set(completed: (Array<GrocerySuggestion>)->()) {
-    println("generating suggestions - start")
     let current_grocery_names = name_set(currentGroceryList.list)
     let groceries = grocerySuggestionsList.list
     var grocery_occurences = [String:[NSDate]]()
@@ -263,16 +262,12 @@ func mk_grocery_sugguestion_set(completed: (Array<GrocerySuggestion>)->()) {
         new_suggestions.append(GrocerySuggestion(name: stock_suggestion, occurences: []))
     }
     
-    
-    println("generating suggestions - done")
     completed(new_suggestions)
 }
 
 var suggestions: Array<GrocerySuggestion>!
 func get_grocery_sugguestion_set(completed: (Array<GrocerySuggestion>)->()) {
-    println("get_grocery_sugguestion_set - start")
     if let s = suggestions {
-        println("get_grocery_sugguestion_set - complete (cached)")
         completed(s)
         return
     }
@@ -280,7 +275,6 @@ func get_grocery_sugguestion_set(completed: (Array<GrocerySuggestion>)->()) {
     mk_grocery_sugguestion_set {
         new_suggestions in
         suggestions = new_suggestions
-        println("get_grocery_sugguestion_set - complete (uncached)")
         completed(suggestions)
     }
 }

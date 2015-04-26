@@ -39,6 +39,7 @@ class Grocery {
 
 let empty_list_message = Grocery(["id": "0", "name": "Empty List", "bought": "no"])
 
+var data_is_stale = false
 class InterfaceController: WKInterfaceController {
     
     @IBOutlet weak var groceryTable: WKInterfaceTable!
@@ -64,10 +65,24 @@ class InterfaceController: WKInterfaceController {
 
         self.presentControllerWithNames(names, contexts: cxs)
     }
+    
+    @IBAction func showChangeList() {
+        WKInterfaceController.openParentApplication(["action": "getLists"]) {
+            [weak self]
+            (replyInfo, error) in
+            
+            let cx: [String: AnyObject?] = [
+                "calendars": replyInfo["calendars"],
+                "current_calendar": replyInfo["current_calendar"]
+            ]
+            
+            self?.presentControllerWithName("ChangeListInterface", context: replyInfo)
+            return
+        }
+    }
 
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
-        self.refresh_ui(force: true)
     }
     @IBAction func menuItemRefresh() {
         self.refresh_data()
@@ -93,12 +108,15 @@ class InterfaceController: WKInterfaceController {
         }
     }
     func refresh_ui(force: Bool = false) {
+        if data_is_stale {
+            data_is_stale = false
+            self.refresh_data()
+            return
+        }
         if !self.needs_ui_refresh && !force {
             return
         }
         self.needs_ui_refresh = false
-        
-        println("refreshing_ui")
         
         self.setTitle(self.list_name)
         

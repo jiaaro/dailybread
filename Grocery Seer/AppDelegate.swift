@@ -105,7 +105,41 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     reply(["status": "success"])
                 }
             }
+        case "getLists":
+            // requires: (no args)
+            get_calendars {
+                calendars in
+                get_calendar {
+                    current_cal in
+                    
+                    let lists = calendars.map {
+                        calendar in
+                        return [
+                            "title": calendar.title,
+                            "id": calendar.calendarIdentifier
+                        ]
+                    }
+                    reply([
+                        "status": "success",
+                        "calendars": lists,
+                        "current_calendar": current_cal.calendarIdentifier
+                    ])
+                }
+            }
+        case "setList":
+            // requires: id
+            let calender_id = userInfo!["id"] as! String
             
+            get_estore {
+                estore in
+                if let cal = estore.calendarWithIdentifier(calender_id) {
+                    set_calendar(cal)
+                    currentGroceryList.loadFromCalendar(loadCompletedItems: false) {
+                        reply(["status": "success"])
+                    }
+                    grocerySuggestionsList.loadFromCalendar(loadCompletedItems: true)
+                }
+            }
         default:
             reply([
                 "status": "error",
