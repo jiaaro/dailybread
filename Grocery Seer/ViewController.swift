@@ -162,11 +162,11 @@ extension ViewController: UIPopoverPresentationControllerDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         let segueid = segue.identifier
         if (segueid == "showPopover") {
-            let destinationVC = segue.destinationViewController as UIViewController
+            let destinationVC = segue.destinationViewController as! UIViewController
             destinationVC.popoverPresentationController?.delegate = self
         }
         else if segueid == "addGrocerySegue" {
-            let destinationVC = segue.destinationViewController as UIViewController
+            let destinationVC = segue.destinationViewController as! UIViewController
             destinationVC.modalPresentationStyle = .Custom
             destinationVC.transitioningDelegate = addGroceryTransitionDelegate
         }

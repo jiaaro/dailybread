@@ -81,7 +81,7 @@ func get_calendars(completed: (([EKCalendar])->())) {
         
         println("getting calendars")
         
-        var cals = estore.calendarsForEntityType(EKEntityTypeReminder) as [EKCalendar]
+        var cals = estore.calendarsForEntityType(EKEntityTypeReminder) as! [EKCalendar]
         completed(cals)
     }
 }
@@ -172,7 +172,7 @@ func get_estore_and_calendar(completed: (EKEventStore, EKCalendar) -> ()) {
 func get_reminder_with_identifier(identifier: String, completed: (EKReminder) -> Void) {
     get_estore {
         (estore: EKEventStore) in
-        let event = estore.calendarItemWithIdentifier(identifier) as EKReminder
+        let event = estore.calendarItemWithIdentifier(identifier) as! EKReminder
         completed(event)
     }
 }
@@ -196,7 +196,7 @@ extension GroceryList {
             estore.fetchRemindersMatchingPredicate(remindersPredicate) {
                 reminders in
                 
-                self.list = (reminders as Array<EKReminder>).map {
+                self.list = (reminders as! Array<EKReminder>).map {
                     Grocery(reminder: $0)
                 }
                 
@@ -221,7 +221,7 @@ extension GroceryList {
                 estore.fetchRemindersMatchingPredicate(predicate) {
                     reminders in
                     
-                    self.list = (reminders as Array<EKReminder>).filter { reminder in
+                    self.list = (reminders as! Array<EKReminder>).filter { reminder in
                         if keepCurrent && current_reminder_ids.containsObject(reminder.calendarItemIdentifier) {
                             return true
                         }

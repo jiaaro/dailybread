@@ -240,7 +240,7 @@ func mk_grocery_sugguestion_set(completed: (Array<GrocerySuggestion>)->()) {
     }
 
     let suggestion_candidates_set = name_set(groceries)
-    var suggestion_candidates = (suggestion_candidates_set.allObjects as Array<String>)
+    var suggestion_candidates = (suggestion_candidates_set.allObjects as! Array<String>)
     
     suggestion_candidates.sort({
         a, b in
@@ -299,7 +299,7 @@ func get_grocery_sugguestions(input:String, completed: (Array<GrocerySuggestion>
                 return false
             }
             // if the filter string is empty, show everything else
-            if countElements(input) == 0 {
+            if count(input) == 0 {
                 return true
             }
             
@@ -307,7 +307,7 @@ func get_grocery_sugguestions(input:String, completed: (Array<GrocerySuggestion>
             let simplified_input = input.lowercaseString
             
             var chars = " \t\n\"'"
-            if countElements(input) > 1 {
+            if count(input) > 1 {
                 chars = "/+_[]- \t\n:"
             }
             

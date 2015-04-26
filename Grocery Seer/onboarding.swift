@@ -108,7 +108,7 @@ extension OnboardingStep2: UITableViewDataSource {
         return self.cals.count + 1
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("basicCell", forIndexPath: indexPath) as UITableViewCell
+        var cell = tableView.dequeueReusableCellWithIdentifier("basicCell", forIndexPath: indexPath) as! UITableViewCell
         
         var label: String
         if (indexPath.item == 0) {

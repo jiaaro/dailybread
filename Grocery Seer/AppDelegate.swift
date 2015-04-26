@@ -20,8 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     lazy var suggestionGenerationQueue: NSOperationQueue = NSOperationQueue()
 
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: NSDictionary?) -> Bool {
         if let w = window {
             w.tintColor = StyleKit.mainColor()!
         }
@@ -72,9 +72,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func application(application: UIApplication!, handleWatchKitExtensionRequest userInfo: [NSObject : AnyObject]!, reply: (([NSObject : AnyObject]!) -> Void)!) {
+    func application(application: UIApplication, handleWatchKitExtensionRequest userInfo: [NSObject : AnyObject]?, reply: (([NSObject : AnyObject]!) -> Void)!) {
         
-        switch userInfo?["action"] as String {
+        switch userInfo?["action"] as! String {
         case "getList":
             // requires: (no args)
             currentGroceryList.loadFromCalendar(loadCompletedItems: false) {
@@ -96,8 +96,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         case "setCompletion":
             // requires: id, completed
-            let reminder_id = userInfo?["id"] as String
-            let is_complete = userInfo?["completed"] as Bool
+            let reminder_id = userInfo?["id"] as! String
+            let is_complete = userInfo?["completed"] as! Bool
             get_reminder_with_identifier(reminder_id) {
                 (reminder: EKReminder) in
                 reminder.completed = is_complete

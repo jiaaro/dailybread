@@ -47,9 +47,9 @@ class OneAtATimeController: WKInterfaceController {
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
-        let cx = context as Dictionary<String, AnyObject>
-        self.groceries = cx["groceries"] as [Grocery]
-        self.my_i = cx["i"] as Int
+        let cx = context as! Dictionary<String, AnyObject>
+        self.groceries = cx["groceries"] as! [Grocery]
+        self.my_i = cx["i"] as! Int
         
         tracker[self.my_i] = self
         
@@ -60,10 +60,10 @@ class OneAtATimeController: WKInterfaceController {
         if self.grocery.bought {
             self.grocery_label.setText("you got:")
             
-            let checkbox_attrs: NSDictionary = [
+            let checkbox_attrs: [NSObject: AnyObject] = [
                 NSForegroundColorAttributeName: UIColor.greenColor(),
             ]
-            let name_attrs: NSDictionary = [
+            let name_attrs: [NSObject: AnyObject] = [
                 NSStrikethroughStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue,
                 NSForegroundColorAttributeName: UIColor.grayColor(),
             ]
@@ -74,7 +74,7 @@ class OneAtATimeController: WKInterfaceController {
             self.got_grocery_button.setAttributedTitle(btn_str)
         }
         else {
-            let name_attrs: NSDictionary = [
+            let name_attrs: [NSObject: AnyObject] = [
                 NSForegroundColorAttributeName: UIColor.whiteColor(),
             ]
             self.grocery_label.setText(self.get_this_text)
@@ -94,9 +94,9 @@ class OneAtATimeDoneController: WKInterfaceController {
     
     override func awakeWithContext(context: AnyObject?) {
         super.awakeWithContext(context)
-        let cx = context as Dictionary<String, AnyObject>
-        self.groceries = cx["groceries"] as [Grocery]
-        self.my_i = cx["i"] as Int
+        let cx = context as! Dictionary<String, AnyObject>
+        self.groceries = cx["groceries"] as! [Grocery]
+        self.my_i = cx["i"] as! Int
         
         tracker[self.my_i] = self
     }

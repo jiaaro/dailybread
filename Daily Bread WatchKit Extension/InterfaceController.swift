@@ -26,7 +26,7 @@ class Grocery {
                     "action": "setCompletion",
                     "id": self.id,
                     "completed": _bought,
-                ], nil)
+                ], reply: nil)
         }
     }
     
@@ -76,9 +76,9 @@ class InterfaceController: WKInterfaceController {
         WKInterfaceController.openParentApplication(["action": "getList"]) {
             [weak self] (replyInfo, error) in
             
-            let grocery_info_list = replyInfo["groceries"]! as [[String:String]]
+            let grocery_info_list = replyInfo["groceries"]! as! [[String:String]]
 
-            self?.list_name = replyInfo["listName"]! as String
+            self?.list_name = replyInfo["listName"]! as! String
             self?.groceries = map(grocery_info_list) {
                 Grocery($0)
             }
@@ -93,7 +93,7 @@ class InterfaceController: WKInterfaceController {
         }
     }
     func refresh_ui(force: Bool = false) {
-        if !self.needs_ui_refresh & !force {
+        if !self.needs_ui_refresh && !force {
             return
         }
         self.needs_ui_refresh = false
@@ -102,13 +102,13 @@ class InterfaceController: WKInterfaceController {
         
         self.setTitle(self.list_name)
         
-        let grocery_count = countElements(self.groceries)
+        let grocery_count = count(self.groceries)
         let row_difference = grocery_count - groceryTable.numberOfRows
         
         groceryTable.setNumberOfRows(grocery_count, withRowType: "groceryRow")
         
         for i in 0..<grocery_count {
-            let row = groceryTable.rowControllerAtIndex(i) as groceryRowController
+            let row = groceryTable.rowControllerAtIndex(i) as! groceryRowController
             let grocery = self.groceries[i]
             
             row.reset_fields_hack()
@@ -120,7 +120,7 @@ class InterfaceController: WKInterfaceController {
         let grocery = self.groceries[rowIndex]
         grocery.bought = !grocery.bought
         
-        let row = table.rowControllerAtIndex(rowIndex) as groceryRowController
+        let row = table.rowControllerAtIndex(rowIndex) as! groceryRowController
         row.set_values(grocery.name, checked: grocery.bought)
     }
 

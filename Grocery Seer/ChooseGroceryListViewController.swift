@@ -53,7 +53,7 @@ class ChooseGroceryListViewController: UITableViewController {
         currentGroceryList.loadFromCalendar(loadCompletedItems: false)
         grocerySuggestionsList.loadFromCalendar(loadCompletedItems: true)
         
-        self.dismissViewControllerAnimated(true, nil)
+        self.dismissViewControllerAnimated(true, completion: nil)
         
         return nil
     }

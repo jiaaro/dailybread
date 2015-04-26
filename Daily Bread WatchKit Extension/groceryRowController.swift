@@ -26,7 +26,7 @@ class groceryRowController : NSObject {
             self.label.setAlpha(0.3)
             
             let single_style: NSNumber = NSUnderlineStyle.StyleSingle.rawValue
-            let attrs: NSDictionary = [NSStrikethroughStyleAttributeName: single_style]
+            let attrs: [NSObject: AnyObject] = [NSStrikethroughStyleAttributeName: single_style]
             let attributed_string = NSMutableAttributedString(string: text, attributes: attrs)
             
             self.label.setAttributedText(attributed_string)
