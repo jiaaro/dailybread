@@ -4,7 +4,7 @@
       "size" : "24x24",
       "idiom" : "watch",
       "scale" : "2x",
-      "filename" : "watchIcon_48.png",
+      "filename" : "watchIcon48.png",
       "role" : "notificationCenter",
       "subtype" : "38mm"
     },
@@ -26,7 +26,7 @@
     {
       "size" : "29x29",
       "idiom" : "watch",
-      "filename" : "watchIcon87-1.png",
+      "filename" : "watchIcon87.png",
       "role" : "companionSettings",
       "scale" : "3x"
     },
@@ -42,7 +42,7 @@
       "size" : "44x44",
       "idiom" : "watch",
       "scale" : "2x",
-      "filename" : "watchIcon88-1.png",
+      "filename" : "watchIcon88.png",
       "role" : "longLook",
       "subtype" : "42mm"
     },
