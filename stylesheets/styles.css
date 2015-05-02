@@ -82,10 +82,11 @@ p {
 footer {
   width: 440px;
   margin: 0 auto;
-  padding: 200px 0 50px;
+  padding: 220px 0 50px;
 }
 .appstore {
 	width: 440px;
+	margin-bottom: 220px;
 }
 
 .astx {
@@ -112,7 +113,7 @@ footer {
 	line-height: 100%;
 	text-align: center;
 }
-#mc_embed_signup h3 {
+#mc_embed_signup h2 small {
 	font-size: 16px;
 	color: #a6a69c;
 	font-weight: 400;
@@ -120,30 +121,70 @@ footer {
 	margin-bottom: 5px;
 }
 #mc-embedded-subscribe-form {
-	margin-top: 40px;
+  position: relative;
+	margin: 0;
 	text-align: center;
+	background: #f6f6f3;
+	border: 1px solid rgba(0,0,0, 0.07);
 }
 #mc-embedded-subscribe-form label {
 	display: none;
 }
 #mc-embedded-subscribe-form input.email {
-	background: #f6f6f3;
+  background: transparent;
 	font-size: 16px;
 	line-height: 200%;
-	padding: 5px 10px;
+	padding: 5px 58px 5px 10px;
 	width: 100%;
 	-webkit-box-sizing: -webkit-border-box;
 	box-sizing: border-box;
-	border: 1px solid rgba(0,0,0, 0.07);
+	border: 0;
 	text-align: center;
 }
 #mc-embedded-subscribe {
-	padding: 10px 20px;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+	width: 48px;
 	font-size: 14px;
 	background: #fff;
-	border: 1px solid rgba(0,0,0,0.08);
-	margin-top: 30px;
+	margin: 0;
+	border: 0;
 	color: #776;
+}
+
+.watchaware-demo-embed {
+  margin: 0 !important;
+  width: 100%;
+}
+
+.review {
+  color: #753;
+  text-rendering: optimizeLegibility;
+}
+.review .title {
+  display: block;
+  font-weight: bold;
+  text-indent: -0.35em;
+}
+.review .review-body {
+  display: block;
+  border-left: 5px solid #f90;
+  padding: 5px 15px;
+  font-size: 90%;
+  font-style: italic;
+}
+.review .stars {
+  display: block;
+  color: #f90;
+  margin-bottom: 10px;
+}
+.review .author {
+  display: block;
+  font-weight: bold;
+  font-size: 75%;
+  margin-top: 10px;
 }
 
 

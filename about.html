@@ -1,0 +1,159 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>About Daily Bread</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/pygment_trac.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <a href="/" class="header-title">DAILY<br>BREAD</a>
+        <div class="header-copy">
+          <a href="/about.html">about ›</a><br>
+          <a href="mailto:dbfb@jiaaro.com?subject=Daily%20Bread%20feedback">feedback ›</a>
+        </div>
+        <img src="img/large-squares.png" class="big-squares">
+      </header>
+      
+      <section>
+        <p>
+          Hi, I’m James.
+          <img src="img/selfie.jpg" class="sidebar">
+        </p>
+
+        <p>I made an app.</p>
+
+        <p>I think it’s pretty good, but we’ll get to the app in a second.</p>
+
+        <p>First, let me tell you a little story.</p>
+
+        <p>
+          For a long time my wife and I shared a grocery list using the built-in 
+          “Reminders” app that is pre-installed on our iPhones.
+        </p>
+
+        <p>We used it because it was already installed, and it worked.</p>
+
+        <p>
+          <img src="img/reminders.png" class="sidebar">
+          It’s backed up to iCloud, and we could use it from our iPhones, iPads, Macs, 
+          and iCloud.com. Pretty Sweet!
+        </p>
+
+        <p>I just have two complaints:</p>
+
+        <ol>
+          <li>I have typed “yogurt” into my grocery list more than twenty times</li>
+          <li>I can’t tell you how many times I’ve come back from the grocery store only to realize I forgot to buy bagels</li>
+        </ol>
+
+        <p>
+          What am I supposed to do? Lather a piece of wheat bread with cream cheese? 
+          I’m not an animal.
+        </p>
+
+        <p>
+          Sometimes I would go looking through the “completed” items to see if 
+          there was anything I should buy again and uncheck them, re-adding those things 
+          to my list. It kind of sucked though because I have hundreds (thousands?) of 
+          completed items in the grocery list.
+        </p>
+
+        <p>
+          Wouldn’t it be great if the things I’ve bought the most times were up at the 
+          top? Wait! I’m professional sorter and aggregator of lists! Maybe I can sort 
+          <em>this</em> list.
+        </p>
+
+        <p>
+          Only problem is: I don’t want to use a <em>new</em> grocery app, and have to 
+          start fresh. I want to sort <em>this</em> list. That I’ve been using for years. 
+          That I already shared with my wife.
+        </p>
+
+        <p>So that’s what I did.</p>
+
+        <p>
+          Daily Bread focuses on the fundamentals. I buy pretty much the same 10 
+          groceries every week. That’s why the screen for adding a grocery shows the 
+          most common items.
+          <img src="img/dailybread.png" class="sidebar">
+        </p>
+
+        <p>
+          And you can just tap to add a grocery to the list. 
+          No Typing!<a id="astx1" class="astx"></a>
+          I don’t care how good the new iOS 8 keyboards are. No keyboard is better
+          than no keyboard at all.
+        </p>
+
+        <p>
+          And since it syncs with Reminders you can keep using your existing grocery
+          list. You can still use iCloud.com. You don’t have to convince anyone else 
+          to install the app or mess around with sharing a new list. And you can switch 
+          back to using Reminders at any time (but you won’t want to)!
+        </p>
+
+        <p>
+          Oh, and you can use Siri: “Add eggs to my grocery list<a id="astx2" class="astx"></a>”
+        </p>
+
+        <p>Making a grocery list should be quick and easy, and now it is.</p>
+        
+        <p style="font-size: 120%; margin-top: 30px; margin-bottom: 45px;">
+            <a href="/"><strong>Get Daily Bread ›</strong></a>
+        </p>
+        <p>
+            <a href="/#mc_embed_signup">email updates ›</a><br>
+            <a href="https://github.com/jiaaro/dailybread">github ›</a><br>
+            <a href="mailto:dbfb@jiaaro.com?subject=Daily%20Bread%20feedback">send feedback ›</a><br>
+        </p>
+        
+      </section>
+      
+      <footer style="padding-top: 0;">
+        <div class="footnotes" style="margin-top: 60px;">
+          <aside id="fn1">
+            Unless you’re adding one of those “once in a while” 
+            things to the list
+          </aside>
+          <aside id="fn2">
+            Assuming the list is called “grocery” otherwise you’ll have to use the name 
+            you used for the list. For example if you call your list “daily bread”
+            it would be “add eggs to my daily bread list”
+          </aside>
+        </div>
+      </footer>
+    </div>
+    
+    <script src="javascripts/scale.fix.js"></script>
+    <script src="javascripts/jquery-2.1.1.min.js"></script>
+    <script>
+      $(function() {
+        // Set up footnote links
+        $(".astx").each(function() {
+          var $this = $(this),
+              id = this.id.slice(4),
+
+              $fn = $("#fn" + id),
+              $goback = $("<a>↩</a>");
+              
+          $goback.attr("href", "#astx" + id);
+          $this.attr("href", "#fn" + id);
+          $this.text(id);
+          
+          $fn.append($goback);
+          $fn.prepend("<strong>[" + id + "]: </strong>");
+        })
+      });
+    </script>
+  </body>
+</html>
