@@ -5,15 +5,15 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBWatchKitPlugin" version="3737"/>
     </dependencies>
     <scenes>
-        <!--Groceries-->
+        <!--loading…-->
         <scene sceneID="aou-V4-d1y">
             <objects>
-                <controller title="Groceries" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Daily_Bread_WatchKit_App" customModuleProvider="target">
+                <controller title="loading…" id="AgC-eL-Hgc" customClass="InterfaceController" customModule="Daily_Bread_WatchKit_App" customModuleProvider="target">
                     <items>
                         <table alignment="left" id="QbS-MN-LAZ">
                             <items>
                                 <tableRow identifier="groceryRow" id="3Yh-Eq-X0e" customClass="groceryRowController" customModule="Daily_Bread_WatchKit_Extension">
-                                    <group key="rootItem" width="1" height="40" alignment="left" animationDuration="1" radius="0.0" spacing="5" id="6Gz-sS-BKa">
+                                    <group key="rootItem" width="1" height="38" alignment="left" animationDuration="1" radius="0.0" spacing="5" id="6Gz-sS-BKa">
                                         <items>
                                             <group width="5" height="30" alignment="left" verticalAlignment="center" initiallyAnimated="NO" animationDuration="1" radius="3" id="ioJ-ul-02N" userLabel="checked">
                                                 <color key="backgroundColor" red="0.99215692280000001" green="0.5647059083" blue="0.14509804549999999" alpha="1" colorSpace="deviceRGB"/>
@@ -109,6 +109,128 @@
                 </controller>
             </objects>
             <point key="canvasLocation" x="406" y="345"/>
+        </scene>
+        <!--Glance Interface Controller-->
+        <scene sceneID="37H-Bf-pm2">
+            <objects>
+                <glanceController id="AU0-KW-0Nw" customClass="GlanceController" customModule="Daily_Bread_WatchKit_Extension">
+                    <items>
+                        <group alignment="left" layout="vertical" spacing="0.0" id="lE8-CS-amf">
+                            <items>
+                                <group width="1" height="1" heightAdjustment="-9" alignment="left" verticalAlignment="center" spacing="8" id="YAK-Lb-aHy">
+                                    <items>
+                                        <imageView width="30" height="30" alignment="left" image="GlanceIcon" id="N49-ff-LP9">
+                                            <variation key="device=watch42mm" height="36" width="36"/>
+                                        </imageView>
+                                        <label alignment="left" verticalAlignment="center" text="Grocery" numberOfLines="2" id="6j3-Gl-3oB">
+                                            <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <fontDescription key="font" style="UICTFontTextStyleHeadline"/>
+                                        </label>
+                                    </items>
+                                </group>
+                                <group width="1" alignment="left" verticalAlignment="bottom" spacing="0.0" id="S9w-pU-rvu">
+                                    <items>
+                                        <label alignment="left" verticalAlignment="bottom" text="RECENTLY ADDED" id="TUN-rD-DBO">
+                                            <color key="textColor" red="0.81960784313725488" green="0.71372549019607845" blue="0.55294117647058827" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <fontDescription key="font" type="system" weight="medium" pointSize="9"/>
+                                        </label>
+                                    </items>
+                                    <edgeInsets key="margins" left="14" right="0.0" top="0.0" bottom="0.0"/>
+                                    <variation key="device=watch42mm">
+                                        <edgeInsets key="margins" left="17" right="0.0" top="0.0" bottom="0.0"/>
+                                    </variation>
+                                </group>
+                            </items>
+                        </group>
+                        <group alignment="left" layout="vertical" id="pKl-6C-w98">
+                            <items>
+                                <group width="1" height="1" heightAdjustment="-26" alignment="left" id="JBh-id-TEG">
+                                    <items>
+                                        <table alignment="left" id="EBB-cJ-uaO">
+                                            <items>
+                                                <tableRow identifier="recentlyAdded" selectable="NO" id="oPY-CH-FAs" customClass="RecentlyAddedRow" customModule="Daily_Bread_WatchKit_Extension">
+                                                    <group key="rootItem" width="1" height="20" alignment="left" spacing="4.5" id="snl-3y-SLs">
+                                                        <items>
+                                                            <group width="4" height="14" alignment="left" verticalAlignment="center" radius="2" id="b7x-6E-kFk">
+                                                                <color key="backgroundColor" red="0.99215692280000001" green="0.5647059083" blue="0.14509804549999999" alpha="1" colorSpace="deviceRGB"/>
+                                                            </group>
+                                                            <label alignment="left" verticalAlignment="center" text="Label" id="Wrp-Jc-fkF">
+                                                                <fontDescription key="font" type="system" weight="medium" pointSize="16"/>
+                                                            </label>
+                                                        </items>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        <edgeInsets key="margins" left="5" right="0.0" top="0.0" bottom="3"/>
+                                                        <variation key="device=watch42mm" height="22" spacing="7">
+                                                            <edgeInsets key="margins" left="5" right="0.0" top="0.0" bottom="6"/>
+                                                        </variation>
+                                                    </group>
+                                                    <connections>
+                                                        <outlet property="label" destination="Wrp-Jc-fkF" id="gBU-2v-cH4"/>
+                                                    </connections>
+                                                </tableRow>
+                                                <tableRow identifier="topSuggestion" id="4Aj-Pd-0oh" customClass="SuggestionRow" customModule="Daily_Bread_WatchKit_Extension">
+                                                    <group key="rootItem" width="1" height="40" alignment="left" layout="vertical" spacing="0.0" id="RQN-na-AwL">
+                                                        <items>
+                                                            <label alignment="center" verticalAlignment="bottom" text="TOP SUGGESTION" id="nbu-5Q-SwE">
+                                                                <color key="textColor" red="0.81960784310000001" green="0.71372549019999998" blue="0.55294117649999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                                <fontDescription key="font" type="system" weight="medium" pointSize="9"/>
+                                                            </label>
+                                                            <label alignment="center" verticalAlignment="bottom" text="Eggs" id="Hsd-nG-tlU">
+                                                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                                <fontDescription key="font" type="system" weight="semibold" pointSize="16"/>
+                                                            </label>
+                                                        </items>
+                                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                        <edgeInsets key="margins" left="0.0" right="0.0" top="0.0" bottom="0.0"/>
+                                                        <variation key="device=watch42mm" height="48"/>
+                                                    </group>
+                                                    <connections>
+                                                        <outlet property="label" destination="Hsd-nG-tlU" id="i2t-xe-IrZ"/>
+                                                    </connections>
+                                                </tableRow>
+                                            </items>
+                                        </table>
+                                    </items>
+                                </group>
+                                <group width="1" height="25" alignment="left" verticalAlignment="bottom" spacing="0.0" id="TAE-c1-h8h">
+                                    <items>
+                                        <group width="0.5" height="1" alignment="left" layout="vertical" spacing="0.0" id="ngZ-jR-4LY">
+                                            <items>
+                                                <label alignment="center" text="0" id="iMT-Ss-TLf">
+                                                    <fontDescription key="font" type="system" weight="semibold" pointSize="14"/>
+                                                </label>
+                                                <label height="8" alignment="center" verticalAlignment="bottom" text="ITEMS" id="qO8-ZW-V7g">
+                                                    <color key="textColor" red="0.81960784310000001" green="0.71372549019999998" blue="0.55294117649999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="font" type="system" weight="medium" pointSize="9"/>
+                                                </label>
+                                            </items>
+                                        </group>
+                                        <group width="0.5" height="1" alignment="left" layout="vertical" spacing="0.0" id="FJB-IA-2qc">
+                                            <items>
+                                                <label alignment="center" text="never" id="oAI-qd-g3z">
+                                                    <fontDescription key="font" type="system" weight="semibold" pointSize="14"/>
+                                                </label>
+                                                <label height="8" alignment="center" verticalAlignment="bottom" text="SHOPPED" id="80I-dS-B2Y">
+                                                    <color key="textColor" red="0.81960784310000001" green="0.71372549019999998" blue="0.55294117649999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <fontDescription key="font" type="system" weight="medium" pointSize="9"/>
+                                                </label>
+                                            </items>
+                                        </group>
+                                    </items>
+                                </group>
+                            </items>
+                        </group>
+                    </items>
+                    <connections>
+                        <outlet property="lastShoppedLabel" destination="oAI-qd-g3z" id="mTE-xQ-Eji"/>
+                        <outlet property="listLengthLabel" destination="iMT-Ss-TLf" id="bHC-nl-tie"/>
+                        <outlet property="listTitleLabel" destination="6j3-Gl-3oB" id="xTC-Nc-u6H"/>
+                        <outlet property="recentlyAddedTitleLabel" destination="TUN-rD-DBO" id="yf6-Z3-B6k"/>
+                        <outlet property="table" destination="EBB-cJ-uaO" id="aCN-9G-fVo"/>
+                    </connections>
+                </glanceController>
+            </objects>
+            <point key="canvasLocation" x="220" y="631"/>
         </scene>
         <!--×-->
         <scene sceneID="QTD-Yt-rAE">

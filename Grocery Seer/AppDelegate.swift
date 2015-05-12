@@ -20,8 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     lazy var suggestionGenerationQueue: NSOperationQueue = NSOperationQueue()
 
-    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {
-
+    func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject : AnyObject]?) -> Bool {       
         if let w = window {
             w.tintColor = StyleKit.mainColor()!
         }
@@ -74,7 +73,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(application: UIApplication, handleWatchKitExtensionRequest userInfo: [NSObject : AnyObject]?, reply: (([NSObject : AnyObject]!) -> Void)!) {
         
-        switch userInfo?["action"] as! String {
+        let actionName = userInfo?["action"] as! String
+        let bg_task_id = application.beginBackgroundTaskWithName("watchkit action: \(actionName)", expirationHandler: {
+            reply([
+                "status": "error",
+                "err": "backgroundTaskExpired"
+            ])
+        })
+        
+        switch actionName {
         case "getList":
             // requires: (no args)
             currentGroceryList.loadFromCalendar(loadCompletedItems: false) {
@@ -92,6 +99,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             ]
                         })
                     ])
+                    application.endBackgroundTask(bg_task_id)
                 }
             }
         case "setCompletion":
@@ -103,6 +111,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 reminder.completed = is_complete
                 save_reminder(reminder) {
                     reply(["status": "success"])
+                    application.endBackgroundTask(bg_task_id)
                 }
             }
         case "getLists":
@@ -124,6 +133,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         "calendars": lists,
                         "current_calendar": current_cal.calendarIdentifier
                     ])
+                    application.endBackgroundTask(bg_task_id)
                 }
             }
         case "setList":
@@ -136,15 +146,59 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                     set_calendar(cal)
                     currentGroceryList.loadFromCalendar(loadCompletedItems: false) {
                         reply(["status": "success"])
+                        application.endBackgroundTask(bg_task_id)
                     }
                     grocerySuggestionsList.loadFromCalendar(loadCompletedItems: true)
                 }
             }
+        case "getGlanceData":
+            // requires: (no args)
+            
+            currentGroceryList.loadFromCalendar(loadCompletedItems: false) {
+                grocerySuggestionsList.loadFromCalendar(loadCompletedItems: true) {
+                    get_calendar {
+                        calendar in
+                        
+                        let recentAdditions = map(currentGroceryList.mostRecentlyAdded(n: 3)) {
+                            $0.name
+                        }
+                        var lastShopped = "never"
+                        if let d = grocerySuggestionsList.mostRecentlyCompleted(n: 1).first?.completed_date {
+                            let days = Int(round(-d.timeIntervalSinceNow / (60*60*24)))
+                            
+                            switch (d.toString(), days) {
+                            case (NSDate().toString(), _):
+                                lastShopped = "today"
+                            case (NSDate(timeIntervalSinceNow: -24*60*60).toString(), _):
+                                lastShopped = "yesterday"
+                            case (_, 0...99):
+                                lastShopped = "\(days) days"
+                            default:
+                                lastShopped = "ages ago"
+                            }
+                        }
+                        get_grocery_sugguestions("") {
+                            suggestions in
+                            reply([
+                                "status": "success",
+                                "listName": calendar.title,
+                                "recentAdditions": recentAdditions,
+                                "topSuggestion": suggestions.first?.name ?? "Treat Yourself!",
+                                "listLength": currentGroceryList.count,
+                                "lastShopped": lastShopped,
+                            ])
+                            application.endBackgroundTask(bg_task_id)
+                        }
+                    }
+                }
+            }
+            
         default:
             reply([
                 "status": "error",
                 "err": "unrecognized_request"
             ])
+            application.endBackgroundTask(bg_task_id)
         }
     }
 

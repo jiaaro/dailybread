@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		05207AB81AA7F13900111032 /* OneAtATimeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05207AB71AA7F13900111032 /* OneAtATimeController.swift */; };
+		052C6C731AF2D8CC003A9965 /* GlanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052C6C721AF2D8CC003A9965 /* GlanceController.swift */; };
+		05310A161AF2FA7A00C23994 /* NSDateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05310A151AF2FA7A00C23994 /* NSDateExtensions.swift */; };
 		05541D431AED6D68003A6427 /* ChooseListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05541D421AED6D68003A6427 /* ChooseListController.swift */; };
 		055B33101A656AA1002CDB32 /* groceryRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055B330F1A656AA1002CDB32 /* groceryRowController.swift */; };
 		0563429B1A65671E009EE218 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0563429A1A65671E009EE218 /* InterfaceController.swift */; };
@@ -71,6 +73,8 @@
 
 /* Begin PBXFileReference section */
 		05207AB71AA7F13900111032 /* OneAtATimeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OneAtATimeController.swift; sourceTree = "<group>"; };
+		052C6C721AF2D8CC003A9965 /* GlanceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlanceController.swift; sourceTree = "<group>"; };
+		05310A151AF2FA7A00C23994 /* NSDateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateExtensions.swift; sourceTree = "<group>"; };
 		05541D421AED6D68003A6427 /* ChooseListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseListController.swift; sourceTree = "<group>"; };
 		055B330F1A656AA1002CDB32 /* groceryRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = groceryRowController.swift; sourceTree = "<group>"; };
 		056342951A65671D009EE218 /* Daily Bread WatchKit Extension.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Daily Bread WatchKit Extension.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -133,6 +137,7 @@
 			isa = PBXGroup;
 			children = (
 				0563429A1A65671E009EE218 /* InterfaceController.swift */,
+				052C6C721AF2D8CC003A9965 /* GlanceController.swift */,
 				05541D421AED6D68003A6427 /* ChooseListController.swift */,
 				05207AB71AA7F13900111032 /* OneAtATimeController.swift */,
 				0563429C1A65671E009EE218 /* NotificationController.swift */,
@@ -196,6 +201,7 @@
 			isa = PBXGroup;
 			children = (
 				38CEF5CC195345250044E405 /* AddGroceryViewController.swift */,
+				05310A151AF2FA7A00C23994 /* NSDateExtensions.swift */,
 				0588F2F51AA2839300D4DD27 /* ZippyAnimator.swift */,
 				38A693951981F2DD007EE7C2 /* StyleKit.h */,
 				05AB511819E75E690084A738 /* onboarding.swift */,
@@ -406,6 +412,7 @@
 				055B33101A656AA1002CDB32 /* groceryRowController.swift in Sources */,
 				0563429D1A65671E009EE218 /* NotificationController.swift in Sources */,
 				0563429B1A65671E009EE218 /* InterfaceController.swift in Sources */,
+				052C6C731AF2D8CC003A9965 /* GlanceController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -413,6 +420,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05310A161AF2FA7A00C23994 /* NSDateExtensions.swift in Sources */,
 				38CEF5CD195345250044E405 /* AddGroceryViewController.swift in Sources */,
 				385AF2D91959043B00EE0773 /* calendarAdapter.swift in Sources */,
 				0587B5B619AC20F7009FAF77 /* ranking.swift in Sources */,

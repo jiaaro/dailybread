@@ -14,6 +14,12 @@ class Grocery {
     var name: String
     var bought: Bool = false
     var reminder: EKReminder
+    var created: NSDate? {
+        return self.reminder.creationDate
+    }
+    var completed_date: NSDate? {
+        return self.reminder.completionDate
+    }
     
     init(name: String, bought: Bool, reminder: EKReminder) {
         self.name = name
@@ -49,7 +55,6 @@ class GroceryList {
             return self.list[index]
         }
     }
-    
     func currentGroceries() -> Array<Grocery> {
         return self.list.filter() { !$0.bought }
     }
@@ -87,6 +92,51 @@ extension GroceryList {
     }
 }
 
+extension GroceryList {
+    func get_top(var n: Int?, by_sort: (Grocery, Grocery) -> Bool) -> [Grocery] {
+        if n == nil || n > self.list.endIndex {
+            n = self.list.endIndex
+        }
+        let n_ = n!
+        
+        let sorted_groceries = sorted(self.list, {
+            switch ($0.created, $1.created) {
+            case (nil, _):
+                return false
+            case (_, nil):
+                return true
+            default:
+                return $0.created!.timeIntervalSinceDate($1.created!) > 0
+            }
+        })
+        
+        return Array(sorted_groceries[0..<n_])
+    }
+    func mostRecentlyAdded(n: Int? = nil) -> [Grocery] {
+        return self.get_top(n) {
+            switch ($0.created, $1.created) {
+            case (nil, _):
+                return false
+            case (_, nil):
+                return true
+            default:
+                return $0.created!.timeIntervalSinceDate($1.created!) > 0
+            }
+        }
+    }
+    func mostRecentlyCompleted(n: Int? = nil) -> [Grocery] {
+        return self.get_top(n) {
+            switch ($0.completed_date, $1.completed_date) {
+            case (nil, _):
+                return false
+            case (_, nil):
+                return true
+            default:
+                return $0.created!.timeIntervalSinceDate($1.created!) > 0
+            }
+        }
+    }
+}
 
 
 

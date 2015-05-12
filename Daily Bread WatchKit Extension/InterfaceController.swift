@@ -11,7 +11,7 @@ import Foundation
 
 class Grocery {
     let id: String
-    let name: String
+    var name: String
     var _bought: Bool
     var bought: Bool {
         get {
@@ -37,7 +37,7 @@ class Grocery {
     }
 }
 
-let empty_list_message = Grocery(["id": "0", "name": "Empty List", "bought": "no"])
+let empty_list_message = Grocery(["id": "0", "name": "Loading…", "bought": "no"])
 
 var data_is_stale = false
 class InterfaceController: WKInterfaceController {
@@ -45,7 +45,7 @@ class InterfaceController: WKInterfaceController {
     @IBOutlet weak var groceryTable: WKInterfaceTable!
     
     var needs_ui_refresh = true
-    var list_name = "Groceries"
+    var list_name = "Loading…"
     var groceries: [Grocery] = [
         empty_list_message,
     ]
@@ -99,6 +99,7 @@ class InterfaceController: WKInterfaceController {
             }
             
             if self?.groceries.count == 0 {
+                empty_list_message.name = "Empty List"
                 self?.groceries = [empty_list_message]
             }
             
