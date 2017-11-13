@@ -31,38 +31,38 @@ class ZippyModalSlideOverAnimator : NSObject, UIViewControllerAnimatedTransition
     var reverse = false
     let view_spacing: CGFloat = 10
     
-    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-        let container_view = transitionContext.containerView()
-        let dst = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
-        let src = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        let container_view = transitionContext.containerView
+        let dst = transitionContext.viewController(forKey: .to)!
+        let src = transitionContext.viewController(forKey: .from)!
         
         container_view.addSubview(src.view)
         container_view.addSubview(dst.view)
         
-        let duration = self.transitionDuration(transitionContext)
+        let duration = self.transitionDuration(using: transitionContext)
         let distance = src.view.frame.height
         
-        var src_start = CGAffineTransformMakeTranslation(0, 0)
-        var dst_start = CGAffineTransformMakeTranslation(0, 0)
-        var src_end = CGAffineTransformMakeTranslation(0, 0)
-        var dst_end = CGAffineTransformMakeTranslation(0, 0)
+        let src_start = CGAffineTransform(translationX: 0, y: 0)
+        var dst_start = CGAffineTransform(translationX: 0, y: 0)
+        var src_end = CGAffineTransform(translationX: 0, y: 0)
+        let dst_end = CGAffineTransform(translationX: 0, y: 0)
         
         if !self.reverse {
-            dst_start = CGAffineTransformMakeTranslation(0, distance)
+            dst_start = CGAffineTransform(translationX: 0, y: distance)
         }
         else {
-            src_end = CGAffineTransformMakeTranslation(0, distance)
-            container_view.sendSubviewToBack(dst.view)
+            src_end = CGAffineTransform(translationX: 0, y: distance)
+            container_view.sendSubview(toBack: dst.view)
         }
         
         src.view.transform = src_start
         dst.view.transform = dst_start
         
-        UIView.animateWithDuration(self.transitionDuration(transitionContext),
+        UIView.animate(withDuration: duration,
             delay: 0,
             usingSpringWithDamping: 0.8,
             initialSpringVelocity: 0,
-            options: .CurveEaseInOut,
+            options: .curveEaseInOut,
             animations: {
                 src.view.transform = src_end
                 dst.view.transform = dst_end
@@ -70,19 +70,19 @@ class ZippyModalSlideOverAnimator : NSObject, UIViewControllerAnimatedTransition
             completion: {
                 (finished) in
                 src.view.removeFromSuperview()
-                dst.view.transform = CGAffineTransformIdentity
+                dst.view.transform = .identity
                 
-                transitionContext.completeTransition(!transitionContext.transitionWasCancelled())
+                transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
                 
                 if self.reverse {
                     // hack to fix a weird bug. see http://stackoverflow.com/a/24589312/2908
-                    UIApplication.sharedApplication().keyWindow!.addSubview(dst.view)
+                    UIApplication.shared.keyWindow!.addSubview(dst.view)
                 }
                 
         })
         
     }
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         if !self.reverse {
             return 0.25
         }
@@ -96,29 +96,29 @@ class ZippyModalSidewaysAnimator : NSObject, UIViewControllerAnimatedTransitioni
     var reverse = false
     let view_spacing: CGFloat = 10
     
-    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-        let container_view = transitionContext.containerView()
-        let dst = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
-        let src = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        let container_view = transitionContext.containerView
+        let dst = transitionContext.viewController(forKey: .to)!
+        let src = transitionContext.viewController(forKey: .from)!
         
         container_view.addSubview(dst.view)
         container_view.addSubview(src.view)
         
-        let duration = self.transitionDuration(transitionContext)
+        let duration = self.transitionDuration(using: transitionContext)
         let distance = src.view.frame.width + view_spacing
         
-        var src_start = CGAffineTransformMakeTranslation(0, 0)
-        var dst_start = CGAffineTransformMakeTranslation(0, 0)
-        var src_end = CGAffineTransformMakeTranslation(0, 0)
-        var dst_end = CGAffineTransformMakeTranslation(0, 0)
+        let src_start = CGAffineTransform(translationX: 0, y: 0)
+        var dst_start = CGAffineTransform(translationX: 0, y: 0)
+        var src_end = CGAffineTransform(translationX: 0, y: 0)
+        let dst_end = CGAffineTransform(translationX: 0, y: 0)
         
         if !self.reverse {
-            src_end = CGAffineTransformMakeTranslation(-distance, 0)
-            dst_start = CGAffineTransformMakeTranslation(distance, 0)
+            src_end = CGAffineTransform(translationX: -distance, y: 0)
+            dst_start = CGAffineTransform(translationX: distance, y: 0)
         }
         else {
-            src_end = CGAffineTransformMakeTranslation(distance, 0)
-            dst_start = CGAffineTransformMakeTranslation(-distance, 0)
+            src_end = CGAffineTransform(translationX: distance, y: 0)
+            dst_start = CGAffineTransform(translationX: -distance, y: 0)
             
         }
 
@@ -126,11 +126,12 @@ class ZippyModalSidewaysAnimator : NSObject, UIViewControllerAnimatedTransitioni
         src.view.transform = src_start
         dst.view.transform = dst_start
 
-        UIView.animateWithDuration(self.transitionDuration(transitionContext),
+        UIView.animate(
+            withDuration: duration,
             delay: 0,
             usingSpringWithDamping: 0.8,
             initialSpringVelocity: 0,
-            options: .CurveEaseOut,
+            options: .curveEaseOut,
             animations: {
                 src.view.transform = src_end
                 dst.view.transform = dst_end
@@ -138,19 +139,19 @@ class ZippyModalSidewaysAnimator : NSObject, UIViewControllerAnimatedTransitioni
             completion: {
                 (finished) in
                 src.view.removeFromSuperview()
-                dst.view.transform = CGAffineTransformIdentity
+                dst.view.transform = .identity
                 
-                transitionContext.completeTransition(!transitionContext.transitionWasCancelled())
+                transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
                 
                 if self.reverse {
                     // hack to fix a weird bug. see http://stackoverflow.com/a/24589312/2908
-                    UIApplication.sharedApplication().keyWindow!.addSubview(dst.view)
+                    UIApplication.shared.keyWindow!.addSubview(dst.view)
                 }
 
         })
         
     }
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning) -> NSTimeInterval {
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return 0.25
     }
 }

@@ -8,11 +8,11 @@
 
 import Foundation
 
-extension NSDate {
+extension Date {
     func toString(format:String = "yyyy'-'MM'-'dd'") -> String {
-        let df = NSDateFormatter()
+        let df = DateFormatter()
         df.dateFormat = format
         
-        return df.stringFromDate(self)
+        return df.string(from: self)
     }
 }

@@ -8,20 +8,20 @@
 
 /* Begin PBXBuildFile section */
 		05207AB81AA7F13900111032 /* OneAtATimeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05207AB71AA7F13900111032 /* OneAtATimeController.swift */; };
-		052C6C731AF2D8CC003A9965 /* GlanceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 052C6C721AF2D8CC003A9965 /* GlanceController.swift */; };
 		05310A161AF2FA7A00C23994 /* NSDateExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05310A151AF2FA7A00C23994 /* NSDateExtensions.swift */; };
 		05541D431AED6D68003A6427 /* ChooseListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05541D421AED6D68003A6427 /* ChooseListController.swift */; };
 		055B33101A656AA1002CDB32 /* groceryRowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055B330F1A656AA1002CDB32 /* groceryRowController.swift */; };
 		0563429B1A65671E009EE218 /* InterfaceController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0563429A1A65671E009EE218 /* InterfaceController.swift */; };
 		0563429D1A65671E009EE218 /* NotificationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0563429C1A65671E009EE218 /* NotificationController.swift */; };
-		056342A31A656722009EE218 /* Daily Bread WatchKit App.app in Resources */ = {isa = PBXBuildFile; fileRef = 056342A21A65671E009EE218 /* Daily Bread WatchKit App.app */; };
 		056342AB1A656722009EE218 /* Interface.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 056342A91A656722009EE218 /* Interface.storyboard */; };
 		056342AD1A656722009EE218 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 056342AC1A656722009EE218 /* Images.xcassets */; };
-		056342B01A656722009EE218 /* Daily Bread WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 056342951A65671D009EE218 /* Daily Bread WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		0587B5B619AC20F7009FAF77 /* ranking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0587B5B519AC20F7009FAF77 /* ranking.swift */; };
 		0588F2F61AA2839300D4DD27 /* ZippyAnimator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0588F2F51AA2839300D4DD27 /* ZippyAnimator.swift */; };
 		05AB511919E75E690084A738 /* onboarding.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05AB511819E75E690084A738 /* onboarding.swift */; };
 		05D693C319E06FD6007F19E2 /* ChooseGroceryListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 05D693C219E06FD6007F19E2 /* ChooseGroceryListViewController.swift */; };
+		05E0F1961FB75957004DBCA9 /* Daily Bread WatchKit Extension.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 056342951A65671D009EE218 /* Daily Bread WatchKit Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		05E0F1991FB75957004DBCA9 /* Daily Bread WatchKit App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = 056342A21A65671E009EE218 /* Daily Bread WatchKit App.app */; };
+		05E0F1BB1FB8FFBC004DBCA9 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 05E0F1BA1FB8FFBC004DBCA9 /* Launch Screen.storyboard */; };
 		385AF2D91959043B00EE0773 /* calendarAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 385AF2D81959043B00EE0773 /* calendarAdapter.swift */; };
 		38A2C9871953622C002409F8 /* groceryModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38A2C9861953622C002409F8 /* groceryModel.swift */; };
 		38A693971981F2DD007EE7C2 /* StyleKit.m in Sources */ = {isa = PBXBuildFile; fileRef = 38A693961981F2DD007EE7C2 /* StyleKit.m */; };
@@ -34,19 +34,19 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		056342A41A656722009EE218 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 38B453461953277F00406FFC /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 056342A11A65671E009EE218;
-			remoteInfo = "Daily Bread WatchKit App";
-		};
-		056342AE1A656722009EE218 /* PBXContainerItemProxy */ = {
+		05E0F1941FB75957004DBCA9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 38B453461953277F00406FFC /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 056342941A65671D009EE218;
 			remoteInfo = "Daily Bread WatchKit Extension";
+		};
+		05E0F19C1FB771DA004DBCA9 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 38B453461953277F00406FFC /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 056342A11A65671E009EE218;
+			remoteInfo = "Daily Bread WatchKit App";
 		};
 		38B453611953277F00406FFC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -58,22 +58,32 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		056342B71A656722009EE218 /* Embed App Extensions */ = {
+		05E0F19A1FB75957004DBCA9 /* Embed App Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				056342B01A656722009EE218 /* Daily Bread WatchKit Extension.appex in Embed App Extensions */,
+				05E0F1961FB75957004DBCA9 /* Daily Bread WatchKit Extension.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		05E0F19B1FB75957004DBCA9 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				05E0F1991FB75957004DBCA9 /* Daily Bread WatchKit App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		05207AB71AA7F13900111032 /* OneAtATimeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OneAtATimeController.swift; sourceTree = "<group>"; };
-		052C6C721AF2D8CC003A9965 /* GlanceController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlanceController.swift; sourceTree = "<group>"; };
 		05310A151AF2FA7A00C23994 /* NSDateExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateExtensions.swift; sourceTree = "<group>"; };
 		05541D421AED6D68003A6427 /* ChooseListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseListController.swift; sourceTree = "<group>"; };
 		055B330F1A656AA1002CDB32 /* groceryRowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = groceryRowController.swift; sourceTree = "<group>"; };
@@ -90,6 +100,7 @@
 		0588F2F51AA2839300D4DD27 /* ZippyAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ZippyAnimator.swift; sourceTree = "<group>"; };
 		05AB511819E75E690084A738 /* onboarding.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = onboarding.swift; sourceTree = "<group>"; };
 		05D693C219E06FD6007F19E2 /* ChooseGroceryListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChooseGroceryListViewController.swift; sourceTree = "<group>"; };
+		05E0F1BA1FB8FFBC004DBCA9 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		384CC9C1196C42DD00FCD6AC /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		385AF2D81959043B00EE0773 /* calendarAdapter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = calendarAdapter.swift; sourceTree = "<group>"; };
 		38A2C9861953622C002409F8 /* groceryModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = groceryModel.swift; sourceTree = "<group>"; };
@@ -137,7 +148,6 @@
 			isa = PBXGroup;
 			children = (
 				0563429A1A65671E009EE218 /* InterfaceController.swift */,
-				052C6C721AF2D8CC003A9965 /* GlanceController.swift */,
 				05541D421AED6D68003A6427 /* ChooseListController.swift */,
 				05207AB71AA7F13900111032 /* OneAtATimeController.swift */,
 				0563429C1A65671E009EE218 /* NotificationController.swift */,
@@ -177,6 +187,7 @@
 		38B453451953277F00406FFC = {
 			isa = PBXGroup;
 			children = (
+				05E0F1BA1FB8FFBC004DBCA9 /* Launch Screen.storyboard */,
 				384CC9C1196C42DD00FCD6AC /* Foundation.framework */,
 				38B453501953277F00406FFC /* Grocery Seer */,
 				38B453631953277F00406FFC /* Grocery SeerTests */,
@@ -259,27 +270,28 @@
 			buildRules = (
 			);
 			dependencies = (
-				056342A51A656722009EE218 /* PBXTargetDependency */,
 			);
 			name = "Daily Bread WatchKit Extension";
 			productName = "Daily Bread WatchKit Extension";
 			productReference = 056342951A65671D009EE218 /* Daily Bread WatchKit Extension.appex */;
-			productType = "com.apple.product-type.watchkit-extension";
+			productType = "com.apple.product-type.watchkit2-extension";
 		};
 		056342A11A65671E009EE218 /* Daily Bread WatchKit App */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 056342B51A656722009EE218 /* Build configuration list for PBXNativeTarget "Daily Bread WatchKit App" */;
 			buildPhases = (
 				056342A01A65671E009EE218 /* Resources */,
+				05E0F19A1FB75957004DBCA9 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				05E0F1951FB75957004DBCA9 /* PBXTargetDependency */,
 			);
 			name = "Daily Bread WatchKit App";
 			productName = "Daily Bread WatchKit App";
 			productReference = 056342A21A65671E009EE218 /* Daily Bread WatchKit App.app */;
-			productType = "com.apple.product-type.application.watchapp";
+			productType = "com.apple.product-type.application.watchapp2";
 		};
 		38B4534D1953277F00406FFC /* Daily Bread */ = {
 			isa = PBXNativeTarget;
@@ -288,12 +300,12 @@
 				38B4534A1953277F00406FFC /* Sources */,
 				38B4534B1953277F00406FFC /* Frameworks */,
 				38B4534C1953277F00406FFC /* Resources */,
-				056342B71A656722009EE218 /* Embed App Extensions */,
+				05E0F19B1FB75957004DBCA9 /* Embed Watch Content */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				056342AF1A656722009EE218 /* PBXTargetDependency */,
+				05E0F19D1FB771DA004DBCA9 /* PBXTargetDependency */,
 			);
 			name = "Daily Bread";
 			productName = "Grocery Seer";
@@ -324,7 +336,7 @@
 		38B453461953277F00406FFC /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0600;
+				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = Jiaaro;
 				TargetAttributes = {
 					056342941A65671D009EE218 = {
@@ -371,7 +383,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				056342A31A656722009EE218 /* Daily Bread WatchKit App.app in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,6 +399,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				05E0F1BB1FB8FFBC004DBCA9 /* Launch Screen.storyboard in Resources */,
 				38B453591953277F00406FFC /* Main.storyboard in Resources */,
 				38B4535B1953277F00406FFC /* Images.xcassets in Resources */,
 			);
@@ -412,7 +424,6 @@
 				055B33101A656AA1002CDB32 /* groceryRowController.swift in Sources */,
 				0563429D1A65671E009EE218 /* NotificationController.swift in Sources */,
 				0563429B1A65671E009EE218 /* InterfaceController.swift in Sources */,
-				052C6C731AF2D8CC003A9965 /* GlanceController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -445,15 +456,15 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		056342A51A656722009EE218 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 056342A11A65671E009EE218 /* Daily Bread WatchKit App */;
-			targetProxy = 056342A41A656722009EE218 /* PBXContainerItemProxy */;
-		};
-		056342AF1A656722009EE218 /* PBXTargetDependency */ = {
+		05E0F1951FB75957004DBCA9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 056342941A65671D009EE218 /* Daily Bread WatchKit Extension */;
-			targetProxy = 056342AE1A656722009EE218 /* PBXContainerItemProxy */;
+			targetProxy = 05E0F1941FB75957004DBCA9 /* PBXContainerItemProxy */;
+		};
+		05E0F19D1FB771DA004DBCA9 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 056342A11A65671E009EE218 /* Daily Bread WatchKit App */;
+			targetProxy = 05E0F19C1FB771DA004DBCA9 /* PBXContainerItemProxy */;
 		};
 		38B453621953277F00406FFC /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -492,11 +503,16 @@
 					"$(inherited)",
 				);
 				INFOPLIST_FILE = "Daily Bread WatchKit Extension/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jiaaro.dailybread.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
 			};
 			name = Debug;
 		};
@@ -507,17 +523,23 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				INFOPLIST_FILE = "Daily Bread WatchKit Extension/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jiaaro.dailybread.watchkitapp.watchkitextension;
 				PRODUCT_NAME = "${TARGET_NAME}";
+				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
 			};
 			name = Release;
 		};
 		056342B31A656722009EE218 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = WatchAppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -528,19 +550,21 @@
 				);
 				IBSC_MODULE = Daily_Bread_WatchKit_Extension;
 				INFOPLIST_FILE = "Daily Bread WatchKit App/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jiaaro.dailybread.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
 			};
 			name = Debug;
 		};
 		056342B41A656722009EE218 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = WatchAppIcon;
 				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -548,13 +572,14 @@
 				COPY_PHASE_STRIP = NO;
 				IBSC_MODULE = Daily_Bread_WatchKit_Extension;
 				INFOPLIST_FILE = "Daily Bread WatchKit App/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jiaaro.dailybread.watchkitapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
+				SDKROOT = watchos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = 4;
-				"TARGETED_DEVICE_FAMILY[sdk=iphonesimulator*]" = "1,4";
+				WATCHOS_DEPLOYMENT_TARGET = 4.0;
 			};
 			name = Release;
 		};
@@ -566,21 +591,31 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -593,7 +628,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				METAL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -609,13 +644,21 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
@@ -624,15 +667,17 @@
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
 				GCC_WARN_UNDECLARED_SELECTOR = YES;
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				METAL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -640,20 +685,21 @@
 		38B4536B1953277F00406FFC /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				GCC_OPTIMIZATION_LEVEL = 0;
 				INFOPLIST_FILE = "Grocery Seer/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jiaaro.dailybread;
 				PRODUCT_NAME = "Daily Bread";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Grocery Seer/Daily Bread-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
@@ -661,19 +707,20 @@
 		38B4536C1953277F00406FFC /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
 				INFOPLIST_FILE = "Grocery Seer/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.jiaaro.dailybread;
 				PRODUCT_NAME = "Daily Bread";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Grocery Seer/Daily Bread-Bridging-Header.h";
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
@@ -693,6 +740,7 @@
 				INFOPLIST_FILE = "Grocery SeerTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jiaaro.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "Daily BreadTests";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};
@@ -709,6 +757,7 @@
 				INFOPLIST_FILE = "Grocery SeerTests/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				METAL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.jiaaro.${PRODUCT_NAME:rfc1034identifier}";
 				PRODUCT_NAME = "Daily BreadTests";
 				TEST_HOST = "$(BUNDLE_LOADER)";
 			};

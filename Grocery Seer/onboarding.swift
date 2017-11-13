@@ -54,14 +54,14 @@ class OnboardingStep2: OnboardingViewController {
                     calendars in
                     if let strongself = self {
                         strongself.cals = calendars
-                        dispatch_async(dispatch_get_main_queue()) {
+                        DispatchQueue.main.async {
                             strongself.tableView.reloadData()
                         }
                     }
                 }
             }
             else {
-                send_user_to_settings(current_view_controller: self)
+                send_user_to_settings(self)
             }
         }
     }
@@ -71,9 +71,8 @@ class OnboardingStep2: OnboardingViewController {
         self.heading.textColor = StyleKit.mainColor()
     }
     
-    @IBAction func continueToMain(sender: AnyObject) {
-        let user_defaults = NSUserDefaults.standardUserDefaults()
-        let app_delegate: AppDelegate? = UIApplication.sharedApplication().delegate as? AppDelegate
+    @IBAction func continueToMain(_ sender: UIButton) {
+        let app_delegate: AppDelegate? = UIApplication.shared.delegate as? AppDelegate
         
         if self.selected_index == 0 {
             create_calendar("Grocery") {
@@ -92,11 +91,11 @@ class OnboardingStep2: OnboardingViewController {
 
 extension OnboardingStep2: UITableViewDelegate {
     
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.textLabel?.font = UIFont(name: "AvenirNext-Regular", size: 16.0)
     }
     
-    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         self.selected_index = indexPath.item
         self.tableView.reloadData()
         return nil
@@ -104,11 +103,11 @@ extension OnboardingStep2: UITableViewDelegate {
 }
 
 extension OnboardingStep2: UITableViewDataSource {
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.cals.count + 1
     }
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCellWithIdentifier("basicCell", forIndexPath: indexPath) as! UITableViewCell
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "basicCell", for: indexPath)
         
         var label: String
         if (indexPath.item == 0) {
@@ -119,10 +118,10 @@ extension OnboardingStep2: UITableViewDataSource {
         }
         
         if (indexPath.item == self.selected_index) {
-            cell.accessoryType = .Checkmark
+            cell.accessoryType = .checkmark
         }
         else {
-            cell.accessoryType = .None
+            cell.accessoryType = .none
         }
         
         

@@ -16,6 +16,7 @@ class AddGroceryViewController: UIViewController {
     
     @IBOutlet var tableview: UITableView!
     @IBOutlet var groceryInput: UITextField!
+    @IBOutlet weak var navBar: UINavigationBar!
     
     
     override func viewDidLoad() {
@@ -29,11 +30,11 @@ class AddGroceryViewController: UIViewController {
         groceryInput.delegate = self
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         groceryInput.becomeFirstResponder()
     }
     
-    func updateSuggestions(text: String) {
+    func updateSuggestions(_ text: String) {
         get_grocery_sugguestions(text) { [weak self]
             grocery_suggestions in
             if let strong_self = self {
@@ -44,26 +45,26 @@ class AddGroceryViewController: UIViewController {
     }
     
     func close() {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
-    @IBAction func cancelAddingGrocery(sender: AnyObject) {
+    @IBAction func cancelAddingGrocery(_ sender: AnyObject) {
         self.close()
     }
     
-    func createGroceryAndClose(grocery_name: String) {
-        if count(grocery_name) > 0 {
+    func createGroceryAndClose(_ grocery_name: String) {
+        if !grocery_name.isEmpty {
             currentGroceryList.add(grocery_name)
         }
         self.close()
     }
     
-    @IBAction func saveGrocery(sender: AnyObject) {
-        self.createGroceryAndClose(groceryInput.text)
+    @IBAction func saveGroceryWithSender(_ sender: AnyObject) {
+        self.createGroceryAndClose(groceryInput.text!)
     }
     
-    @IBAction func textChanged(sender: AnyObject) {
-        self.updateSuggestions(groceryInput.text)
+    @IBAction func textChangedWithSender(_ sender: AnyObject) {
+        self.updateSuggestions(groceryInput.text!)
     }
     
     override func didReceiveMemoryWarning() {
@@ -73,55 +74,55 @@ class AddGroceryViewController: UIViewController {
 }
 
 extension AddGroceryViewController : UITextFieldDelegate {
-    func textField(textField: UITextField,
-        shouldChangeCharactersInRange range: NSRange,
-        replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField,
+                   shouldChangeCharactersIn range: NSRange,
+                   replacementString string: String) -> Bool {
             
-        var text = NSMutableString(string: textField.text)
-        text.replaceCharactersInRange(range, withString: string)
+        let text = NSMutableString(string: textField.text!)
+        text.replaceCharacters(in: range, with: string)
             
         self.updateSuggestions(text as String)
         return true
     }
     
-    func textFieldShouldClear(textField: UITextField) -> Bool {
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
         self.updateSuggestions("")
         return true
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
-        self.createGroceryAndClose(groceryInput.text)
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.createGroceryAndClose(groceryInput.text!)
         return false
     }
 }
 
 extension AddGroceryViewController : UITableViewDelegate {
-    func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+    func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         let suggestion = grocery_suggestions[indexPath.item]
         groceryInput.text = suggestion.name
-        currentGroceryList.add(groceryInput.text)
+        currentGroceryList.add(groceryInput.text!)
         self.close()
         return nil
     }
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
         cell.textLabel?.font = UIFont(name: "AvenirNext-Medium", size: 14.0)
         cell.detailTextLabel?.font = UIFont(name: "AvenirNext-Regular", size: 9.0)
         
-        cell.textLabel?.textColor = UIColor.grayColor()
-        cell.detailTextLabel?.textColor = UIColor.grayColor()
+        cell.textLabel?.textColor = UIColor.gray
+        cell.detailTextLabel?.textColor = UIColor.gray
         
-        cell.backgroundColor = UIColor.clearColor()
+        cell.backgroundColor = UIColor.clear
     }
 }
 
 extension AddGroceryViewController : UITableViewDataSource {
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return grocery_suggestions.count
     }
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath:NSIndexPath) -> UITableViewCell {
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         //var cell = UITableViewCell(style: UITableViewCellStyle.Subtitle, reuseIdentifier: "suggestionCell")
-        var cell = tableView.dequeueReusableCellWithIdentifier("suggestionCell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "suggestionCell", for: indexPath)
         
         let suggestion = self.grocery_suggestions[indexPath.item]
         

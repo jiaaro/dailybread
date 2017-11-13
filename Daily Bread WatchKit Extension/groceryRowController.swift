@@ -15,7 +15,7 @@ class groceryRowController : NSObject {
     func reset_fields_hack() {
         self.label.setText("")
         self.label.setAlpha(0.0)
-        self.checked.setBackgroundColor(UIColor.grayColor())
+        self.checked.setBackgroundColor(.gray)
         self.checked.setWidth(0)
         self.checked.setHeight(0)
         self.checked.setCornerRadius(0)
@@ -25,13 +25,14 @@ class groceryRowController : NSObject {
         if checked {
             self.label.setAlpha(0.3)
             
-            let single_style: NSNumber = NSUnderlineStyle.StyleSingle.rawValue
-            let attrs: [NSObject: AnyObject] = [NSStrikethroughStyleAttributeName: single_style]
+            let single_style = NSUnderlineStyle.styleSingle.rawValue;
+            
+            let attrs: [NSAttributedStringKey: Any] = [NSAttributedStringKey.strikethroughStyle: single_style]
             let attributed_string = NSMutableAttributedString(string: text, attributes: attrs)
             
             self.label.setAttributedText(attributed_string)
             
-            self.checked.setBackgroundColor(UIColor.grayColor())
+            self.checked.setBackgroundColor(.gray)
             
             self.checked.setHeight(16)
             self.checked.setWidth(4)
@@ -41,7 +42,7 @@ class groceryRowController : NSObject {
             self.label.setAlpha(1.0)
             self.label.setText(text)
             
-            self.checked.setBackgroundColor(UIColor.orangeColor())
+            self.checked.setBackgroundColor(.orange)
             
             self.checked.setHeight(24)
             self.checked.setWidth(6)

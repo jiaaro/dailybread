@@ -45,8 +45,8 @@ class OneAtATimeController: WKInterfaceController {
         }
     }
     
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         let cx = context as! Dictionary<String, AnyObject>
         self.groceries = cx["groceries"] as! [Grocery]
         self.my_i = cx["i"] as! Int
@@ -60,22 +60,22 @@ class OneAtATimeController: WKInterfaceController {
         if self.grocery.bought {
             self.grocery_label.setText("you got:")
             
-            let checkbox_attrs: [NSObject: AnyObject] = [
-                NSForegroundColorAttributeName: UIColor.greenColor(),
+            let checkbox_attrs: [NSAttributedStringKey: Any] = [
+                NSAttributedStringKey.foregroundColor: UIColor.green,
             ]
-            let name_attrs: [NSObject: AnyObject] = [
-                NSStrikethroughStyleAttributeName: NSUnderlineStyle.StyleSingle.rawValue,
-                NSForegroundColorAttributeName: UIColor.grayColor(),
+            let name_attrs: [NSAttributedStringKey: Any] = [
+                NSAttributedStringKey.strikethroughStyle: NSUnderlineStyle.styleSingle.rawValue,
+                NSAttributedStringKey.foregroundColor: UIColor.gray,
             ]
             
             let btn_str = NSMutableAttributedString(string: "✓", attributes: checkbox_attrs)
-            btn_str.appendAttributedString(NSAttributedString(string: " \(self.grocery.name)", attributes: name_attrs))
+            btn_str.append(NSAttributedString(string: " \(self.grocery.name)", attributes: name_attrs))
             
             self.got_grocery_button.setAttributedTitle(btn_str)
         }
         else {
-            let name_attrs: [NSObject: AnyObject] = [
-                NSForegroundColorAttributeName: UIColor.whiteColor(),
+            let name_attrs: [NSAttributedStringKey: Any] = [
+                NSAttributedStringKey.foregroundColor: UIColor.white,
             ]
             self.grocery_label.setText(self.get_this_text)
             self.got_grocery_button.setAttributedTitle(NSAttributedString(string: self.grocery.name, attributes: name_attrs))
@@ -92,8 +92,8 @@ class OneAtATimeDoneController: WKInterfaceController {
     var my_i = 0
     var groceries = [empty_list_message]
     
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
+    override func awake(withContext context: Any?) {
+        super.awake(withContext: context)
         let cx = context as! Dictionary<String, AnyObject>
         self.groceries = cx["groceries"] as! [Grocery]
         self.my_i = cx["i"] as! Int
@@ -101,6 +101,6 @@ class OneAtATimeDoneController: WKInterfaceController {
         tracker[self.my_i] = self
     }
     @IBAction func doneButton() {
-        self.dismissController()
+        self.dismiss()
     }
 }

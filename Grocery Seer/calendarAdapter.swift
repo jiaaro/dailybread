@@ -1,40 +1,42 @@
 import EventKit
 import UIKit
 
-func send_user_to_settings(var current_view_controller: UIViewController! = nil) {
-    if current_view_controller == nil {
-        if let vc = UIApplication.sharedApplication().keyWindow?.rootViewController {
-            if vc.isViewLoaded() && vc.view.window != nil {
-                current_view_controller = vc
+func send_user_to_settings(_ current_view_controller: UIViewController! = nil) {
+    var current_vc = current_view_controller
+    if current_vc == nil {
+        if let vc = UIApplication.shared.keyWindow?.rootViewController {
+            if vc.isViewLoaded && vc.view.window != nil {
+                current_vc = vc
             }
         }
     }
     
     // if nothing was passed in and we couldn't find a VC to use, give up
-    if current_view_controller == nil {
+    if current_vc == nil {
         return
     }
     
-    let alert = UIAlertController(title: "Reminders Access", message: "This app needs to access to your Reminders to work. This lets you add groceries with Siri, sync with iCloud, and share your grocery list.\n\nReminders are in the privacy section of this app’s settings.", preferredStyle: .Alert)
+    let alert = UIAlertController(title: "Reminders Access", message: "This app needs to access to your Reminders to work. This lets you add groceries with Siri, sync with iCloud, and share your grocery list.\n\nReminders are in the privacy section of this app’s settings.", preferredStyle: .alert)
     
-    let default_action = UIAlertAction(title: "Open Settings", style: .Default) { action in
-        if let url = NSURL(string:UIApplicationOpenSettingsURLString) {
-            UIApplication.sharedApplication().openURL(url)
+    let default_action = UIAlertAction(title: "Open Settings", style: .default) { action in
+        if let url = URL(string:UIApplicationOpenSettingsURLString) {
+            UIApplication.shared.open(url, options: [:])
         }
     }
     
     alert.addAction(default_action)
-    dispatch_async(dispatch_get_main_queue()) {
-        current_view_controller.presentViewController(alert, animated: true, completion: nil)
+    
+    DispatchQueue.main.async() {
+        current_vc?.present(alert, animated: true, completion: nil)
         return
     }
 }
 
-func get_estore_permission(completed: (Bool) -> Void) {
-    switch EKEventStore.authorizationStatusForEntityType(EKEntityTypeReminder) {
-    case .NotDetermined:
-        EKEventStore().requestAccessToEntityType(EKEntityTypeReminder) {
-            (granted: Bool, err: NSError?) in
+func get_estore_permission(completed: @escaping (Bool) -> Void) {
+    switch EKEventStore.authorizationStatus(for: EKEntityType.reminder) {
+    case .notDetermined:
+        EKEventStore().requestAccess(to: EKEntityType.reminder) {
+            (granted: Bool, err: Error?) in
             if granted && (err == nil) {
                 completed(true)
             }
@@ -42,7 +44,7 @@ func get_estore_permission(completed: (Bool) -> Void) {
                 completed(false)
             }
         }
-    case .Authorized:
+    case .authorized:
         completed(true)
     default:
         completed(false)
@@ -50,7 +52,7 @@ func get_estore_permission(completed: (Bool) -> Void) {
 }
 
 var _estore: EKEventStore!
-func get_estore(completed: (EKEventStore) -> ()) {
+func get_estore(completed: @escaping (EKEventStore) -> ()) {
     if _estore != nil {
         completed(_estore)
         return
@@ -71,25 +73,24 @@ func get_estore(completed: (EKEventStore) -> ()) {
 }
 
 func app_has_estore_permission() -> Bool {
-    let status = EKEventStore.authorizationStatusForEntityType(EKEntityTypeReminder)
-    return status == EKAuthorizationStatus.Authorized;
+    let status = EKEventStore.authorizationStatus(for: EKEntityType.reminder)
+    return status == EKAuthorizationStatus.authorized;
 }
 
-func get_calendars(completed: (([EKCalendar])->())) {
+func get_calendars(completed: @escaping (([EKCalendar])->())) {
     get_estore {
         estore in
         
-        var cals = estore.calendarsForEntityType(EKEntityTypeReminder) as! [EKCalendar]
-        
+        let cals = estore.calendars(for: .reminder)
         completed(cals)
     }
 }
-func get_default_calendar(completed: (EKCalendar) -> () ) {
+func get_default_calendar(completed: @escaping (EKCalendar) -> () ) {
     get_calendars {
         calendars in
         
         let cals = calendars.filter() {
-            switch $0.title.lowercaseString {
+            switch $0.title.lowercased() {
             case "grocery", "groceries", "grocery list", "groceries list":
                 return true
             default:
@@ -107,19 +108,19 @@ func get_default_calendar(completed: (EKCalendar) -> () ) {
         }
     }
 }
-func create_calendar(name: String, completed: (EKCalendar)->Void) {
+func create_calendar(_ name: String, completed: @escaping (EKCalendar)->Void) {
     get_estore {
         estore in
         
-        let cal = EKCalendar(forEntityType:EKEntityTypeReminder, eventStore: estore)
+        let cal = EKCalendar(for: .reminder, eventStore: estore)
         cal.title = name
-        cal.source = estore.defaultCalendarForNewReminders().source
+        cal.source = estore.defaultCalendarForNewReminders()!.source
         
-        var err: NSError?
-        estore.saveCalendar(cal, commit: true, error: &err)
-        
-        if let err = err {
-            println(err)
+        do {
+            try estore.saveCalendar(cal, commit: true)
+        }
+        catch let err {
+            print(err)
         }
         
         completed(cal)
@@ -127,19 +128,19 @@ func create_calendar(name: String, completed: (EKCalendar)->Void) {
 }
 
 var calendar: EKCalendar!
-func get_calendar(completed: (EKCalendar)->()) {
+func get_calendar(_ completed: @escaping (EKCalendar)->()) {
     if calendar != nil {
         completed(calendar)
         return
     }
     
-    let user_defaults = NSUserDefaults.standardUserDefaults()
+    let user_defaults = UserDefaults.standard
     
     get_estore {
         estore in
         
-        if let calendar_id = user_defaults.stringForKey("calendar_id") {
-            if let cal = estore.calendarWithIdentifier(calendar_id) {
+        if let calendar_id = user_defaults.string(forKey: "calendar_id") {
+            if let cal = estore.calendar(withIdentifier: calendar_id) {
                 calendar = cal
                 completed(cal)
                 return
@@ -153,14 +154,14 @@ func get_calendar(completed: (EKCalendar)->()) {
         }
     }
 }
-func set_calendar(cal: EKCalendar) {
-    let user_defaults = NSUserDefaults.standardUserDefaults()
-    user_defaults.setObject(cal.calendarIdentifier, forKey: "calendar_id")
+func set_calendar(_ cal: EKCalendar) {
+    let user_defaults = UserDefaults.standard
+    user_defaults.set(cal.calendarIdentifier, forKey: "calendar_id")
     
     calendar = cal
 }
 
-func get_estore_and_calendar(completed: (EKEventStore, EKCalendar) -> ()) {
+func get_estore_and_calendar(completed: @escaping (EKEventStore, EKCalendar) -> ()) {
     get_estore { estore in
         get_calendar { calendar in
             completed(estore, calendar)
@@ -168,16 +169,16 @@ func get_estore_and_calendar(completed: (EKEventStore, EKCalendar) -> ()) {
     }
 }
 
-func get_reminder_with_identifier(identifier: String, completed: (EKReminder) -> Void) {
+func get_reminder_with_identifier(_ identifier: String, completed: @escaping (EKReminder) -> Void) {
     get_estore {
         (estore: EKEventStore) in
-        let event = estore.calendarItemWithIdentifier(identifier) as! EKReminder
+        let event = estore.calendarItem(withIdentifier: identifier) as! EKReminder
         completed(event)
     }
 }
 
 extension GroceryList {
-    func loadFromCalendar(loadCompletedItems:Bool = false, complete: (()->Void)? = nil) {
+    func loadFromCalendar(loadCompletedItems: Bool = false, complete: (()->Void)? = nil) {
         
         get_estore_and_calendar {
             (estore, calendar) in
@@ -185,16 +186,16 @@ extension GroceryList {
             var remindersPredicate: NSPredicate
             
             if loadCompletedItems {
-                 remindersPredicate = estore.predicateForCompletedRemindersWithCompletionDateStarting(nil, ending: nil, calendars: [calendar])
+                remindersPredicate = estore.predicateForCompletedReminders(withCompletionDateStarting: nil, ending: nil, calendars: [calendar])
             }
             else {
-                remindersPredicate = estore.predicateForIncompleteRemindersWithDueDateStarting(nil, ending: nil, calendars: [calendar])
+                remindersPredicate = estore.predicateForIncompleteReminders(withDueDateStarting: nil, ending: nil, calendars: [calendar])
             }
             
-            estore.fetchRemindersMatchingPredicate(remindersPredicate) {
+            estore.fetchReminders(matching: remindersPredicate) {
                 reminders in
                 
-                self.list = (reminders as! Array<EKReminder>).map {
+                self.list = reminders!.map {
                     Grocery(reminder: $0)
                 }
                 
@@ -214,21 +215,21 @@ extension GroceryList {
                 calendar in
                 
                 let current_reminder_ids = NSSet(array: self.list.map { $0.reminder.calendarItemIdentifier })
-                let predicate = estore.predicateForRemindersInCalendars([calendar])
+                let predicate = estore.predicateForReminders(in: [calendar])
                 
-                estore.fetchRemindersMatchingPredicate(predicate) {
+                estore.fetchReminders(matching: predicate) {
                     reminders in
                     
-                    self.list = (reminders as! Array<EKReminder>).filter { reminder in
-                        if keepCurrent && current_reminder_ids.containsObject(reminder.calendarItemIdentifier) {
+                    self.list = reminders!.filter { reminder in
+                        if keepCurrent && current_reminder_ids.contains(reminder.calendarItemIdentifier) {
                             return true
                         }
 
                         if loadCompletedItems {
-                            return reminder.completed
+                            return reminder.isCompleted
                         }
                         else {
-                            return !reminder.completed
+                            return !reminder.isCompleted
                         }
                     }.map {
                         Grocery(reminder: $0)
@@ -242,15 +243,15 @@ extension GroceryList {
 }
 
 
-func create_reminder(name: String, completed: (EKReminder) -> ()) {
+func create_reminder(_ name: String, completed: @escaping (EKReminder) -> ()) {
     get_estore {
         estore in
         get_calendar {
             calendar in
             
-            var reminder = EKReminder(eventStore: estore)
+            let reminder = EKReminder(eventStore: estore)
             reminder.title = name
-            reminder.completed = false
+            reminder.isCompleted = false
             reminder.calendar = calendar
             completed(reminder)
             
@@ -259,25 +260,24 @@ func create_reminder(name: String, completed: (EKReminder) -> ()) {
     }
 }
 
-func save_reminder(reminder: EKReminder, completed: () -> ()) {
+func save_reminder(_ reminder: EKReminder, completed: @escaping () -> ()) {
     get_estore {
         estore in
-        var err: NSError?
-        estore.saveReminder(reminder, commit: true, error: &err)
         
-        if let err = err {
-            println(err)
+        do {
+            try estore.save(reminder, commit: true)
         }
-        else {
-            completed()
+        catch let err {
+            print(err)
         }
+        
+        completed()
     }
 }
 
-func delete_reminder(reminder: EKReminder) {
+func delete_reminder(_ reminder: EKReminder) {
     get_estore {
         estore in
-        var err: NSError?
-        estore.removeReminder(reminder, commit: true, error: &err)
+        try? estore.remove(reminder, commit: true)
     }
 }

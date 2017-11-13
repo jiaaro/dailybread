@@ -14,10 +14,10 @@ class Grocery {
     var name: String
     var bought: Bool = false
     var reminder: EKReminder
-    var created: NSDate? {
+    var created: Date? {
         return self.reminder.creationDate
     }
-    var completed_date: NSDate? {
+    var completed_date: Date? {
         return self.reminder.completionDate
     }
     
@@ -27,13 +27,13 @@ class Grocery {
         self.reminder = reminder
     }
     convenience init(reminder: EKReminder) {
-        self.init(name: reminder.title, bought: reminder.completed ?? false, reminder: reminder)
+        self.init(name: reminder.title, bought: reminder.isCompleted, reminder: reminder)
     }
     
     func toggle_bought() {
         bought = !bought
-        reminder.completed = bought
-        save_reminder(reminder, {})
+        reminder.isCompleted = bought
+        save_reminder(reminder) {}
     }
 }
 
@@ -60,10 +60,10 @@ class GroceryList {
     }
     
     func sendChangedNotification() {
-        NSNotificationCenter.defaultCenter().postNotificationName("groceryListChanged", object: self)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "groceryListChanged"), object: self)
     }
     
-    func add(name: String) {
+    func add(_ name: String) {
         create_reminder(name) {
             reminder in
             
@@ -71,13 +71,13 @@ class GroceryList {
             
             self.list.append(grocery)
             self.sendChangedNotification()
-            NSNotificationCenter.defaultCenter().postNotificationName("groceryAdded", object: self, userInfo: ["grocery": grocery])
+            NotificationCenter.default.post(name: NSNotification.Name(rawValue: "groceryAdded"), object: self, userInfo: ["grocery": grocery])
         }
     }
-    func delete(grocery: Grocery) {
+    func delete(_ grocery: Grocery) {
         delete_reminder(grocery.reminder)
         self.list = self.list.filter() { $0 !== grocery }
-        NSNotificationCenter.defaultCenter().postNotificationName("groceryDeleted", object: self, userInfo: ["grocery": grocery])
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "groceryDeleted"), object: self, userInfo: ["grocery": grocery])
     }
 }
 
@@ -93,26 +93,29 @@ extension GroceryList {
 }
 
 extension GroceryList {
-    func get_top(var n: Int?, by_sort: (Grocery, Grocery) -> Bool) -> [Grocery] {
-        if n == nil || n > self.list.endIndex {
-            n = self.list.endIndex
+    func get_top(_ n: Int?, by_sort: (Grocery, Grocery) -> Bool) -> [Grocery] {
+        let n_: Int
+        if n == nil || n! > self.list.endIndex {
+            n_ = self.list.endIndex
         }
-        let n_ = n!
+        else {
+            n_ = n!
+        }
         
-        let sorted_groceries = sorted(self.list, {
+        let sorted_groceries = self.list.sorted {
             switch ($0.created, $1.created) {
             case (nil, _):
                 return false
             case (_, nil):
                 return true
             default:
-                return $0.created!.timeIntervalSinceDate($1.created!) > 0
+                return $0.created!.timeIntervalSince($1.created!) > 0
             }
-        })
+        }
         
         return Array(sorted_groceries[0..<n_])
     }
-    func mostRecentlyAdded(n: Int? = nil) -> [Grocery] {
+    func mostRecentlyAdded(_ n: Int? = nil) -> [Grocery] {
         return self.get_top(n) {
             switch ($0.created, $1.created) {
             case (nil, _):
@@ -120,11 +123,11 @@ extension GroceryList {
             case (_, nil):
                 return true
             default:
-                return $0.created!.timeIntervalSinceDate($1.created!) > 0
+                return $0.created!.timeIntervalSince($1.created!) > 0
             }
         }
     }
-    func mostRecentlyCompleted(n: Int? = nil) -> [Grocery] {
+    func mostRecentlyCompleted(_ n: Int? = nil) -> [Grocery] {
         return self.get_top(n) {
             switch ($0.completed_date, $1.completed_date) {
             case (nil, _):
@@ -132,7 +135,7 @@ extension GroceryList {
             case (_, nil):
                 return true
             default:
-                return $0.created!.timeIntervalSinceDate($1.created!) > 0
+                return $0.created!.timeIntervalSince($1.created!) > 0
             }
         }
     }
@@ -143,17 +146,17 @@ extension GroceryList {
 
 
 
-func name_set(groceries: Array<Grocery>) -> NSSet {
+func name_set(_ groceries: Array<Grocery>) -> NSSet {
     return NSSet(array: groceries.map {
-        $0.name.lowercaseString
+        $0.name.lowercased()
     })
 }
 
 class GrocerySuggestion {
     var name: String
-    var occurences = [NSDate]()
+    var occurences = [Date]()
     
-    init(name: String, occurences: [NSDate]) {
+    init(_ name: String, occurences: [Date]) {
         self.name = name
         self.occurences = occurences
     }
@@ -271,12 +274,11 @@ let stock_suggestions = [
     "Hummus",
 ]
 func mk_grocery_sugguestion_set(completed: (Array<GrocerySuggestion>)->()) {
-    let current_grocery_names = name_set(currentGroceryList.list)
     let groceries = grocerySuggestionsList.list
-    var grocery_occurences = [String:[NSDate]]()
+    var grocery_occurences = [String:[Date]]()
     
     for grocery in groceries {
-        let key = grocery.name.lowercaseString
+        let key = grocery.name.lowercased()
         let reminder = grocery.reminder
         
         if grocery_occurences[key] == nil {
@@ -291,25 +293,25 @@ func mk_grocery_sugguestion_set(completed: (Array<GrocerySuggestion>)->()) {
     let suggestion_candidates_set = name_set(groceries)
     var suggestion_candidates = (suggestion_candidates_set.allObjects as! Array<String>)
     
-    suggestion_candidates.sort({
+    suggestion_candidates = suggestion_candidates.sorted {
         a, b in
 
-        let occurrances1 = grocery_occurences[a.lowercaseString]!
-        let occurrances2 = grocery_occurences[b.lowercaseString]!
+        let occurrances1 = grocery_occurences[a.lowercased()]!
+        let occurrances2 = grocery_occurences[b.lowercased()]!
 
         return grocery_rank_score(occurrances1) > grocery_rank_score(occurrances2)
-    })
+    }
     var new_suggestions: [GrocerySuggestion] = suggestion_candidates.map({
-        let occurences = grocery_occurences[$0.lowercaseString]!
-        return GrocerySuggestion(name: $0, occurences: occurences)
+        let occurences = grocery_occurences[$0.lowercased()]!
+        return GrocerySuggestion($0, occurences: occurences)
     })
 
     
     for stock_suggestion in stock_suggestions {
-        if suggestion_candidates_set.containsObject(stock_suggestion.lowercaseString) {
+        if suggestion_candidates_set.contains(stock_suggestion.lowercased()) {
             continue
         }
-        new_suggestions.append(GrocerySuggestion(name: stock_suggestion, occurences: []))
+        new_suggestions.append(GrocerySuggestion(stock_suggestion, occurences: []))
     }
     
     completed(new_suggestions)
@@ -329,7 +331,7 @@ func get_grocery_sugguestion_set(completed: (Array<GrocerySuggestion>)->()) {
     }
 }
 
-func get_grocery_sugguestions(input:String, completed: (Array<GrocerySuggestion>)->()) {
+func get_grocery_sugguestions(_ input:String, completed: (Array<GrocerySuggestion>)->()) {
     get_grocery_sugguestion_set {
         suggestions in
         
@@ -339,23 +341,23 @@ func get_grocery_sugguestions(input:String, completed: (Array<GrocerySuggestion>
             grocery in
             
             // don't show anything in the current list
-            if current_list_names.containsObject(grocery.name.lowercaseString) {
+            if current_list_names.contains(grocery.name.lowercased()) {
                 return false
             }
             // if the filter string is empty, show everything else
-            if count(input) == 0 {
+            if input.count == 0 {
                 return true
             }
             
-            let simplified_name = grocery.name.lowercaseString
-            let simplified_input = input.lowercaseString
+            let simplified_name = grocery.name.lowercased()
+            let simplified_input = input.lowercased()
             
             var chars = " \t\n\"'"
-            if count(input) > 1 {
+            if !input.isEmpty {
                 chars = "/+_[]- \t\n:"
             }
             
-            let words: [String] = simplified_name.componentsSeparatedByCharactersInSet(NSCharacterSet(charactersInString: chars))
+            let words: [String] = simplified_name.components(separatedBy: CharacterSet(charactersIn: chars))
             for word in words {
                 if word.hasPrefix(simplified_input) {
                     return true
@@ -368,7 +370,7 @@ func get_grocery_sugguestions(input:String, completed: (Array<GrocerySuggestion>
 
 var updating = false
 func update_grocery_suggestions() {
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0)) {
+    DispatchQueue.global().async {
         if updating { return }
         updating = true
 

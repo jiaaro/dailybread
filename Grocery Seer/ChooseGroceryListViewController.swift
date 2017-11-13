@@ -27,12 +27,12 @@ class ChooseGroceryListViewController: UITableViewController {
         }
     }
     
-    override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.calendars.count
     }
     
-    override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        var cell = UITableViewCell()
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = UITableViewCell()
         let calendar = self.calendars[indexPath.item]
         
         if calendar.calendarIdentifier == self.current_cal?.calendarIdentifier {
@@ -46,14 +46,14 @@ class ChooseGroceryListViewController: UITableViewController {
         
         return cell
     }
-    override func tableView(tableView: UITableView, willSelectRowAtIndexPath indexPath: NSIndexPath) -> NSIndexPath? {
+    override func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         let calendar = self.calendars[indexPath.item]
         set_calendar(calendar)
         
         currentGroceryList.loadFromCalendar(loadCompletedItems: false)
         grocerySuggestionsList.loadFromCalendar(loadCompletedItems: true)
         
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
         
         return nil
     }

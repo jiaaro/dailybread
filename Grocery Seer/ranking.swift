@@ -8,7 +8,7 @@
 
 import Foundation
 
-func normalize(x: Double, scale_min: Double, scale_max: Double) -> Double {
+func normalize(_ x: Double, _ scale_min: Double, _ scale_max: Double) -> Double {
     return (x - scale_min) / (scale_max - scale_min);
 }
 
@@ -19,11 +19,11 @@ let RANK_FADE_PERIODS_TO_NOMINAL = 3.0
 let FADE_UP_FROM = 0.2
 let FADE_TO_MAX = 2.0
 
-func grocery_rank_score(occurrances: [NSDate]) -> Double {
+func grocery_rank_score(_ occurrances: [Date]) -> Double {
     var score = Double(occurrances.count)
     
     if occurrances.count >= 3 {
-        let avg_time_between_adds = occurrances.last!.timeIntervalSinceDate(occurrances.first!) / Double(occurrances.count - 1)
+        let avg_time_between_adds = occurrances.last!.timeIntervalSince(occurrances.first!) / Double(occurrances.count - 1)
         let time_since_last_add = -occurrances.last!.timeIntervalSinceNow
         
         if (time_since_last_add < avg_time_between_adds) {

@@ -7,6 +7,7 @@
 //
 
 import WatchKit
+import WatchConnectivity
 import Foundation
 
 class Grocery {
@@ -22,11 +23,11 @@ class Grocery {
                 return
             }
             _bought = newValue
-            WKInterfaceController.openParentApplication([
+            cd.openParentApplication([
                     "action": "setCompletion",
                     "id": self.id,
                     "completed": _bought,
-                ], reply: nil)
+                ])
         }
     }
     
@@ -36,6 +37,44 @@ class Grocery {
         self._bought = (grocery_data["bought"] == "yes")
     }
 }
+
+class ConnectivityDelegate: NSObject, WCSessionDelegate {
+    var session: WCSession
+    var activation_complete_cb: (() -> ())?
+    
+    override init() {
+        session = WCSession.default
+        super.init()
+        session.delegate = self
+        session.activate()
+    }
+    
+    public func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
+        if let cb = activation_complete_cb {
+            cb()
+        }
+    }
+    
+    public func openParentApplication(
+            _ action: [String:Any],
+            reply: ((_ replyInfo: [String:Any], _ error: Any?) -> ())? = nil
+    ) {
+        if session.isReachable {
+            session.sendMessage(
+                action,
+                replyHandler: { replyData in
+                    DispatchQueue.main.async {
+                        reply?(replyData, nil)
+                    }
+                }, errorHandler: { error in
+                    DispatchQueue.main.async {
+                        reply?([:], error)
+                    }
+                })
+        }
+    }
+}
+var cd = ConnectivityDelegate()
 
 let empty_list_message = Grocery(["id": "0", "name": "Loading…", "bought": "no"])
 
@@ -52,49 +91,45 @@ class InterfaceController: WKInterfaceController {
     
     override init() {
         super.init()
+        cd.activation_complete_cb = {
+            [weak self] () in
+            self?.refresh_data()
+        }
         self.refresh_data()
     }
     
     @IBAction func showOneAtATime() {
         let to_buy = groceries.filter { !$0.bought }
-        var names = Array<String>(count: to_buy.count, repeatedValue: "OneAtATimeInterface")
-        var cxs = (0...to_buy.count).map {
+        var names = Array<String>(repeating: "OneAtATimeInterface", count: to_buy.count)
+        let cxs = (0...to_buy.count).map {
             ["i": $0, "groceries": to_buy]
         }
         names.append("OneAtATimeDoneInterface")
 
-        self.presentControllerWithNames(names, contexts: cxs)
+        self.presentController(withNames: names, contexts: cxs)
     }
     
     @IBAction func showChangeList() {
-        WKInterfaceController.openParentApplication(["action": "getLists"]) {
+        cd.openParentApplication(["action": "getLists"]) {
             [weak self]
             (replyInfo, error) in
             
-            let cx: [String: AnyObject?] = [
-                "calendars": replyInfo["calendars"],
-                "current_calendar": replyInfo["current_calendar"]
-            ]
-            
-            self?.presentControllerWithName("ChangeListInterface", context: replyInfo)
+            self?.presentController(withName: "ChangeListInterface", context: replyInfo)
             return
         }
     }
 
-    override func awakeWithContext(context: AnyObject?) {
-        super.awakeWithContext(context)
-    }
     @IBAction func menuItemRefresh() {
         self.refresh_data()
     }
     func refresh_data() {
-        WKInterfaceController.openParentApplication(["action": "getList"]) {
+        cd.openParentApplication(["action": "getList"]) {
             [weak self] (replyInfo, error) in
             
             let grocery_info_list = replyInfo["groceries"]! as! [[String:String]]
 
             self?.list_name = replyInfo["listName"]! as! String
-            self?.groceries = map(grocery_info_list) {
+            self?.groceries = grocery_info_list.map {
                 Grocery($0)
             }
             
@@ -121,26 +156,25 @@ class InterfaceController: WKInterfaceController {
         
         self.setTitle(self.list_name)
         
-        let grocery_count = count(self.groceries)
-        let row_difference = grocery_count - groceryTable.numberOfRows
+        let grocery_count = self.groceries.count
         
         groceryTable.setNumberOfRows(grocery_count, withRowType: "groceryRow")
         
         for i in 0..<grocery_count {
-            let row = groceryTable.rowControllerAtIndex(i) as! groceryRowController
+            let row = groceryTable.rowController(at: i) as! groceryRowController
             let grocery = self.groceries[i]
             
             row.reset_fields_hack()
-            row.set_values(grocery.name, checked: grocery.bought)
+            row.set_values(text: grocery.name, checked: grocery.bought)
         }
     }
     
-    override func table(table: WKInterfaceTable, didSelectRowAtIndex rowIndex: Int) {
+    override func table(_ table: WKInterfaceTable, didSelectRowAt rowIndex: Int) {
         let grocery = self.groceries[rowIndex]
         grocery.bought = !grocery.bought
         
-        let row = table.rowControllerAtIndex(rowIndex) as! groceryRowController
-        row.set_values(grocery.name, checked: grocery.bought)
+        let row = table.rowController(at: rowIndex) as! groceryRowController
+        row.set_values(text: grocery.name, checked: grocery.bought)
     }
 
     override func willActivate() {
