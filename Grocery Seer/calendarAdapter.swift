@@ -201,7 +201,7 @@ extension GroceryList {
                     }
                     return
                 }
-                strong_self.list = reminders.map {
+                strong_self.list = reminders.flatMap {
                     Grocery(reminder: $0)
                 }
                 
@@ -250,7 +250,7 @@ extension GroceryList {
                     else {
                         return !reminder.isCompleted
                     }
-                }.map {
+                }.flatMap {
                     Grocery(reminder: $0)
                 }
                 

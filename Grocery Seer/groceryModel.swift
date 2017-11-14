@@ -26,7 +26,10 @@ class Grocery {
         self.bought = bought
         self.reminder = reminder
     }
-    convenience init(reminder: EKReminder) {
+    convenience init?(reminder: EKReminder) {
+        if reminder.title == nil {
+            return nil
+        }
         self.init(name: reminder.title, bought: reminder.isCompleted, reminder: reminder)
     }
     
@@ -67,7 +70,9 @@ class GroceryList {
         create_reminder(name) {
             reminder in
             
-            let grocery = Grocery(reminder: reminder)
+            guard let grocery = Grocery(reminder: reminder) else {
+                return
+            }
             
             self.list.append(grocery)
             self.sendChangedNotification()

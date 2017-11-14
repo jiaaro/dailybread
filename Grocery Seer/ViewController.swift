@@ -107,7 +107,7 @@ extension ViewController: UITableViewDataSource {
     }
     func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
         // special case for empty, "add grocery" cell
-        if indexPath.item == currentGroceryList.count {
+        if indexPath.item >= currentGroceryList.count {
             return false
         }
         return true
@@ -124,7 +124,7 @@ extension ViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = UITableViewCell()
         
-        if indexPath.item != currentGroceryList.count {
+        if indexPath.item < currentGroceryList.count {
             let selected_bg_view = UIView()
             selected_bg_view.backgroundColor = StyleKit.orangeWhite()
             cell.selectedBackgroundView = selected_bg_view
@@ -138,7 +138,7 @@ extension ViewController: UITableViewDataSource {
         }
         
         // special case for empty, "add grocery" cell
-        if indexPath.item == currentGroceryList.count {
+        if indexPath.item >= currentGroceryList.count {
             return cell
         }
         
