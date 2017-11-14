@@ -370,7 +370,7 @@ func get_grocery_sugguestions(_ input:String, completed: (Array<GrocerySuggestio
 
 var updating = false
 func update_grocery_suggestions() {
-    DispatchQueue.global().async {
+    DispatchQueue.global(qos: .utility).async {
         if updating { return }
         updating = true
 

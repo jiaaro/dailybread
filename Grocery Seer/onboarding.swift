@@ -45,7 +45,9 @@ class OnboardingStep2: OnboardingViewController {
         super.viewDidLoad()
         self.tableView?.dataSource = self
         self.tableView?.delegate = self
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         get_estore_permission {
             estore_permission in
             
@@ -72,18 +74,26 @@ class OnboardingStep2: OnboardingViewController {
     }
     
     @IBAction func continueToMain(_ sender: UIButton) {
-        let app_delegate: AppDelegate? = UIApplication.shared.delegate as? AppDelegate
+        get_estore_permission {
+            estore_permission in
+            if !estore_permission {
+                send_user_to_settings(self)
+                return
+            }
         
-        if self.selected_index == 0 {
-            create_calendar("Grocery") {
-                calendar in
-                set_calendar(calendar)
+            let app_delegate: AppDelegate? = UIApplication.shared.delegate as? AppDelegate
+        
+            if self.selected_index == 0 {
+                create_calendar("Grocery") {
+                    calendar in
+                    set_calendar(calendar)
+                    app_delegate?.showMainViewController();
+                }
+            }
+            else {
+                set_calendar(self.cals[self.selected_index - 1])
                 app_delegate?.showMainViewController();
             }
-        }
-        else {
-            set_calendar(self.cals[self.selected_index - 1])
-            app_delegate?.showMainViewController();
         }
     }
     

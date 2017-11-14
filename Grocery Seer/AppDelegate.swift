@@ -51,28 +51,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         return true
     }
     func showMainViewController() {
-        currentGroceryList.loadFromCalendar(loadCompletedItems: false)
-        grocerySuggestionsList.loadFromCalendar(loadCompletedItems: true)
-        get_estore {
-            estore in
-            let nc = NotificationCenter.default
-            
-            let updateQueue: OperationQueue = OperationQueue()
-            
-            nc.addObserver(forName: NSNotification.Name(rawValue: "EKEventStoreChangedNotification"), object: estore, queue: updateQueue) {
-                notification in
-                
-                currentGroceryList.updateFromCalendar(loadCompletedItems: false, keepCurrent: true)
-                grocerySuggestionsList.loadFromCalendar(loadCompletedItems: true)
-            }
-            
-        }
-        
         if let window = self.window {
             if let storyboard = window.rootViewController?.storyboard {
                 let rootViewController = storyboard.instantiateViewController(withIdentifier: "appMain")
                 window.rootViewController = rootViewController
                 window.makeKeyAndVisible()
+            }
+        }
+        DispatchQueue.global(qos: .userInteractive).async {
+            currentGroceryList.loadFromCalendar(loadCompletedItems: false) {
+                grocerySuggestionsList.loadFromCalendar(loadCompletedItems: true)
+            }
+            get_estore {
+                estore in
+                let nc = NotificationCenter.default
+                
+                let updateQueue: OperationQueue = OperationQueue()
+                
+                nc.addObserver(forName: NSNotification.Name(rawValue: "EKEventStoreChangedNotification"), object: estore, queue: updateQueue) {
+                    notification in
+                    
+                    currentGroceryList.updateFromCalendar(loadCompletedItems: false, keepCurrent: true) {
+                        grocerySuggestionsList.loadFromCalendar(loadCompletedItems: true)
+                    }
+                }
             }
         }
     }

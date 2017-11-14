@@ -16,17 +16,19 @@ func send_user_to_settings(_ current_view_controller: UIViewController! = nil) {
         return
     }
     
-    let alert = UIAlertController(title: "Reminders Access", message: "This app needs to access to your Reminders to work. This lets you add groceries with Siri, sync with iCloud, and share your grocery list.\n\nReminders are in the privacy section of this app’s settings.", preferredStyle: .alert)
-    
-    let default_action = UIAlertAction(title: "Open Settings", style: .default) { action in
-        if let url = URL(string:UIApplicationOpenSettingsURLString) {
-            UIApplication.shared.open(url, options: [:])
+    DispatchQueue.main.async {
+        let alert = UIAlertController(title: "Reminders Access", message: "This app needs to access to your Reminders to work. This lets you add groceries with Siri, sync with iCloud, and share your grocery list.\n\nReminders are in the privacy section of this app’s settings.", preferredStyle: .alert)
+        
+        let default_action = UIAlertAction(title: "Open Settings", style: .default) { action in
+            if let url = URL(string:UIApplicationOpenSettingsURLString) {
+                DispatchQueue.main.async {
+                    UIApplication.shared.open(url, options: [:])
+                }
+            }
         }
-    }
-    
-    alert.addAction(default_action)
-    
-    DispatchQueue.main.async() {
+        
+        alert.addAction(default_action)
+        
         current_vc?.present(alert, animated: true, completion: nil)
         return
     }
@@ -73,8 +75,8 @@ func get_estore(completed: @escaping (EKEventStore) -> ()) {
 }
 
 func app_has_estore_permission() -> Bool {
-    let status = EKEventStore.authorizationStatus(for: EKEntityType.reminder)
-    return status == EKAuthorizationStatus.authorized;
+    let status = EKEventStore.authorizationStatus(for: .reminder)
+    return status == .authorized;
 }
 
 func get_calendars(completed: @escaping (([EKCalendar])->())) {
@@ -179,8 +181,7 @@ func get_reminder_with_identifier(_ identifier: String, completed: @escaping (EK
 
 extension GroceryList {
     func loadFromCalendar(loadCompletedItems: Bool = false, complete: (()->Void)? = nil) {
-        
-        get_estore_and_calendar {
+        get_estore_and_calendar { [weak self]
             (estore, calendar) in
             
             var remindersPredicate: NSPredicate
@@ -194,48 +195,72 @@ extension GroceryList {
             
             estore.fetchReminders(matching: remindersPredicate) {
                 reminders in
-                
-                self.list = reminders!.map {
+                guard let strong_self = self, let reminders = reminders else {
+                    if let cb = complete {
+                        cb()
+                    }
+                    return
+                }
+                strong_self.list = reminders.map {
                     Grocery(reminder: $0)
                 }
                 
-                self.sendChangedNotification()
-
-                if let cb = complete {
-                    cb()
+                DispatchQueue.main.async {
+                    if let strong_self = self {
+                        strong_self.sendChangedNotification()
+                    }
+                    if let cb = complete {
+                        cb()
+                    }
                 }
             }
         }
     }
-    func updateFromCalendar(loadCompletedItems: Bool, keepCurrent: Bool) {
-        get_estore {
-            estore in
+    func updateFromCalendar(loadCompletedItems: Bool, keepCurrent: Bool, complete: (()->Void)? = nil) {
+        get_estore_and_calendar { [weak self]
+            (estore, calendar) in
+            guard let strong_self = self else {
+                return
+            }
+            let current_reminder_ids = NSSet(array: strong_self.list.map { $0.reminder.calendarItemIdentifier })
+            let predicate = estore.predicateForReminders(in: [calendar])
             
-            get_calendar() {
-                calendar in
-                
-                let current_reminder_ids = NSSet(array: self.list.map { $0.reminder.calendarItemIdentifier })
-                let predicate = estore.predicateForReminders(in: [calendar])
-                
-                estore.fetchReminders(matching: predicate) {
-                    reminders in
-                    
-                    self.list = reminders!.filter { reminder in
-                        if keepCurrent && current_reminder_ids.contains(reminder.calendarItemIdentifier) {
-                            return true
-                        }
-
-                        if loadCompletedItems {
-                            return reminder.isCompleted
-                        }
-                        else {
-                            return !reminder.isCompleted
-                        }
-                    }.map {
-                        Grocery(reminder: $0)
+            estore.fetchReminders(matching: predicate) {
+                reminders in
+                guard let strong_self = self else {
+                    if let cb = complete {
+                        cb()
                     }
-                    
-                    self.sendChangedNotification()
+                    return
+                }
+                guard let reminders = reminders else {
+                    if let cb = complete {
+                        cb()
+                    }
+                    return
+                }
+                strong_self.list = reminders.filter { reminder in
+                    if keepCurrent && current_reminder_ids.contains(reminder.calendarItemIdentifier) {
+                        return true
+                    }
+
+                    if loadCompletedItems {
+                        return reminder.isCompleted
+                    }
+                    else {
+                        return !reminder.isCompleted
+                    }
+                }.map {
+                    Grocery(reminder: $0)
+                }
+                
+                DispatchQueue.main.async {
+                    if let strong_self = self {
+                        strong_self.sendChangedNotification()
+                    }
+                    if let cb = complete {
+                        cb()
+                    }
                 }
             }
         }
