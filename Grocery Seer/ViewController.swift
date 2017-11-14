@@ -90,7 +90,7 @@ extension ViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, willSelectRowAt indexPath: IndexPath) -> IndexPath? {
         // special case for empty, "add grocery" cell
-        if indexPath.item == currentGroceryList.count {
+        if indexPath.item >= currentGroceryList.count {
             return nil
         }
         
