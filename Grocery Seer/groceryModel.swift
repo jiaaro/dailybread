@@ -27,10 +27,10 @@ class Grocery {
         self.reminder = reminder
     }
     convenience init?(reminder: EKReminder) {
-        if reminder.title == nil {
+        guard let name = reminder.title else {
             return nil
         }
-        self.init(name: reminder.title, bought: reminder.isCompleted, reminder: reminder)
+        self.init(name: name, bought: reminder.isCompleted, reminder: reminder)
     }
     
     func toggle_bought() {

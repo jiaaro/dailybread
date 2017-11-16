@@ -79,7 +79,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         }
     }
     func session(_ session: WCSession, activationDidCompleteWith activationState: WCSessionActivationState, error: Error?) {
-        print("iphone watch session activated")
     }
     func sessionDidBecomeInactive(_ session: WCSession) {
     }
@@ -91,6 +90,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
         let actionName = message["action"] as! String
         
         let bg_task_id = application.beginBackgroundTask(withName: "watchkit action: \(actionName)") {
+            print("watch session on iPhone ran out of time")
             reply([
                 "status": "error",
                 "err": "backgroundTaskExpired"
@@ -166,47 +166,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, WCSessionDelegate {
                         application.endBackgroundTask(bg_task_id)
                     }
                     grocerySuggestionsList.loadFromCalendar(loadCompletedItems: true)
-                }
-            }
-        case "getGlanceData":
-            // requires: (no args)
-            
-            currentGroceryList.loadFromCalendar(loadCompletedItems: false) {
-                grocerySuggestionsList.loadFromCalendar(loadCompletedItems: true) {
-                    get_calendar {
-                        calendar in
-                        
-                        let recentAdditions = currentGroceryList.mostRecentlyAdded(3).map {
-                            $0.name
-                        }
-                        var lastShopped = "never"
-                        if let d = grocerySuggestionsList.mostRecentlyCompleted(1).first?.completed_date {
-                            let days = Int(round(-d.timeIntervalSinceNow / (60*60*24)))
-                            
-                            switch (d.toString(), days) {
-                            case (Date().toString(), _):
-                                lastShopped = "today"
-                            case (Date(timeIntervalSinceNow: -24*60*60).toString(), _):
-                                lastShopped = "yesterday"
-                            case (_, 0...99):
-                                lastShopped = "\(days) days"
-                            default:
-                                lastShopped = "ages ago"
-                            }
-                        }
-                        get_grocery_sugguestions("") {
-                            suggestions in
-                            reply([
-                                "status": "success",
-                                "listName": calendar.title,
-                                "recentAdditions": recentAdditions,
-                                "topSuggestion": suggestions.first?.name ?? "Treat Yourself!",
-                                "listLength": currentGroceryList.count,
-                                "lastShopped": lastShopped,
-                            ])
-                            application.endBackgroundTask(bg_task_id)
-                        }
-                    }
                 }
             }
             

@@ -63,14 +63,19 @@ class ConnectivityDelegate: NSObject, WCSessionDelegate {
             session.sendMessage(
                 action,
                 replyHandler: { replyData in
+                    print("got a reply")
                     DispatchQueue.main.async {
                         reply?(replyData, nil)
                     }
                 }, errorHandler: { error in
+                    print("got an error")
                     DispatchQueue.main.async {
                         reply?([:], error)
                     }
                 })
+        }
+        else {
+            print("session wasn't reachable")
         }
     }
 }
@@ -93,6 +98,7 @@ class InterfaceController: WKInterfaceController {
         super.init()
         cd.activation_complete_cb = {
             [weak self] () in
+            print("watch: activation complete calback called")
             self?.refresh_data()
         }
         self.refresh_data()
@@ -123,6 +129,7 @@ class InterfaceController: WKInterfaceController {
         self.refresh_data()
     }
     func refresh_data() {
+        print("refresh data() called")
         cd.openParentApplication(["action": "getList"]) {
             [weak self] (replyInfo, error) in
             
@@ -179,8 +186,9 @@ class InterfaceController: WKInterfaceController {
 
     override func willActivate() {
         // This method is called when watch view controller is about to be visible to user
-        super.willActivate()
+        data_is_stale = true
         self.refresh_ui(force: true)
+        super.willActivate()
     }
 
     override func didDeactivate() {

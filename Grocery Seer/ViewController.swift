@@ -24,8 +24,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        tableview.separatorColor = UIColor(hue: 0, saturation: 0, brightness: 0, alpha: 0.1)
-        
         tableview.dataSource = self
         tableview.delegate = self
         
@@ -38,7 +36,7 @@ class ViewController: UIViewController {
         get_calendar { [weak self]
             calendar in
             let title = calendar.title
-            self?.navbarTitle.title = title
+            self?.navbarTitle?.title = title
         }
         self.tableview.reloadData()
         
